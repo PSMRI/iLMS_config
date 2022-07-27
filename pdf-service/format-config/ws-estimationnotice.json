@@ -451,19 +451,6 @@
                                         ],
                                         [
                                             {
-                                                "text": "10.",
-                                                "alignment": "center"
-                                            },
-                                            {
-                                                "text": "{{roundOff}}"
-                                            },
-                                            {
-                                                "text": "{{roundOffAmount}}",
-                                                "alignment": "right"
-                                            }
-                                        ],
-                                        [
-                                            {
                                                 "text": "(+)",
                                                 "alignment": "center"
                                             },
@@ -503,13 +490,7 @@
             },
             {
                 "text": "{{approved_by}}",
-                "alignment": "center",
-                "margin": [
-                    -39,
-                    -30,
-                    -38,
-                    0
-                ]
+                "alignment": "center"
             }
         ],
         "styles": {
