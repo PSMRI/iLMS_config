@@ -1,0 +1,357 @@
+serviceMaps:
+  serviceName: lcms-services
+  mappings:
+  - version: 1.0
+    description: Persists LCMS data to concerned tables
+    fromTopic: save-lcms-services
+    isTransaction: true
+    queryMaps:
+    
+    - query: INSERT INTO document (id, documentname, filestoreid, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?);
+      basePath: $.Document
+      jsonMaps:
+
+      - jsonPath: $.Document.id
+
+      - jsonPath: $.Document.documentName
+
+      - jsonPath: $.Document.fileStoreId
+      
+      - jsonPath: $.Document.*.auditDetails.createdBy
+
+      - jsonPath: $.Document.*.auditDetails.createdTime
+
+      - jsonPath: $.Document.*.auditDetails.lastModifiedBy
+
+      - jsonPath: $.Document.*.auditDetails.lastModifiedTime
+      
+
+    - query: INSERT INTO public.opinion(opinionId,code, additionalAdvocate, advocateCode,createdBy,lastModifiedby,createdTime, lastModifiedtime, caseNo, departmentName, inWardDate, opinionDescription, opinionOn, opinionRequestDate, stateId, tenantId, satuts)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      basePath: Opinion
+      jsonMaps:
+
+      - jsonPath: $.Opinion.opinionId
+      
+      - jsonPath: $.Opinion.code
+
+      - jsonPath: $.Opinion.advocateCode
+        type: JSON
+        dbType: JSONB
+
+      - jsonPath: $.Opinion.auditDetails.createdBy
+       
+      - jsonPath: $.Opinion.auditDetails.lastModifiedBy 
+      
+      - jsonPath: $.Opinion.auditDetails.createdTime
+
+      - jsonPath: $.Opinion.auditDetails.lastModifiedTime 
+
+      - jsonPath: $.Opinion.caseNo
+
+      - jsonPath: $.Opinion.departmentName
+
+      - jsonPath: $.Opinion.inWardDate
+
+      - jsonPath: $.Opinion.opinionDescription
+      
+      - jsonPath: $.Opinion.opinionOn
+      
+      - jsonPath: $.Opinion.opinionRequestDate
+      
+      - jsonPath: $.Opinion.stateId
+      
+      - jsonPath: $.Opinion.tenantId
+      
+      - jsonPath: $.Opinion.status
+      
+      - jsonPath: $.Opinion.additionalAdvocate
+        type: JSON
+        dbType: JSONB
+        
+    - query: INSERT INTO parawise_comments (id, code, caseId, parawiseCommentsAskedDate, parawiseCommentsReceivedDate, hodProvidedDate, resolutionDate, paraWiseComments, createdBy, createdTime, lastModifiedBy, lastModifiedTime, tenantId, docId, documentName, fileStoreId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      basePath: ParawiseComments
+      jsonMaps:
+
+      - jsonPath: $.ParawiseComments.id
+      
+      - jsonPath: $.ParawiseComments.code
+      
+      - jsonPath: $.ParawiseComments.caseId
+
+      - jsonPath: $.ParawiseComments.parawiseCommentsAskedDate
+     
+      - jsonPath: $.ParawiseComments.parawiseCommentsReceivedDate
+
+      - jsonPath: $.ParawiseComments.hodProvidedDate
+
+      - jsonPath: $.ParawiseComments.resolutionDate
+
+      - jsonPath: $.ParawiseComments.paraWiseComments
+
+      - jsonPath: $.ParawiseComments.auditDetails.createdBy
+
+      - jsonPath: $.ParawiseComments.auditDetails.createdTime
+
+      - jsonPath: $.ParawiseComments.auditDetails.lastModifiedBy
+
+      - jsonPath: $.ParawiseComments.auditDetails.lastModifiedTime
+      
+      - jsonPath: $.ParawiseComments.tenantId
+      
+      - jsonPath: $.ParawiseComments.Document.docId
+
+      - jsonPath: $.ParawiseComments.Document.documentName
+
+      - jsonPath: $.ParawiseComments.Document.fileStoreId
+      
+      
+      
+    - query: INSERT INTO reference_evidence (id, code, caseId, referenceType, referenceDate, caseNo, description, tenantId, caseCode, referenceCaseNo, createdBy, createdTime, lastModifiedBy, lastModifiedTime, docId, documentName, fileStoreId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      basePath: ReferenceEvidence
+      jsonMaps:
+      - jsonPath: $.ReferenceEvidence.id
+
+      - jsonPath: $.ReferenceEvidence.code
+
+      - jsonPath: $.ReferenceEvidence.caseId
+
+      - jsonPath: $.ReferenceEvidence.referenceType
+     
+      - jsonPath: $.ReferenceEvidence.referenceDate
+
+      - jsonPath: $.ReferenceEvidence.caseNo
+
+      - jsonPath: $.ReferenceEvidence.description
+
+      - jsonPath: $.ReferenceEvidence.tenantId
+
+      - jsonPath: $.ReferenceEvidence.caseCode
+
+      - jsonPath: $.ReferenceEvidence.referenceCaseNo
+      
+      - jsonPath: $.ReferenceEvidence.auditDetails.createdBy
+
+      - jsonPath: $.ReferenceEvidence.auditDetails.createdTime
+
+      - jsonPath: $.ReferenceEvidence.auditDetails.lastModifiedBy
+
+      - jsonPath: $.ReferenceEvidence.auditDetails.lastModifiedTime
+      
+      - jsonPath: $.ReferenceEvidence.Document.docId
+
+      - jsonPath: $.ReferenceEvidence.Document.documentName
+
+      - jsonPath: $.ReferenceEvidence.Document.fileStoreId
+
+    - query: INSERT INTO hearing_details(code,caseJudgeMent,caseFinalDecision,caseStatus,nextHearingDate,nextHearingTime,currentHearingDate,currentHearingTime,attendees,judges,tenantId,judgeMentDate,advocateOpinion,furtherProcessDetails,darkhasthDueDate) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+      basePath: HearingDetails
+      jsonMaps:
+
+      - jsonPath: $.HearingDetails.code
+
+      - jsonPath: $.HearingDetails.caseJudgeMent
+
+      - jsonPath: $.HearingDetails.caseFinalDecision
+
+      - jsonPath: $.HearingDetails.caseStatus
+
+      - jsonPath: $.HearingDetails.nextHearingDate
+
+      - jsonPath: $.HearingDetails.nextHearingTime
+
+      - jsonPath: $.HearingDetails.currentHearingDate
+
+      - jsonPath: $.HearingDetails.currentHearingTime
+
+      - jsonPath: $.HearingDetails.attendees
+
+      - jsonPath: $.HearingDetails.judges
+
+      - jsonPath: $.HearingDetails.tenantId
+
+      - jsonPath: $.HearingDetails.judgeMentDate
+
+      - jsonPath: $.HearingDetails.advocateOpinion
+
+      - jsonPath: $.HearingDetails.furtherProcessDetails
+
+      - jsonPath: $.HearingDetails.darkhasthDueDate
+
+
+    - query: INSERT INTO cases(code, isSummon, summonReferenceNo, caseNo, summonDate,summonYear, status, caseTypeCode, plantiffName, defendent, caseCategoryCode, courtNameCode, departmentNameCode, sectionApplied, hearingDate,hearingTime,ward,entryType,benchCode,sideCode, stampCode, caseDetails, tenantId, stateId, oldCaseNo, suitNo, judgeDetails, caseRefernceNo, departmentPerson, caseRegistrationDate, vakalatnamaGenerationDate, isVakalatnamaGenerated, witness,coName, age, days, address, caseVoucherCode, advocateCode, pleaderEngagementDetails, receiptDate, reslovtion, reslovtionDate, advocateInfoDate, remarks, caseStatusCode,parawiseComments,hearingDetails, referenceEvidences, id , documentName, fileStoreId ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      basePath: Case
+      jsonMaps:
+        - jsonPath: $.Case.code
+
+        - jsonPath: $.Case.isSummon
+
+        - jsonPath: $.Case.summonReferenceNo
+
+        - jsonPath: $.Case.caseNo
+
+        - jsonPath: $.Case.summonYear
+
+        - jsonPath: $.Case.summonDate
+
+        - jsonPath: $.Case.status
+
+        - jsonPath: $.Case.caseTypeCode
+
+        - jsonPath: $.Case.plantiffName
+
+        - jsonPath: $.Case.courtNameCode
+
+        - jsonPath: $.Case.departmentNameCode
+
+        - jsonPath: $.Case.sectionApplied
+
+        - jsonPath: $.Case.hearingDate
+
+        - jsonPath: $.Case.hearingTime
+
+        - jsonPath: $.Case.ward
+
+        - jsonPath: $.Case.entryType
+
+        - jsonPath: $.Case.benchCode
+
+        - jsonPath: $.Case.sideCode
+
+        - jsonPath: $.Case.stampCode
+
+        - jsonPath: $.Case.caseDetails
+
+        - jsonPath: $.Case.workFlowDetails
+
+        - jsonPath: $.Case.tenantId
+
+        - jsonPath: $.Case.stateId
+
+        - jsonPath: $.Case.oldCaseNo
+
+        - jsonPath: $.Case.suitNo
+
+        - jsonPath: $.Case.judgeDetails
+
+        - jsonPath: $.Case.caseRefernceNo
+
+        - jsonPath: $.Case.departmentPerson
+
+        - jsonPath: $.Case.caseRegistrationDate
+
+        - jsonPath: $.Case.vakalatnamaGenerationDate
+
+        - jsonPath: $.Case.isVakalatnamaGenerated
+
+        - jsonPath: $.Case.coName
+
+        - jsonPath: $.Case.age
+
+        - jsonPath: $.Case.days
+
+        - jsonPath: $.Case.address
+
+        - jsonPath: $.Case.caseVoucherCode
+
+        - jsonPath: $.Case.advocateCode
+
+        - jsonPath: $.Case.pleaderEngagementDetails
+
+        - jsonPath: $.Case.receiptDate
+
+        - jsonPath: $.Case.reslovtion
+
+        - jsonPath: $.Case.reslovtionDate
+
+        - jsonPath: $.Case.advocateInfoDate
+
+        - jsonPath: $.Case.remarks
+
+        - jsonPath: $.Case.caseStatusCode
+
+        - jsonPath: $.Case.referenceEvidences
+
+        - jsonPath: $.Case.witness
+          type: JSON
+          dbType: JSONB
+
+        - jsonPath: $.Case.parawiseComments
+
+        - jsonPath: $.Case.hearingDetails
+
+        - jsonPath: $.ReferenceEvidence.Document.id
+
+        - jsonPath: $.ReferenceEvidence.Document.documentName
+
+        - jsonPath: $.ReferenceEvidence.Document.fileStoreId
+        
+        
+    - query: UPDATE reference_evidence SET code=?, caseId=?, referenceType=?, referenceDate=?, caseNo=?, description=?, tenantId=?, caseCode=?, referenceCaseNo=?, createdBy=?, createdTime=?, lastModifiedBy=?, lastModifiedTime=?, docId=?, documentName=?, fileStoreId=? WHERE Id=? AND tenantId=?;
+      basePath: ReferenceEvidence
+      jsonMaps:
+      - jsonPath: $.ReferenceEvidence.code
+      
+      - jsonPath: $.ReferenceEvidence.caseId
+
+      - jsonPath: $.ReferenceEvidence.referenceType
+
+      - jsonPath: $.ReferenceEvidence.referenceDate
+
+      - jsonPath: $.ReferenceEvidence.caseNo
+
+      - jsonPath: $.ReferenceEvidence.description
+
+      - jsonPath: $.ReferenceEvidence.tenantId
+      
+      - jsonPath: $.ReferenceEvidence.caseCode
+      
+      - jsonPath: $.ReferenceEvidence.referenceCaseNo
+      
+      - jsonPath: $.ReferenceEvidence.createdBy
+      
+      - jsonPath: $.ReferenceEvidence.createdTime
+      
+      - jsonPath: $.ReferenceEvidence.lastModifiedBy
+      
+      - jsonPath: $.ReferenceEvidence.lastModifiedTime
+      
+      - jsonPath: $.ReferenceEvidence.docId
+      
+      - jsonPath: $.ReferenceEvidence.documentName
+      
+      - jsonPath: $.ReferenceEvidence.fileStoreId
+      
+      
+    - query: UPDATE parawise_comments SET code=?, caseId=?, parawiseCommentsAskedDate=?, parawiseCommentsReceivedDate=?, hodProvidedDate=?, resolutionDate=?, paraWiseComments=?, createdBy=?, createdTime=?, lastModifiedBy=?, lastModifiedTime=?, tenantId=?, docId=?, documentName=?, fileStoreId=? WHERE Id=? AND tenantId=?;
+      basePath: ReferenceEvidence
+      jsonMaps:
+      - jsonPath: $.ParawiseComments.code
+      
+      - jsonPath: $.ParawiseComments.caseId
+
+      - jsonPath: $.ParawiseComments.parawiseCommentsAskedDate
+     
+      - jsonPath: $.ParawiseComments.parawiseCommentsReceivedDate
+
+      - jsonPath: $.ParawiseComments.hodProvidedDate
+
+      - jsonPath: $.ParawiseComments.resolutionDate
+
+      - jsonPath: $.ParawiseComments.paraWiseComments
+
+      - jsonPath: $.ParawiseComments.auditDetails.createdBy
+
+      - jsonPath: $.ParawiseComments.auditDetails.createdTime
+
+      - jsonPath: $.ParawiseComments.auditDetails.lastModifiedBy
+
+      - jsonPath: $.ParawiseComments.auditDetails.lastModifiedTime
+      
+      - jsonPath: $.ParawiseComments.tenantId
+      
+      - jsonPath: $.ParawiseComments.Document.docId
+
+      - jsonPath: $.ParawiseComments.Document.documentName
+
+      - jsonPath: $.ParawiseComments.Document.fileStoreId  
+
