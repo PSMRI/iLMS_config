@@ -8,8 +8,10 @@ serviceMaps:
    queryMaps:
 
       - query: INSERT INTO eg_vendor( id, name, tenantid, additionaldetails, owner_id, description, source, status, agencyType, paymentPreference, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
-         basePath: vendor
-         jsonMaps:
+         
+        basePath: vendor
+         
+        jsonMaps:
           - jsonPath: $.vendor.id
 
           - jsonPath: $.vendor.name
@@ -42,8 +44,8 @@ serviceMaps:
           
           
       - query: INSERT INTO eg_vendor_address(id, tenantid, doorno, plotno, landmark, city, district, region, state, country, locality, pincode, additionalDetails, buildingname, street, vendor_id, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-         basePath: vendor.address
-         jsonMaps:
+        basePath: vendor.address
+        jsonMaps:
           - jsonPath: $.vendor.address.id
 
           - jsonPath: $.vendor.address.tenantId
@@ -89,8 +91,8 @@ serviceMaps:
           
           
       - query: INSERT INTO eg_driver( id, name, tenantid, additionaldetails, owner_id, description, status,licenseNumber, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-         basePath: vendor.drivers.*
-         jsonMaps:
+        basePath: vendor.drivers.*
+        jsonMaps:
           - jsonPath: $.vendor.drivers.*.id
           - jsonPath: $.vendor.drivers.*.name 
           - jsonPath: $.vendor.drivers.*.tenantId
@@ -107,15 +109,15 @@ serviceMaps:
           - jsonPath: $.vendor.drivers.*.auditDetails.lastModifiedTime
           
       - query: INSERT INTO eg_vendor_driver(  vendor_id, driver_id, vendordriverstatus) VALUES ( ?, ?, ?);
-         basePath: vendor.drivers.*
-         jsonMaps:
+        basePath: vendor.drivers.*
+        jsonMaps:
           - jsonPath: $.vendor.id
           - jsonPath: $.vendor.drivers.*.id
           - jsonPath: $.vendor.drivers.*.vendorDriverStatus
           
       - query: INSERT INTO eg_vendor_vehicle(  vendor_id,vechile_id, vendorVehicleStatus) VALUES ( ?, ?, ?); 
-         basePath: vendor.vehicles.*
-         jsonMaps:
+        basePath: vendor.vehicles.*
+        jsonMaps:
           - jsonPath: $.vendor.id
           - jsonPath: $.vendor.vehicles.*.id
           - jsonPath: $.vendor.vehicles.*.vendorVehicleStatus
