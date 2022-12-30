@@ -19,7 +19,7 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: cases.tenantid
+          - name: cases.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
           - name: cases.id
@@ -52,7 +52,7 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: cases.tenantid
+          - name: cases.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
           - name: cases.id
@@ -85,7 +85,7 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: cases.tenantid
+          - name: cases.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
           - name: cases.id
