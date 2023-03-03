@@ -12,7 +12,7 @@ ServiceMaps:
           isBulk: true
           timeStampField: $.case.auditDetails.createdTime
           customJsonMapping:
-            indexMapping: {"Data":{"id":"","number":"","cnrNumber":"","parentCaseId":"","type":"","category":"","@timestamp":"timestamp"}}
+            indexMapping: {"Data":{"id":"","number":"","cnrNumber":"","type":"","category":"","@timestamp":"timestamp"}}
             fieldMapping:
             - inJsonPath: $.id
               outJsonPath: $.Data.id
@@ -20,8 +20,6 @@ ServiceMaps:
               outJsonPath: $.Data.number
             - inJsonPath: $.cnrNumber
               outJsonPath: $.Data.cnrNumber
-            - inJsonPath: $.parentCaseId
-              outJsonPath: $.Data.parentCaseId
             - inJsonPath: $.type
               outJsonPath: $.Data.type
             - inJsonPath: $.category
