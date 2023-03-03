@@ -2,6 +2,82 @@
   "_comment": "TODO:  denormalize the role & visualisations",
   "roles" : [
     {
+      "roleId": 10,
+      "roleName" : "SUPERUSER",
+      "isSuper" : "",
+      "orgId": "",
+      "dashboards": [
+        {
+          "name": "My Dashboard",
+          "id": "home",
+          "isActive": "",
+          "style" : "tabbed",
+          "visualizations": [
+            {
+              "row": 1,
+              "name": "TOTAL CASE",
+              "vizArray": [
+                {
+                  "id": 11,
+                  "name": "",
+                  "dimensions": {
+                    "height": 350,
+                    "width": 5
+                  },
+                  "vizType": "metric-collection",
+                  "charts": [
+                    {
+                      "id": "TOTAL_CASE",
+                      "name": "Total Case",
+                      "code": "",
+                      "chartType": "metric",
+                      "filter": "",
+                      "headers": []
+                    },
+                    {
+                      "id": "ACTIVE_CASE",
+                      "name": "Active Case",
+                      "code": "",
+                      "chartType": "metric",
+                      "filter": "",
+                      "headers": []
+                    },
+                    {
+                      "id": "RESOLVED_CASE",
+                      "name": "Resolved Case",
+                      "code": "",
+                      "chartType": "metric",
+                      "filter": "",
+                      "headers": []
+                    }
+                  ]
+                },
+                {
+                  "id": 12,
+                  "name": "Total Cumulative Collection",
+                  "dimensions": {
+                    "height": 350,
+                    "width": 7
+                  },
+                  "vizType": "chart",
+                  "charts": [
+                    {
+                      "id": "cumulativeCollection",
+                      "name": "Weekly",
+                      "code": "",
+                      "chartType": "line",
+                      "filter": "",
+                      "headers": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "roleId": 6,
       "roleName" : "R1",
       "isSuper" : "",

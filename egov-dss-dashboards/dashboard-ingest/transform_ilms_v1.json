@@ -1,0 +1,129 @@
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "tenantId": "tenantId",
+      "transactionId": "transactionId",
+      "@timestamp": "@timestamp",
+      "Case": {
+        "$i": {
+          "petitioner": {
+            "$j": {
+              "id": "Case.petitioner.id",
+              "caseId": "Case.petitioner.caseId",
+              "firstName": "Case.petitioner.firstName",
+              "lastName": "Case.petitioner.lastName",
+              "gender": "Case.petitioner.gender",
+              "petitionerType": "Case.petitioner.petitionerType",
+              "address": "Case.petitioner.address",
+              "departmentName": "Case.petitioner.departmentName",
+              "contactNumber": "Case.petitioner.contactNumber",
+              "partyType": "Case.petitioner.partyType",
+              "advocate": {
+                "*": {
+                  "id": "Case.petitioner.advocate.[&1].id",
+                  "partyId": "Case.petitioner.advocate.[&1].partyId",
+                  "hearingId": "Case.petitioner.advocate.[&1].hearingId",
+                  "firstName": "Case.petitioner.advocate.[&1].firstName",
+                  "lastName": "Case.petitioner.advocate.[&1].lastName",
+                  "contactNumber": "Case.petitioner.advocate.[&1].contactNumber",
+                  "partyType": "Case.petitioner.advocate.[&1].partyType",
+                  "status": "Case.petitioner.advocate.[&1].status",
+                  "auditDetails": "Case.petitioner.advocate[&1].auditDetails"
+                }
+              },
+              "status": "Case.respondent.status",
+              "auditDetails": "Case.respondent.auditDetails"
+            }
+          },
+          "respondent": {
+            "$j": {
+              "id": "Case.respondent.id",
+              "caseId": "Case.respondent.caseId",
+              "firstName": "Case.respondent.firstName",
+              "lastName": "Case.respondent.lastName",
+              "gender": "Case.respondent.gender",
+              "petitionerType": "Case.respondent.petitionerType",
+              "address": "Case.respondent.address",
+              "departmentName": "Case.respondent.departmentName",
+              "contactNumber": "Case.respondent.contactNumber",
+              "partyType": "Case.respondent.partyType",
+              "advocate": {
+                "*": {
+                  "id": "Case.respondent.advocate.[&1].id",
+                  "partyId": "Case.respondent.advocate.[&1].partyId",
+                  "hearingId": "Case.respondent.advocate.[&1].hearingId",
+                  "firstName": "Case.respondent.advocate.[&1].firstName",
+                  "lastName": "Case.respondent.advocate.[&1].lastName",
+                  "contactNumber": "Case.respondent.advocate.[&1].contactNumber",
+                  "partyType": "Case.respondent.advocate.[&1].partyType",
+                  "status": "Case.respondent.advocate.[&1].status",
+                  "auditDetails": "Case.respondent.advocate[&1].auditDetails"
+                }
+              },
+              "status": "Case.respondent.status",
+              "auditDetails": "Case.respondent.auditDetails"
+            }
+          },
+          "act": {
+            "$j": {
+              "id":"Case.act.id",
+              "caseId": "Case.act.caseId",
+              "actName": "Case.act.actName",
+              "status" : "Case.act.status",
+              "auditDetails": "Case.act.auditDetails"
+            }
+          },
+          "court": {
+            "$j": {
+              "id": "Case.act.id",
+              "caseId": "Case.act.caseId",
+              "courtName": "Case.act.courtName",
+              "district": "Case.act.district",
+              "state": "Case.act.state",
+              "division": "Case.act.division",
+              "status": "Case.act.status",
+              "auditDetails": "Case.act.auditDetails"
+            }
+          },
+          "documents": {
+            "$j": {
+              "id": "Case.documents.id",
+              "caseId": "Case.documents.caseId",
+              "documentType": "Case.documents.documentType",
+              "documentId": "Case.documents.documentId",
+              "fileStoreId": "Case.documents.fileStoreId",
+              "status": "Case.documents.status",
+              "remarks": "Case.documents.remarks",
+              "auditDetails": "Case.documents.auditDetails"
+            }
+          },
+          "creationReason":"Case.creationReason",
+          "id": "Case.id",
+          "tenantId": "Case.tenantId",
+          "number": "Case.number",
+          "cnrNumber": "Case.cnrNumber",
+          "parentCaseId": "Case.parentCaseId",
+          "caseHierarchy": "Case.caseHierarchy",
+          "linkedCases": "Case.linkedCases",
+          "type": "Case.type",
+          "category": "Case.category",
+          "filingNumber": "Case.filingNumber",
+          "filingDate": "Case.filingDate",
+          "registrationDate": "Case.registrationDate",
+          "summary": "Case.summary",
+          "arisingDetails":"Case.arisingDetails",
+          "applicationNo":"Case.applicationNo",
+          "policyOrNonPolicyMatter":"Case.policyOrNonPolicyMatter",
+          "caseStatus":"Case.caseStatus",
+          "stage":"Case.stage",
+          "subStage":"Case.subStage",
+          "priority":"Case.priority",
+          "recommendOic":"Case.recommendOic",
+          "remarks":"Case.remarks",
+          "additionalDetails":"Case.additionalDetails"
+        }
+      }
+    }
+  }
+]

@@ -1,11 +1,38 @@
 {
   "domainConfig": [
     {
+      "id": "101",
+      "domain": "ilms",
+      "indexName": "ilms-v1",
+      "documentType": "",
+      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.propertyDetails.assessmentNumber\":\"value\"}},{\"match_phrase\":{\"Data.propertyId\":\"value\"}}]}}}",
+      "targetReferences": [
+        {
+          "fieldName": "id",
+          "argument": "Data.id",
+          "dataType": "String",
+          "value": "$value",
+          "seperator": " ",
+          "expression": "id"
+        }
+      ],
+      "sourceReferences": [
+        {
+          "fieldName": "id",
+          "argument": "Data.id",
+          "dataType": "String",
+          "value": "$value",
+          "seperator": ":",
+          "expression": "id"
+        }
+      ]
+    },
+    {
       "id": "1",
       "domain": "PT",
-      "indexName": "property-services",
+      "indexName": "ptindex-v1",
       "documentType": "",
-      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.propertyId\":\"value\"}}]}}}",
+      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.propertyDetails.assessmentNumber\":\"value\"}},{\"match_phrase\":{\"Data.propertyId\":\"value\"}}]}}}",
       "targetReferences": [
         {
           "fieldName": "propertyId",
@@ -14,16 +41,24 @@
           "value": "$value",
           "seperator": " ",
           "expression": "propertyId"
+        },
+        {
+          "fieldName": "assessmentNumber",
+          "argument": "Data.propertyDetails.assessmentNumber",
+          "dataType": "String",
+          "value": "$value",
+          "seperator": " ",
+          "expression": "assessmentNumber"
         }
       ],
       "sourceReferences": [
         {
           "fieldName": "consumerCode",
-          "argument": "paymentDetails.bill.consumerCode",
+          "argument": "Bill.billDetails.consumerCode",
           "dataType": "String",
           "value": "$value",
-          "seperator": " ",
-          "expression": "propertyId"
+          "seperator": ":",
+          "expression": "propertyId:assessmentNumber"
         }
       ]
     },
@@ -32,25 +67,25 @@
       "domain": "TL",
       "indexName": "tlindex-v1",
       "documentType": "",
-      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.tradelicense.applicationNumber\":\"value\"}}]}}}",
+      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.tradelicense.applicationnumber\":\"value\"}}]}}}",
       "targetReferences": [
         {
-          "fieldName": "applicationNumber",
-          "argument": "Data.tradelicense.applicationNumber",
+          "fieldName": "applicationnumber",
+          "argument": "Data.tradelicense.applicationnumber",
           "dataType": "String",
           "value": "$value",
           "seperator": " ",
-          "expression": "applicationNumber"
+          "expression": "applicationnumber"
         }
       ],
       "sourceReferences": [
         {
           "fieldName": "consumerCode",
-          "argument": "Data.tradelicense.applicationNumber",
+          "argument": "Data.tradelicense.applicationnumber",
           "dataType": "String",
           "value": "$value",
           "seperator": " ",
-          "expression": "applicationNumber"
+          "expression": "applicationnumber"
         }
       ]
     },
@@ -104,33 +139,6 @@
           "value": "$value",
           "seperator": " ",
           "expression": "applicationNo"
-        }
-      ]
-    },
-    {
-      "id": "5",
-      "domain": "FIRENOC",
-      "indexName": "firenoc-services",
-      "documentType": "",
-      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.fireNOCDetails.applicationNumber\":\"value\"}}]}}}}",
-      "targetReferences": [
-        {
-          "fieldName": "applicationNumber",
-          "argument": "Data.fireNOCDetails.applicationNumber",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "applicationNumber"
-        }
-      ],
-      "sourceReferences": [
-        {
-          "fieldName": "consumerCode",
-          "argument": "paymentDetails.bill.consumerCode",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "applicationNumber"
         }
       ]
     },
@@ -215,7 +223,7 @@
         }
       ]
     },
-   {
+    {
       "id": "9",
       "domain": "BPA",
       "indexName": "bpa-index",
@@ -293,141 +301,6 @@
           "value": "$value",
           "seperator": " ",
           "expression": "applicationNo"
-        }
-      ]
-    },
-    {
-      "id": "12",
-      "domain": "BPA.LOW_RISK_PERMIT_FEE",
-      "indexName": "bpa-index",
-      "documentType": "",
-      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.applicationNo\":\"value\"}}]}}}",
-      "targetReferences": [
-        {
-          "fieldName": "applicationNo",
-          "argument": "Data.applicationNo",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "applicationNo"
-        }
-      ],
-      "sourceReferences": [
-        {
-          "fieldName": "consumerCode",
-          "argument": "paymentDetails.bill.consumerCode",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "applicationNo"
-        }
-      ]
-    },
-    {
-      "id": "13",
-      "domain": "BPA.NC_APP_FEE",
-      "indexName": "bpa-index",
-      "documentType": "",
-      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.applicationNo\":\"value\"}}]}}}",
-      "targetReferences": [
-        {
-          "fieldName": "applicationNo",
-          "argument": "Data.applicationNo",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "applicationNo"
-        }
-      ],
-      "sourceReferences": [
-        {
-          "fieldName": "consumerCode",
-          "argument": "paymentDetails.bill.consumerCode",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "applicationNo"
-        }
-      ]
-    },
-    {
-      "id": "14",
-      "domain": "BPA.NC_OC_APP_FEE",
-      "indexName": "bpa-index",
-      "documentType": "",
-      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.applicationNo\":\"value\"}}]}}}",
-      "targetReferences": [
-        {
-          "fieldName": "applicationNo",
-          "argument": "Data.applicationNo",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": "",
-          "expression": "applicationNo"
-        }
-      ],
-      "sourceReferences": [
-        {
-          "fieldName": "consumerCode",
-          "argument": "paymentDetails.bill.consumerCode",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "applicationNo"
-        }
-      ]
-    },
-    {
-      "id": "15",
-      "domain": "BPA.NC_SAN_FEE",
-      "indexName": "bpa-index",
-      "documentType": "",
-      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.applicationNo\":\"value\"}}]}}}",
-      "targetReferences": [
-        {
-          "fieldName": "applicationNo",
-          "argument": "Data.applicationNo",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": "",
-          "expression": "applicationNo"
-        }
-      ],
-      "sourceReferences": [
-        {
-          "fieldName": "consumerCode",
-          "argument": "paymentDetails.bill.consumerCode",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "applicationNo"
-        }
-      ]
-    },
-    {
-      "id": "16",
-      "domain": "MCOLLECT",
-      "indexName": "echallan-services",
-      "documentType": "",
-      "query": "{\"query\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.challanNo\":\"value\"}}]}}}",
-      "targetReferences": [
-        {
-          "fieldName": "challanNo",
-          "argument": "Data.challanNo",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "challanNo"
-        }
-      ],
-      "sourceReferences": [
-        {
-          "fieldName": "consumerCode",
-          "argument": "paymentDetails.bill.consumerCode",
-          "dataType": "String",
-          "value": "$value",
-          "seperator": " ",
-          "expression": "challanNo"
         }
       ]
     },
