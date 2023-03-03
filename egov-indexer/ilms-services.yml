@@ -7,14 +7,13 @@ ServiceMaps:
       indexes:
         - name: ilms
           type: general
-          id: $.id
+          id: $.id,$.tenantId
           jsonPath: $.case
           isBulk: true
           timeStampField: $case.auditDetails.lastModifiedTime
           customJsonMapping:
-            indexMapping: {"Data":{"id":"","tenantId":"","number":"","cnrNumber":"","parentCaseId":"","type":"","category":"","filingNumber":"","summary":"","arisingDetails":"","policyOrNonPolicyMatter":"","applicationNo":"","caseStatus":"","stage":"","subStage":"","departmentName":"","recommendOic":"","remarks":"","@timestamp":"timestamp"}}
+            indexMapping: {"Data":{"id":"","tenantId":"","number":"","cnrNumber":"","parentCaseId":"","type":"","category":"","@timestamp":"timestamp"}}
             fieldMapping:
-
               - inJsonPath: $.id
                 outJsonPath: $.Data.id
               - inJsonPath: $.tenantId
@@ -28,29 +27,7 @@ ServiceMaps:
               - inJsonPath: $.type
                 outJsonPath: $.Data.type
               - inJsonPath: $.category
-                outJsonPath: $.Data.category
-              - inJsonPath: $.filingNumber
-                outJsonPath: $.Data.filingNumber
-              - inJsonPath: $.summary
-                outJsonPath: $.Data.summary
-              - inJsonPath: $.arisingDetails
-                outJsonPath: $.Data.arisingDetails
-              - inJsonPath: $.policyOrNonPolicyMatter
-                outJsonPath: $.Data.policyOrNonPolicyMatter
-              - inJsonPath: $.applicationNo
-                outJsonPath: $.Data.applicationNo
-              - inJsonPath: $.caseStatus
-                outJsonPath: $.Data.caseStatus
-              - inJsonPath: $.stage
-                outJsonPath: $.Data.stage
-              - inJsonPath: $.subStage
-                outJsonPath: $.Data.subStage
-              - inJsonPath: $.departmentName
-                outJsonPath: $.Data.departmentName
-              - inJsonPath: $.recommendOic
-                outJsonPath: $.Data.recommendOic
-              - inJsonPath: $.remarks
-                outJsonPath: $.Data.remarks
+                outJsonPath: $.Data.category              
               - inJsonPath: $.@timestamp
                 outJsonPath: $.Data.@timestamp  
             externalUriMapping:
