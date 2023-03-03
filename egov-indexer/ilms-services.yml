@@ -10,7 +10,7 @@ ServiceMaps:
           id: $.id,$.tenantId
           jsonPath: $.case
           isBulk: true
-          timeStampField: $.auditDetails.createdTime
+          timeStampField: $.case.auditDetails.createdTime
           customJsonMapping:
             indexMapping: {"Data":{"id":"","number":"","cnrNumber":"","parentCaseId":"","type":"","category":"","@timestamp":"timestamp"}}
             fieldMapping:
