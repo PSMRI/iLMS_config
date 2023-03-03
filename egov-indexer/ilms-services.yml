@@ -11,7 +11,7 @@ ServiceMaps:
           jsonPath: $.case
           timeStampField: $.auditDetails.lastModifiedTime
           customJsonMapping:
-            indexMapping: {"Data":{"petitioner":[],"id":"","tenantId":"","court":[],"number":"","cnrNumber":"","parentCaseId":"","type":"","category":"","filingNumber":"","filingDate":"2014-01-01T12:10:30.000Z","registrationDate":"2014-01-01T12:10:30.000Z","summary":"","arisingDetails":"","documents":{},"act":{},"policyOrNonPolicyMatter":"","applicationNo":"","caseStatus":"","respondent":{},"stage":"","subStage":"","priority":"","departmentName":"","recommendOic":"","remarks":"","additionalDetails":""}}
+            indexMapping: {"Data":{"petitioner":[],"id":"","tenantId":"","court":[],"number":"","cnrNumber":"","parentCaseId":"","type":"","category":"","filingNumber":"","filingDate":"2014-01-01T12:10:30.000Z","registrationDate":"2014-01-01T12:10:30.000Z","summary":"","arisingDetails":"","documents":{},"act":{},"policyOrNonPolicyMatter":"","applicationNo":"","caseStatus":"","respondent":{},"stage":"","subStage":"","priority":"","departmentName":"","recommendOic":"","remarks":"","additionalDetails":"","@timestamp":"timestamp"}}
             fieldMapping:
               - inJsonPath: $.petitioner[*][?(@.status=='ACTIVE')].name
                 outJsonPath: $.Data.ownerNames
@@ -65,6 +65,8 @@ ServiceMaps:
                 outJsonPath: $.Data.remarks
               - inJsonPath: $.additionalDetails
                 outJsonPath: $.Data.additionalDetails
+              - inJsonPath: $.@timestamp
+                outJsonPath: $.Data.@timestamp
             externalUriMapping:
               - path: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search
                 queryParam: hierarchyTypeCode=REVENUE,boundaryType=Block,codes=$.address.locality.code,tenantId=$.tenantId
