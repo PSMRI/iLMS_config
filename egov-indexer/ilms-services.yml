@@ -14,13 +14,7 @@ ServiceMaps:
             indexMapping: {"Data":{"petitioner":[],"id":"","tenantId":"","court":[],"number":"","cnrNumber":"","parentCaseId":"","type":"","category":"","filingNumber":"","filingDate":"2014-01-01T12:10:30.000Z","registrationDate":"2014-01-01T12:10:30.000Z","summary":"","arisingDetails":"","documents":{},"act":{},"policyOrNonPolicyMatter":"","applicationNo":"","caseStatus":"","respondent":{},"stage":"","subStage":"","priority":"","departmentName":"","recommendOic":"","remarks":"","additionalDetails":"","@timestamp":"timestamp"}}
             fieldMapping:
               - inJsonPath: $.petitioner[*][?(@.status=='ACTIVE')].name
-                outJsonPath: $.Data.ownerNames
-              - inJsonPath: $.address.doorNo
-                outJsonPath: $.Data.doorNo
-              - inJsonPath: $.address.street
-                outJsonPath: $.Data.street
-              - inJsonPath: $.owners.*.uuid
-                outJsonPath: $.Data.owners
+                outJsonPath: $.Data.petitioner
               - inJsonPath: $.id
                 outJsonPath: $.Data.id
               - inJsonPath: $.tenantId
