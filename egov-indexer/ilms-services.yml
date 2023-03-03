@@ -11,7 +11,7 @@ ServiceMaps:
           jsonPath: $.case
           timeStampField: $.auditDetails.lastModifiedTime
           customJsonMapping:
-            indexMapping: {"Data":{"petitioner":[],"id":"","tenantId":"","court":[],"number":"","cnrNumber":"","parentCaseId":"","type":"","category":"","filingNumber":"","filingDate":0,"registrationDate":0,"summary":"","arisingDetails":"","documents":{},"act":{},"policyOrNonPolicyMatter":"","applicationNo":"","caseStatus":"","respondent":{},"stage":"","subStage":"","priority":"","departmentName":"","recommendOic":"","remarks":"","additionalDetails":"","@timestamp":"timestamp"}}
+            indexMapping: {"Data":{"petitioner":[],"id":"","tenantId":"","court":[],"number":"","cnrNumber":"","parentCaseId":"","type":"","category":"","filingNumber":"","filingDate":"2014-01-01T12:10:30.000Z","registrationDate":"2014-01-01T12:10:30.000Z","summary":"","arisingDetails":"","documents":{},"act":{},"policyOrNonPolicyMatter":"","applicationNo":"","caseStatus":"","respondent":{},"stage":"","subStage":"","priority":"","departmentName":"","recommendOic":"","remarks":"","additionalDetails":""}}
             fieldMapping:
               - inJsonPath: $.petitioner[*][?(@.status=='ACTIVE')].name
                 outJsonPath: $.Data.ownerNames
