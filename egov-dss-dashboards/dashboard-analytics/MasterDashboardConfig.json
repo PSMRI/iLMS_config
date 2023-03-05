@@ -18,8 +18,8 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "All_Cases",
-                  "name": "ALL_CASES",
+                  "id": "Total Cases",
+                  "name": "TOTAL_CASES",
                   "code": "",
                   "chartType": "metric",
                   "filter": {"title": "DATE"},
