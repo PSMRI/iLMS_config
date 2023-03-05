@@ -8,7 +8,7 @@
         "dateRefField": "Data.respondent.status.keyword",
         "requestQueryMap": "{\"cases\" : \"Data.respondent.status.keyword\"}",
         "indexName": "ilms",
-        "aggrQuery":  "{\aggs\": {\"total number of cases\":{\"value_count\":{\"field\":{\"Data.respondent.status.keyword\"}}}}}"
+        "aggrQuery":  "{\"aggs\": {\"total number of cases\":{\"value_count\":{\"field\":{\"Data.respondent.status.keyword\"}}}}}"
       }
     ],
     "chartType": "metric",
