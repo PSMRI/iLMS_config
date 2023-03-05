@@ -47,17 +47,6 @@ ServiceMaps:
                 uriResponseMapping:
                   - inJsonPath: $.MdmsRes.tenant.tenants
                     outJsonPath: $.Data.tenantData
-              - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
-                moduleName: ilms
-                masterName: CaseCategory
-                tenantId: mp
-                filter: "[?(@.code == $caseCategory)]"
-                filterMapping:
-                  - variable: $caseCategory
-                    valueJsonpath: $.caseCategory
-                uriResponseMapping:
-                  - inJsonPath: $.MdmsRes.ilms.CaseCategory
-                    outJsonPath: $.Data.CaseCategory
 
 
     - topic: update-property-registry
