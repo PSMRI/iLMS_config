@@ -51,7 +51,7 @@ ServiceMaps:
                 moduleName: common-masters
                 masterName: CaseCategory
                 tenantId: mp
-                filter: "[?(@.code == $usageCategory)]"
+                filter: "[?(@.code == $caseCategory)]"
                 filterMapping:
                   - variable: $CaseCategory
                     valueJsonpath: $.CaseCategory
