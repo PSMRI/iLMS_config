@@ -12,7 +12,7 @@ ServiceMaps:
           isBulk: false
           timeStampField: $.auditDetails.createdTime
           customJsonMapping:
-            indexMapping: {"Data":{"id":"","number":"","cnrNumber":"","type":"","category":"","@timestamp":"timestamp"},"history":{},"tenantData":{},"caseCategory":{}}
+            indexMapping: {"Data":{"id":"","number":"","cnrNumber":"","type":"","category":"","@timestamp":"timestamp"},"history":{},"tenantData":{},"CaseCategory":{}}
             fieldMapping:
             - inJsonPath: $.id
               outJsonPath: $.Data.id
@@ -51,12 +51,12 @@ ServiceMaps:
                 moduleName: ilms
                 masterName: CaseCategory
                 tenantId: mp
-                filter: "[?(@.code == $caseCategory)]"
+                filter: "[?(@.code == $CaseCategory)]"
                 filterMapping:
                   - variable: $CaseCategory
                     valueJsonpath: $.CaseCategory
                 uriResponseMapping:
-                  - inJsonPath: $.MdmsRes.common-masters.CaseCategory[0].name
+                  - inJsonPath: $.MdmsRes.ilms.CaseCategory
                     outJsonPath: $.Data.CaseCategory
 
 
