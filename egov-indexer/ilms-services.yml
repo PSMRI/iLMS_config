@@ -9,7 +9,7 @@ ServiceMaps:
           type: general
           id: $.id,$.tenantId
           jsonPath: $.case
-          isBulk: true
+          isBulk: false
           timeStampField: $.auditDetails.createdTime
           customJsonMapping:
             indexMapping: {"Data":{"id":"","number":"","cnrNumber":"","type":"","category":"","@timestamp":"timestamp"},"history":{},"tenantData":{},"caseCategory":{}}
