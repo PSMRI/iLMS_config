@@ -5,10 +5,10 @@
     "queries": [
       {
         "module": "iLMS",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\"}",
-        "indexName": "ilms_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pb.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.bill.billDetails.businessService.keyword\":\"PT\"}},{\"range\":{\"dataObject.paymentDetails.receiptDate\":{\"gt\":\"now-1d/d\",\"lte\":\"now\"}}}]}},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.bill.billDetails.amountPaid\"}}}}}}"
+        "dateRefField": "Data.respondent.status.keyword",
+        "requestQueryMap": "{\"cases\" : \"Data.respondent.status.keyword\"}",
+        "indexName": "ilms",
+        "aggrQuery":  "{\aggs\": {\"total number of cases\":{\"value_count\":{\"field\":{\"Data.respondent.status.keyword\"}}}}}"
       }
     ],
     "chartType": "metric",
