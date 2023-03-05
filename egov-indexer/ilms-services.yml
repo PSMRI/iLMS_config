@@ -37,7 +37,7 @@ ServiceMaps:
                     outJsonPath: $.Data.history
             mdmsMapping:
               - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
-                moduleName: tenant
+                moduleName: common-master
                 masterName: tenants
                 tenantId: mp
                 filter: "[?(@.code == $tenant)]"
@@ -48,7 +48,7 @@ ServiceMaps:
                   - inJsonPath: $.MdmsRes.tenant.tenants
                     outJsonPath: $.Data.tenantData
               - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
-                moduleName: common-masters
+                moduleName: ilms
                 masterName: CaseCategory
                 tenantId: mp
                 filter: "[?(@.code == $caseCategory)]"
