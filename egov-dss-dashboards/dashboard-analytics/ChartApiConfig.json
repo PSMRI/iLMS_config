@@ -1,14 +1,14 @@
   {
   
-  "totalCase": {
+  "iLMStotalCase": {
     "chartName": "DSS_TOTAL_CASES",
     "queries": [
       {
         "module": "iLMS",
         "dateRefField": "Data.respondent.status.keyword",
-          "requestQueryMap": "{\"cases\" : \"Data.respondent.status.keyword\"}",
+        "requestQueryMap": "{\"cases\" : \"Data.respondent.status.keyword\"}",
         "indexName": "ilms",
-        "aggrQuery":  "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.respondent.status.keyword\":\"ACTIVE\"}},{\"term\":{\"Data.workflow.tenantId\":\"mp\"}}]}}}"
+        "aggrQuery":  "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.respondent.status.keyword\":\"ACTIVE\"}},{\"term\":{\"Data.workflow.tenantId\":\"mp\"}}]}}, ,\"aggs\":{\"total number of cases\":{\"value_count\":{\"field\":\"Data.respondent.status.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -17,7 +17,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Total Cases"
+      "total number of cases"
     ],
     "insight": {
       "chartResponseMap" : "TOTALCASE",
