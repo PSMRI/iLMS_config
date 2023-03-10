@@ -11,9 +11,10 @@
           "name": "DSS_ILMS",
           "vizArray": [
             {
-              "id": "DSS_ILMS",
+              "id": 112,
               "name": "DSS_ILMS",
               "vizType": "metric-collection",
+              "label": "DSS_iLMS",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
