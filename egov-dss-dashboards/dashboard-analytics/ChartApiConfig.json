@@ -37,7 +37,7 @@
         "module": "iLMS",
         "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"cases\" : \"Data.respondent.status.keyword\"}",
-        "indexName": "ilms_v2",
+        "indexName": "ilms",
         "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.respondent.status.keyword\":\"ACTIVE\"}},{\"term\":{\"Data.workflow.tenantId\":\"mp\"}}]}},\"aggs\":{\"Active Cases\":{\"value_count\":{\"field\":\"Data.respondent.status.keyword\"}}}}"
       }
     ],
@@ -67,7 +67,7 @@
         "module": "iLMS",
         "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"cases\" : \"Data.respondent.status.keyword\"}",
-        "indexName": "ilms_v2",
+        "indexName": "ilms",
         "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.respondent.status.keyword\":\"ACTIVE\"}},{\"term\":{\"Data.workflow.tenantId\":\"mp\"}}]}},\"aggs\":{\"Resolve Cases\":{\"value_count\":{\"field\":\"Data.respondent.status.keyword\"}}}}"
       }
     ],
