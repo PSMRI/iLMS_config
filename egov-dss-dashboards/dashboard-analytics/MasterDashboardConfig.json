@@ -28,7 +28,7 @@
                 },
                 {
                   "id": "DSSactiveCase",
-                  "name": "ACTIVE_CASES",
+                  "name": "DSS_ACTIVE_CASES",
                   "code": "",
                   "chartType": "metric",
                   "filter": {"title": "DATE"},
@@ -36,9 +36,9 @@
                 },
                 {
                   "id": "resolveCase",
-                  "name": "PENDING_CASES",
+                  "name": "DSS_RESOLVE_CASES",
                   "code": "",
-                  "chartType": "pie",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
