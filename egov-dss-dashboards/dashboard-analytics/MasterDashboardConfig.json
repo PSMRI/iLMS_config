@@ -23,7 +23,7 @@
                   "name": "DSS_TOTAL_CASES",
                   "code": "",
                   "chartType": "metric",
-                  "filter": {"title": "DATE"},
+                  "filter": {"title": "DATE","title": "tenantId"},
                   "headers": []
                 },
                 {
@@ -38,7 +38,7 @@
                   "id": "PendingCase",
                   "name": "PENDING_CASES",
                   "code": "",
-                  "chartType": "metric",
+                  "chartType": "pie",
                   "filter": "",
                   "headers": []
                 }
