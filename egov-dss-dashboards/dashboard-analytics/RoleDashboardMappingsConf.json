@@ -14,7 +14,7 @@
         },
         {
           "name": "iLMS Service",
-          "id": "ilmsService"
+          "id": "iLMS"
         }      
       ]
     },
@@ -27,7 +27,7 @@
       "dashboards": [
         {
           "name": "My Dashboard",
-          "id": "DSS_ILMS"
+          "id": "iLMS"
         }     
       ]
     },
