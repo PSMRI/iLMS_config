@@ -19,7 +19,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "iLMStotalCase",
+                  "id": "DSSiLMStotalCase",
                   "name": "DSS_TOTAL_CASES",
                   "code": "",
                   "chartType": "metric",
