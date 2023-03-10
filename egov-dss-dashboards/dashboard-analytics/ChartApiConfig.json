@@ -30,7 +30,7 @@
     },
     "_comment": " "
   },
-  "activeCase": {
+  "DSSactiveCase": {
     "chartName": "DSS_ACTIVE_CASES",
     "queries": [
       {

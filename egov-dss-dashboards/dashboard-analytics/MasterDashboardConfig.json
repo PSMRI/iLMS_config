@@ -27,7 +27,7 @@
                   "headers": []
                 },
                 {
-                  "id": "ActiveCase",
+                  "id": "DSSactiveCase",
                   "name": "ACTIVE_CASES",
                   "code": "",
                   "chartType": "metric",
@@ -35,7 +35,7 @@
                   "headers": []
                 },
                 {
-                  "id": "PendingCase",
+                  "id": "resolveCase",
                   "name": "PENDING_CASES",
                   "code": "",
                   "chartType": "pie",
