@@ -1014,7 +1014,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "PtotalComplaints",
+                  "id": "totalComplaints",
                   "name": "DSS_PGR_TOTAL_COMPLAINTS",
                   "code": "",
                   "chartType": "metric",
@@ -1439,7 +1439,7 @@
               "label": "",
               "charts": [
                 {
-                  "id": "PtotalComplaints",
+                  "id": "totalComplaints",
                   "name": "DSS_PGR_TOTAL_COMPLAINTS",
                   "code": "",
                   "chartType": "metric",
@@ -2559,7 +2559,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "PtotalComplaints",
+                  "id": "totalComplaints",
                   "name": "DSS_PGR_TOTAL_COMPLAINTS",
                   "code": "",
                   "chartType": "metric",
@@ -4016,7 +4016,7 @@
               "label": "",
               "charts": [
                 {
-                  "id": "PtotalComplaints",
+                  "id": "totalComplaints",
                   "name": "DSS_PGR_TOTAL_COMPLAINTS",
                   "code": "",
                   "chartType": "metric",

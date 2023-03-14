@@ -3412,7 +3412,7 @@
     },
     "_comment": " Total Number of Complaints "
   },
-  "PtotalComplaints": {
+  "totalComplaints": {
     "chartName": "DSS_PGR_TOTAL_COMPLAINTS",
     "queries": [
       {
