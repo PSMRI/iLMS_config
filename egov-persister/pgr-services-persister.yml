@@ -7,12 +7,28 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: INSERT INTO eg_pgr_service_v2(id, tenantid, servicecode, servicerequestid, description, accountid, additionaldetails, applicationstatus, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    - query: INSERT INTO eg_pgr_service_v2(id, tenantid, dateofincident, locationofincident, complainantname, complainantmobilenumber, complainanttype, institutiontype, institutionname, grievanceagainstwhom, servicecode, servicerequestid, description, accountid, additionaldetails, applicationstatus, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: service
       jsonMaps:
       - jsonPath: $.service.id
 
       - jsonPath: $.service.tenantId
+
+      - jsonPath: $.service.dateOfIncident
+
+      - jsonPath: $.service.locationOfIncident
+
+      - jsonPath: $.service.complainantName
+
+      - jsonPath: $.service.complainantMobileNumber
+
+      - jsonPath: $.service.complainantType
+
+      - jsonPath: $.service.institutionType
+
+      - jsonPath: $.service.institutionName
+
+      - jsonPath: $.service.grievanceAgainstWhom
 
       - jsonPath: $.service.serviceCode
 
@@ -38,7 +54,7 @@ serviceMaps:
 
       - jsonPath: $.service.auditDetails.lastModifiedTime
 
-    - query: INSERT INTO eg_pgr_address_v2(id, tenantid, parentid, doorno, plotno, buildingname, street, landmark, city, pincode, locality, district, region, state, country, latitude, longitude, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    - query: INSERT INTO eg_pgr_address_v2(id, tenantid, parentid, doorno, plotno, buildingname, street, landmark, city, pincode, locality, district, region, block, village, state, country, latitude, longitude, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: service.address
       jsonMaps:
       - jsonPath: $.service.address.id
@@ -66,6 +82,10 @@ serviceMaps:
       - jsonPath: $.service.address.district
 
       - jsonPath: $.service.address.region
+
+      - jsonPath: $.service.address.block
+
+      - jsonPath: $.service.address.village
 
       - jsonPath: $.service.address.state
 
@@ -95,9 +115,26 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: UPDATE eg_pgr_service_v2 SET servicecode=?, rating = ?,servicerequestid=?, description=?, accountid=?, additionaldetails=?, applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
+    - query: UPDATE eg_pgr_service_v2 SET dateofincident=?, locationofincident=?, complainantname=?, complainantmobilenumber=?, complainanttype=?, institutiontype=?, institutionname=?, grievanceagainstwhom=?, servicecode=?, rating =?, servicerequestid=?, description=?, accountid=?, additionaldetails=?, applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
       basePath: service
       jsonMaps:
+
+      - jsonPath: $.service.dateOfIncident
+
+      - jsonPath: $.service.locationOfIncident
+
+      - jsonPath: $.service.complainantName
+
+      - jsonPath: $.service.complainantMobileNumber
+
+      - jsonPath: $.service.complainantType
+
+      - jsonPath: $.service.institutionType
+
+      - jsonPath: $.service.institutionName
+
+      - jsonPath: $.service.grievanceAgainstWhom
+
       - jsonPath: $.service.serviceCode
 
       - jsonPath: $.service.rating
@@ -121,7 +158,7 @@ serviceMaps:
       - jsonPath: $.service.id
 
 
-    - query: UPDATE eg_pgr_address_v2 SET doorno=?, plotno=?, buildingname=?, street=?, landmark=?, city=?, pincode=?, locality=?, district=?, region=?, state=?, country=?, latitude=?, longitude=?,additionaldetails=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
+    - query: UPDATE eg_pgr_address_v2 SET doorno=?, plotno=?, buildingname=?, street=?, landmark=?, city=?, pincode=?, locality=?, district=?, region=?, block=?, village=?, state=?, country=?, latitude=?, longitude=?,additionaldetails=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
       basePath: service.address
       jsonMaps:
 
@@ -145,6 +182,10 @@ serviceMaps:
 
       - jsonPath: $.service.address.region
 
+      - jsonPath: $.service.address.block
+
+      - jsonPath: $.service.address.village
+
       - jsonPath: $.service.address.state
 
       - jsonPath: $.service.address.country
@@ -162,23 +203,3 @@ serviceMaps:
       - jsonPath: $.service.auditDetails.lastModifiedTime
 
       - jsonPath: $.service.address.id
-
-
-  - version: 1.0
-    description: Updates pgr status for auto escalate
-    fromTopic: pgr-auto-escalation
-    isTransaction: true
-    queryMaps:
-
-    - query: UPDATE eg_pgr_service_v2 SET applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE serviceRequestId=? AND tenantId=?;
-      basePath: ProcessInstances.*
-      jsonMaps:
-      - jsonPath: $.ProcessInstances.*.state.applicationStatus
-
-      - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedBy
-
-      - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedTime
-
-      - jsonPath: $.ProcessInstances.*.businessId
-
-      - jsonPath: $.ProcessInstances.*.tenantId
