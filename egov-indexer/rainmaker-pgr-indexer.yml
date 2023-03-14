@@ -3,7 +3,7 @@ ServiceMaps:
  version: 1.0.0
  mappings:
 
-  - topic: save-pgr-index-service
+  - topic: save-pgr-request
     configKey: INDEX
     indexes:
     - name: pgrindex-v1
