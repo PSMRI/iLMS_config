@@ -11,7 +11,7 @@
         "aggrQuery":  "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.respondent.status.keyword\":\"ACTIVE\"}},{\"term\":{\"Data.workflow.tenantId\":\"mp\"}}]}},\"aggs\":{\"total number of cases\":{\"value_count\":{\"field\":\"Data.respondent.status.keyword\"}}}}"
       }
     ],
-    "chartType": "pie",
+    "chartType": "metric",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -41,7 +41,7 @@
         "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.respondent.status.keyword\":\"ACTIVE\"}},{\"term\":{\"Data.workflow.tenantId\":\"mp\"}}]}},\"aggs\":{\"Active Cases\":{\"value_count\":{\"field\":\"Data.respondent.status.keyword\"}}}}"
       }
     ],
-    "chartType": "pie",
+    "chartType": "metric",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -71,7 +71,7 @@
         "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.respondent.status.keyword\":\"ACTIVE\"}},{\"term\":{\"Data.workflow.tenantId\":\"mp\"}}]}},\"aggs\":{\"Resolve Cases\":{\"value_count\":{\"field\":\"Data.respondent.status.keyword\"}}}}"
       }
     ],
-    "chartType": "pie",
+    "chartType": "metric",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
