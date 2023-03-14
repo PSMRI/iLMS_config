@@ -74,7 +74,7 @@ ServiceMaps:
              - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
                moduleName: common-masters
                masterName: Department
-               tenantId: mp.HEALTH
+               tenantId: mp
                filter: "[?(@.code == $department)]"
                filterMapping:
                  - variable: $department
@@ -85,7 +85,7 @@ ServiceMaps:
              - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
                moduleName: RAINMAKER-PGR
                masterName: ServiceDefs
-               tenantId: mp.HEALTH
+               tenantId: mp
                filter: "[?((@.serviceCode == $servicecode) && (@.active == true))]"
                filterMapping:
                  - variable: $servicecode
@@ -96,7 +96,7 @@ ServiceMaps:
              - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
                moduleName: tenant
                masterName: tenants
-               tenantId: mp.HEALTH
+               tenantId: mp
                filter: "[?(@.code == $tenant)]"
                filterMapping:
                  - variable: $tenant
