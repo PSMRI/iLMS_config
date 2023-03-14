@@ -24,13 +24,13 @@
                     "height": 350,
                     "width": 5
                   },
-                  "vizType": "metric-collection",
+                  "vizType": "chart",
                   "charts": [
                     {
                       "id": "TOTAL_CASE",
                       "name": "Total Case",
                       "code": "",
-                      "chartType": "metric",
+                      "chartType": "pie",
                       "filter": "",
                       "headers": []
                     },
@@ -38,7 +38,7 @@
                       "id": "ACTIVE_CASE",
                       "name": "Active Case",
                       "code": "",
-                      "chartType": "metric",
+                      "chartType": "pie",
                       "filter": "",
                       "headers": []
                     },
@@ -46,7 +46,7 @@
                       "id": "RESOLVED_CASE",
                       "name": "Resolved Case",
                       "code": "",
-                      "chartType": "metric",
+                      "chartType": "pie",
                       "filter": "",
                       "headers": []
                     }
