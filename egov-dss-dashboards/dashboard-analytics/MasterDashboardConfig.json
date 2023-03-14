@@ -22,7 +22,7 @@
                   "id": "DSSiLMStotalCase",
                   "name": "DSS_TOTAL_CASES",
                   "code": "",
-                  "chartType": "pie",
+                  "chartType": "metric",
                   "filter": {"title": "DATE","title": "tenantId"},
                   "headers": []
                 },
@@ -30,7 +30,7 @@
                   "id": "DSSactiveCase",
                   "name": "DSS_ACTIVE_CASES",
                   "code": "",
-                  "chartType": "pie",
+                  "chartType": "metric",
                   "filter": {"title": "DATE"},
                   "headers": []
                 },
@@ -38,7 +38,7 @@
                   "id": "resolveCase",
                   "name": "DSS_RESOLVE_CASES",
                   "code": "",
-                  "chartType": "pie",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
