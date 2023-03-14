@@ -1,9 +1,9 @@
 ServiceMaps:
- serviceName: pgr-services
+ serviceName: PGR - rainmaker
  version: 1.0.0
  mappings:
 
-  - topic: save-pgr-request
+  - topic: save-pgr-index-service
     configKey: INDEX
     indexes:
     - name: pgrindex-v1
@@ -12,26 +12,10 @@ ServiceMaps:
       isBulk: true
       jsonPath: $.serviceRequests
       timeStampField: $.auditDetails.createdTime
-      fieldsToBeMasked: ["$.dateOfIncident","$.phone", "$.citizen.mobileNumber", "$.citizen.address", "$.citizen.aadhaarNumber", "$.citizen.pan", "$.citizen.emailId", "$.citizen.password"]
+      fieldsToBeMasked: ["$.phone", "$.citizen.mobileNumber", "$.citizen.address", "$.citizen.aadhaarNumber", "$.citizen.pan", "$.citizen.emailId", "$.citizen.password"]
       customJsonMapping:
-        indexMapping: {"Data":{"dateOfIncident":"dateOfIncident","locationOfIncident":"locationOfIncident","complainantName":"complainantName","complainantMobileNumber":"complainantMobileNumber","complainantType":"complainantType","institutionType":"institutionType","institutionName":"institutionName","grievanceAgainstWhom":"grievanceAgainstWhom","serviceRequestId":"serviceRequestId","tenantId":"tenantId","complainCategory":"complainCategory","citizen":{},"phone":"phone","dateOfComplaint":null,"address":"","addressDetail":{},"status":"status","assignee":"assignee","gro":"gro","department":"department","complaintWard":{},"source":"","description":"","slaHours":"slaHours","tenantData":{},"actionHistory":{},"auditDetails":{},"@timestamp":"timestamp"}}
+        indexMapping: {"Data":{"serviceRequestId":"serviceRequestId","tenantId":"tenantId","complainCategory":"complainCategory","citizen":{},"phone":"phone","dateOfComplaint":null,"address":"","addressDetail":{},"status":"status","assignee":"assignee","gro":"gro","department":"department","complaintWard":{},"source":"","description":"","slaHours":"slaHours","tenantData":{},"actionHistory":{},"auditDetails":{},"@timestamp":"timestamp"}}
         fieldMapping:
-        - inJsonPath: $.dateOfIncident
-          outJsonPath: $.Data.dateOfIncident
-        - inJsonPath: $.locationOfIncident
-          outJsonPath: $.Data.locationOfIncident
-        - inJsonPath: $.complainantName
-          outJsonPath: $.Data.complainantName   
-        - inJsonPath: $.complainantMobileNumber
-          outJsonPath: $.Data.complainantMobileNumber  
-        - inJsonPath: $.complainantType
-          outJsonPath: $.Data.complainantType 
-        - inJsonPath: $.institutionType
-          outJsonPath: $.Data.institutionType 
-        - inJsonPath: $.institutionName
-          outJsonPath: $.Data.institutionName 
-        - inJsonPath: $.grievanceAgainstWhom
-          outJsonPath: $.Data.grievanceAgainstWhom
         - inJsonPath: $.serviceRequestId
           outJsonPath: $.Data.serviceRequestId
         - inJsonPath: $.tenantId
