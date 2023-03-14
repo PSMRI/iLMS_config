@@ -13,7 +13,7 @@
             {
               "id": 112,
               "name": "DSS_ILMS",
-              "vizType": "metric-collection",
+              "vizType": "chart",
               "label": "DSS_iLMS",
               "noUnit": true,
               "isCollapsible": false,
