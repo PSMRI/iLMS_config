@@ -28,7 +28,11 @@
         {
           "name": "My Dashboard",
           "id": "iLMS"
-        }     
+        },
+        {
+          "name": "PGR",
+          "id": "pgr"
+        }
       ]
     },
     {
