@@ -3423,7 +3423,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}}"
       }
     ],
-    "chartType": "metric",
+    "chartType": "line",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -3453,7 +3453,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Closed Complaints\":{\"filters\":{\"filters\":{\"closed\":{\"match\":{\"Data.service.applicationStatus.keyword\":\"CLOSED\"}},\"resolved\":{\"match\":{\"Data.service.applicationStatus.keyword\":\"RESOLVED\"}},\"rejected\":{\"match\":{\"Data.service.applicationStatus.keyword\":\"REJECTED\"}}}}}}}}}"
       }
     ],
-    "chartType": "metric",
+    "chartType": "line",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
