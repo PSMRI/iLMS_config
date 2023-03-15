@@ -3448,9 +3448,9 @@
       {
         "module": "PGR",
         "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.tenantId\"}",
-        "dateRefField": "Data.dateOfComplaint",
-        "indexName": "pgrindex-v1",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Closed Complaints\":{\"filters\":{\"filters\":{\"closed\":{\"match\":{\"Data.status.keyword\":\"closed\"}},\"resolved\":{\"match\":{\"Data.status.keyword\":\"resolved\"}},\"rejected\":{\"match\":{\"Data.status.keyword\":\"rejected\"}}}}}}}}}"
+        "dateRefField": "Data.service.dateOfIncident",
+        "indexName": "pgr-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Closed Complaints\":{\"filters\":{\"filters\":{\"closed\":{\"match\":{\"Data.service.applicationStatus.keyword\":\"CLOSED\"}},\"resolved\":{\"match\":{\"Data.service.applicationStatus.keyword\":\"RESOLVED\"}},\"rejected\":{\"match\":{\"Data.service.applicationStatus.keyword\":\"REJECTED\"}}}}}}}}}"
       }
     ],
     "chartType": "metric",
