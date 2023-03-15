@@ -1206,7 +1206,7 @@
                     "height": 350,
                     "width": 5
                   },
-                  "vizType": "chart",
+                  "vizType": "metric-collection",
                   "label": "DSS_OVERVIEW",
                   "noUnit": true,
                   "isCollapsible": false,
@@ -1215,7 +1215,7 @@
                       "id": "totalComplaints",
                       "name": "DSS_PGR_TOTAL_COMPLAINTS",
                       "code": "",
-                      "chartType": "line",
+                      "chartType": "metric",
                       "filter": "",
                       "headers": []
                     },
@@ -1223,7 +1223,7 @@
                       "id": "closedComplaints",
                       "name": "DSS_PGR_CLOSED_COMPLAINTS",
                       "code": "",
-                      "chartType": "line",
+                      "chartType": "metric",
                       "filter": "",
                       "headers": []
                     },
