@@ -1219,6 +1219,35 @@
                   ]
                 }
               ]
+            },
+            {
+              "row": 2,
+              "name": "DSS_REVENUE",
+              "vizArray": [
+                {
+                  "id": 231,
+                  "name": "DSS_TL_KEY_FY_INDICATORS",
+                  "dimensions": {
+                    "height": 350,
+                    "width": 12
+                  },
+                  "vizType": "chart",
+                  "label": "",
+                  "noUnit": false,
+                  "isCollapsible": true,
+                  "charts": [
+                    {
+                      "id": "licenseIssuedDDRRevenue",
+                      "name": "DSS_TL_DEMAND_COLLECTION_BOUNDARY",
+                      "code": "",
+                      "chartType": "table",
+                      "filter": "",
+                      "headers": [],
+                      "tabName": "Boundary"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
