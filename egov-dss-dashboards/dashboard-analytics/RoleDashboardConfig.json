@@ -1191,7 +1191,7 @@
         },
         {
           "name": "DSS_PGR_DASHBOARD",
-          "id": "PGR",
+          "id": "pgr",
           "isActive": "",
           "style": "linear",
           "visualizations": [
