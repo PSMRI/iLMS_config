@@ -2434,11 +2434,11 @@
     "chartName": "DSS_TL_KEY_FY_INDICATORS",
     "queries": [
       {
-        "module": "COMMON",
+        "module": "PGR",
         "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pb.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}},\"Transactions\":{\"value_count\":{\"field\":\"dataObject.transactionNumber.keyword\"}}}}}}"
+        "dateRefField": "Data.service.dateOfIncident",
+        "indexName": "pgr-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pb.testing\"}},{\"terms\":{\"Data.history.state.applicationStatus.keyword\":[\"RESOLVED\"]}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"Data.service.dateOfIncident\"}},\"Transactions\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}}"
       },
       {
         "module": "TL",
@@ -2495,11 +2495,11 @@
     "chartName": "DSS_TL_DEMAND_COLLECTION_BOUNDARY",
     "queries": [
       {
-        "module": "COMMON",
+        "module": "PGR",
         "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pb.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}]}},\"aggs\":{\"ULBs \":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":200},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}},\"Transactions\":{\"value_count\":{\"field\":\"dataObject.paymentDetails.billId.keyword\"}}}}}}}}"
+        "dateRefField": "Data.service.dateOfIncident",
+        "indexName": "pgr-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pb.testing\"}},{\"terms\":{\"Data.history.applicationStatus.keyword\":[\"RESOLVED\"]}}]}},\"aggs\":{\"ULBs \":{\"terms\":{\"field\":\"Data.service.tenantId.keyword\",\"size\":200},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"Data.service.dateOfIncident\"}},\"Transactions\":{\"value_count\":{\"field\":\"Data.service.id.keyword\"}}}}}}}}"
       },
       {
         "module": "TL",
