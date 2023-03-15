@@ -31,17 +31,6 @@ ServiceMaps:
                     outJsonPath: $.Data.history
             mdmsMapping:
               - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
-                moduleName: common-masters
-                masterName: Department
-                tenantId: mp.health
-                filter: "[?(@.code == $department)]"
-                filterMapping:
-                  - variable: $department
-                    valueJsonpath: $.department
-                uriResponseMapping:
-                  - inJsonPath: $.MdmsRes.common-masters.Department.*.name
-                    outJsonPath: $.Data.department
-              - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
                 moduleName: RAINMAKER-PGR
                 masterName: ServiceDefs
                 tenantId: mp.health
