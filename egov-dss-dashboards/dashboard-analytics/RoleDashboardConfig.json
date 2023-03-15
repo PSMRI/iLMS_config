@@ -684,25 +684,6 @@
                       "headers": []
                     }
                   ]
-                },
-                {
-                  "id": 12,
-                  "name": "Total Cumulative Collection",
-                  "dimensions": {
-                    "height": 350,
-                    "width": 7
-                  },
-                  "vizType": "chart",
-                  "charts": [
-                    {
-                      "id": "cumulativeCollection",
-                      "name": "Weekly",
-                      "code": "",
-                      "chartType": "line",
-                      "filter": "",
-                      "headers": []
-                    }
-                  ]
                 }
               ]
             },
