@@ -2562,7 +2562,7 @@
                   "id": "totalComplaints",
                   "name": "DSS_PGR_TOTAL_COMPLAINTS",
                   "code": "",
-                  "chartType": "metric",
+                  "chartType": "line",
                   "filter": "",
                   "headers": []
                 },
@@ -2570,7 +2570,7 @@
                   "id": "closedComplaints",
                   "name": "DSS_PGR_CLOSED_COMPLAINTS",
                   "code": "",
-                  "chartType": "metric",
+                  "chartType": "line",
                   "filter": "",
                   "headers": []
                 },
