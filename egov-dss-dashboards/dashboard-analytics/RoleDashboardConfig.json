@@ -1209,39 +1209,10 @@
                       "headers": []
                     },
                     {
-                      "id": "slaAchieved",
-                      "name": "DSS_SLA_ACHIEVED",
-                      "code": "",
-                      "chartType": "metric",
-                      "filter": "",
-                      "headers": []
-                    },
-                    {
                       "id": "completionRate",
                       "name": "DSS_PGR_COMPLETION_RATE",
                       "code": "",
                       "chartType": "metric",
-                      "filter": "",
-                      "headers": []
-                    }
-                  ]
-                },
-                {
-                  "id": 412,
-                  "name": "DSS_TOTAL_CUMULATIVE_CLOSED_COMPLAINTS",
-                  "dimensions": {
-                    "height": 350,
-                    "width": 7
-                  },
-                  "vizType": "chart",
-                  "isCollapsible": false,
-                  "label": "",
-                  "charts": [
-                    {
-                      "id": "cumulativeClosedComplaints",
-                      "name": "Monthly",
-                      "code": "",
-                      "chartType": "line",
                       "filter": "",
                       "headers": []
                     }
