@@ -2455,9 +2455,9 @@
         "aggrQuery": "{\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       }
     ],
-    "isMdmsEnabled": true,
+    "isMdmsEnabled": false,
     "filterKeys": [
-      {"key": "tenantId", "column": "DDRs"}
+      {"key": "stateId", "column": "state"}
     ],
     "isPostResponseHandler": true,
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -2466,7 +2466,7 @@
     "drillChart": "licenseIssuedBoundaryRevenue",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "DDRs",
+    "plotLabel": "state",
     "aggregationPaths": [
       "Total Collection",
       "Transactions",
