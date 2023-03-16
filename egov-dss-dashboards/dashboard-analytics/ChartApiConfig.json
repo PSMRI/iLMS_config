@@ -2435,7 +2435,7 @@
     "queries": [
       {
         "module": "PGR",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"Data.history.businessService.keyword\", \"tenantId\" : \"Data.service.tenantId\", \"district\" : \"Data.service.address.district\" }",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"Data.history.businessService.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\", \"district\" : \"Data.service.address.district\" }",
         "dateRefField": "Data.service.dateOfIncident",
         "indexName": "pgr-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp\"}},{\"terms\":{\"Data.service.applicatinStatus.keyword\":[\"RESOLVED\"]}}],\"must\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.service.address.state.keyword\",\"size\":200},\"aggs\":{\"Transactions\":{\"value_count\":{\"field\":\"Data.service.id.keyword\"}}}}}}}}"
