@@ -2457,7 +2457,7 @@
     ],
     "isMdmsEnabled": true,
     "filterKeys": [
-      {"key": "tenantId", "column": "tenants"}
+      {"key": "tenantId", "value": "mp.health"}
     ],
     "isPostResponseHandler": true,
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -2466,7 +2466,7 @@
     "drillChart": "licenseIssuedBoundaryRevenue",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "tenants",
+    "plotLabel": "mp.health",
     "aggregationPaths": [
       "Total Collection",
       "Transactions",
