@@ -1078,6 +1078,44 @@
               ]
             }
           ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_SERVICE",
+          "vizArray": [
+            {
+              "id": 431,
+              "name": "DSS_PGR_STATUS_BY_TENANT",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "xpgrStatusByDDR",
+                  "name": "DSS_PGR_STATUS_BY_TENANT",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Boundary"
+                },
+                {
+                  "id": "xpgrStatusByDept",
+                  "name": "DSS_PGR_STATUS_BY_DEPARTMENT",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Department"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
