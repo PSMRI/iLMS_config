@@ -1244,15 +1244,6 @@
                       "filter": "",
                       "headers": [],
                       "tabName": "Boundary"
-                    },
-                    {
-                      "id": "licenseIssuedBoundaryRevenue",
-                      "name": "DSS_TL_DEMAND_COLLECTION_BOUNDARY",
-                      "code": "",
-                      "chartType": "table",
-                      "filter": "",
-                      "headers": [],
-                      "tabName": "Boundary"
                     }
                   ]
                 }
