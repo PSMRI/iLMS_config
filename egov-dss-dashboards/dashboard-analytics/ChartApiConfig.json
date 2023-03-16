@@ -2435,7 +2435,7 @@
     "queries": [
       {
         "module": "PGR",
-        "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
+        "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.tenantId\"}",
         "dateRefField": "Data.service.dateOfIncident",
         "indexName": "pgr-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp\"}},{\"terms\":{\"Data.service.applicatinStatus.keyword\":[\"RESOLVED\"]}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.service.address.state.keyword\",\"size\":200},\"aggs\":{\"Transactions\":{\"value_count\":{\"field\":\"Data.service.id.keyword\"}}}}}}}}"
@@ -2443,16 +2443,16 @@
     ],
     "isMdmsEnabled": true,
     "filterKeys": [
-      {"key": "tenantId", "column": "Boundary"}
+      {"key": "tenantId", "column": "DDRs"}
     ],
     "isPostResponseHandler": true,
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
-    "chartType": "xtable",
+    "chartType": "table",
     "valueType": "number",
     "drillChart": "licenseIssuedBoundaryRevenue",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Boundary",
+    "plotLabel": "DDRs",
     "aggregationPaths": [
       "Transactions"
     ],
