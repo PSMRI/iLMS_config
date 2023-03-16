@@ -2438,7 +2438,7 @@
         "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
         "dateRefField": "Data.service.dateOfIncident",
         "indexName": "pgr-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp\"}},{\"terms\":{\"Data.history.state.applicationStatus.keyword\":[\"RESOLVED\"]}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"Data.service.dateOfIncident\"}},\"Transactions\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp\"}},{\"terms\":{\"Data.service.applicatinStatus.keyword\":[\"RESOLVED\"]}}]}},\"aggs\":{\"State \":{\"terms\":{\"field\":\"Data.service.address.state.keyword\",\"size\":200},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"Data.service.dateOfIncident\"}},\"Transactions\":{\"value_count\":{\"field\":\"Data.service.id.keyword\"}}}}}}}}"
       },
       {
         "module": "TL",
