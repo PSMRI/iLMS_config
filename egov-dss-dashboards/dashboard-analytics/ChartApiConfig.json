@@ -2457,7 +2457,7 @@
     ],
     "isMdmsEnabled": true,
     "filterKeys": [
-      {"key": "stateId", "column": "state"}
+      {"key": "tenantId", "column": "DDRs"}
     ],
     "isPostResponseHandler": true,
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -2466,7 +2466,7 @@
     "drillChart": "licenseIssuedBoundaryRevenue",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "state",
+    "plotLabel": "DDRs",
     "aggregationPaths": [
       "Total Collection",
       "Transactions",
