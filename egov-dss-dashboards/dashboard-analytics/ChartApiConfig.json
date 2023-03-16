@@ -2435,56 +2435,30 @@
     "queries": [
       {
         "module": "PGR",
-        "requestQueryMap": "{\"tenantId\": \"Data.service.tenantId\",\"module\" : \"Data.history.businessService.keyword\" }",
+        "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.service.dateOfIncident",
         "indexName": "pgr-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp\"}},{\"terms\":{\"Data.service.applicatinStatus.keyword\":[\"RESOLVED\"]}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.service.address.state.keyword\",\"size\":200},\"aggs\":{\"Transactions\":{\"value_count\":{\"field\":\"Data.service.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "TL",
-        "indexName": "tlindex-v1",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tradelicense.tenantId.keyword\":\"pb.testing\"}}]}},\"aggs\": {\"Total Licence Issued\": {\"value_count\": {\"field\": \"Data.tradelicense.licenseNumber.keyword\"}}}}}}",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tradelicense.tenantId\" \r\n, \r\n\"businessService\" : \"dataObject.Bill.billDetails.businessServices\" \r\n}",
-        "dateRefField": "Data.tradelicense.issuedDate"
-      },
-      {
-        "module": "COMMON",
-        "requestQueryMap": "{\"module\" : \"businessService.keyword\", \"tenantId\" : \"tenantIdForMunicipalCorporation.keyword\"}",
-        "dateRefField": "",
-        "indexName": "dss-target_v1",
-        "aggrQuery": "{\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       }
     ],
     "isMdmsEnabled": true,
     "filterKeys": [
-      {"key": "tenantId", "column": "DDRs"}
+      {"key": "tenantId", "column": "Boundary"}
     ],
     "isPostResponseHandler": true,
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "licenseIssuedBoundaryRevenue",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "DDRs",
+    "plotLabel": "Boundary",
     "aggregationPaths": [
-      "Total Collection",
-      "Transactions",
-      "Total Licence Issued",
-      "Target Collection"
+      "Transactions"
     ],
     "pathDataTypeMapping": [
       {
-        "Total Collection": "amount"
-      },
-      {
         "Transactions": "number"
-      },
-      {
-        "Total Licence Issued": "number"
-      },
-      {
-        "Target Collection": "amount"
       }
     ],
     "insight": {
