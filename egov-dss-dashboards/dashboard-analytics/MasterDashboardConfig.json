@@ -1068,7 +1068,7 @@
                 },
                 {
                   "id": "licenseIssuedBoundaryRevenue",
-                  "name": "DSS_TL_DEMAND_COLLECTION_BOUNDARY",
+                  "name": "DSS_TL_KEY_FY_INDICATORS",
                   "code": "",
                   "chartType": "table",
                   "filter": "",
