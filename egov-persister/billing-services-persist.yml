@@ -1,274 +1,184 @@
 serviceMaps:
- serviceName: User Service
- mappings:
- - version: 1.0
-   name: bill create
-   description: create bill in egbs_bill
-   fromTopic: save-bill-db
-   queryMaps: 
-    - query: INSERT into egbs_bill (id, tenantid, payeename, payeeaddress, payeeemail, isactive, iscancelled, createdby, createddate, lastmodifiedby, lastmodifieddate) values(?,?,?,?,?,?,?,?,?,?,?)
-      basePath: $.Bills.*
-      jsonMaps:
-       
-       - jsonPath: $.Bills.*.id
+  serviceName: egov-survey-services
+  mappings:
+    - version: 1.0
+      description: Persists surveys in eg_ss_survey table
+      fromTopic: save-ss-survey
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_ss_survey( uuid,tenantid,title,description,status,postedby,startDate,endDate,active,createdby,lastmodifiedby,createdtime,lastmodifiedtime) VALUES (?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: SurveyEntity
+          jsonMaps:
+            - jsonPath: $.SurveyEntity.uuid
 
-       - jsonPath: $.Bills.*.tenantId
-         
-       - jsonPath: $.Bills.*.payeeName
-         
-       - jsonPath: $.Bills.*.payeeAddress
+            - jsonPath: $.SurveyEntity.tenantId
 
-       - jsonPath: $.Bills.*.payeeEmail
-         
-       - jsonPath: $.Bills.*.isActive
-         type: BOOLEAN                  
-       
-       - jsonPath: $.Bills.*.isCancelled
-         type: BOOLEAN
+            - jsonPath: $.SurveyEntity.title
 
-       - jsonPath: $.RequestInfo.userInfo.id
-         type: LONG
-         
-       - type: CURRENTDATE
-         dbType: LONG
-         
-       - jsonPath: $.RequestInfo.userInfo.id
-         
-       - type: CURRENTDATE
-         dbType: LONG
-         
-    - query: INSERT into egbs_billdetail (id, tenantid, billid, businessservice, billno, billdate, consumercode, consumertype, billdescription, displaymessage, minimumamount, totalamount, callbackforapportioning, partpaymentallowed, collectionmodesnotallowed, createdby, createddate, lastmodifiedby, lastmodifieddate) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
-      basePath: $.Bills.*.billDetails.*
-      jsonMaps:
-       - jsonPath: $.Bills.*.billDetails.*.id
+            - jsonPath: $.SurveyEntity.description
 
-       - jsonPath: $.Bills.*.billDetails.*.tenantId
-         
-       - jsonPath: $.Bills[?({id} in @.billDetails[*].id)].id
-         
-       - jsonPath: $.Bills.*.billDetails.*.businessService
-         type: DOUBLE
+            - jsonPath: $.SurveyEntity.status
 
-       - jsonPath: $.Bills.*.billDetails.*.billNumber
-         type: DOUBLE
-         
-       - jsonPath: $.Bills.*.billDetails.*.billDate
-         type: LONG
-         
-       - jsonPath: $.Bills.*.billDetails.*.consumerCode
-         
-       - jsonPath: $.Bills.*.billDetails.*.consumerType
-         
-       - jsonPath: $.Bills.*.billDetails.*.billDescription
+            - jsonPath: $.SurveyEntity.postedBy
 
-       - jsonPath: $.Bills.*.billDetails.*.displayMessage
-         
-       - jsonPath: $.Bills.*.billDetails.*.minimumAmount
-         type: DOUBLE
-         
-       - jsonPath: $.Bills.*.billDetails.*.totalAmount
-         type: DOUBLE
+            - jsonPath: $.SurveyEntity.startDate
 
-       - jsonPath: $.Bills.*.billDetails.*.callBackForApportioning
-         type: BOOLEAN
-         
-       - jsonPath: $.Bills.*.billDetails.*.partPaymentAllowed
-         type: BOOLEAN
-         
-       - jsonPath: $.Bills.*.billDetails.*.collectionModesNotAllowed
-         type: ARRAY
-         dbType: STRING
-         
-       - jsonPath: $.RequestInfo.userInfo.id
-         type: LONG
-         
-       - type: CURRENTDATE
-         dbType: LONG
-         
-       - jsonPath: $.RequestInfo.userInfo.id
-         
-       - type: CURRENTDATE
-         dbType: LONG 
-         
-    - query: INSERT into egbs_billaccountdetail(id, tenantid, billdetail, glcode, orderno, accountdescription, cramounttobepaid, creditamount, debitamount, isactualdemand, purpose, createdby, createddate, lastmodifiedby, lastmodifieddate) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
-      basePath: $.Bills.*.billDetails.*.billAccountDetails.*
-      jsonMaps:
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.id
+            - jsonPath: $.SurveyEntity.endDate
 
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.tenantId
-         
-       - jsonPath: $.Bills[*].billDetails[?({id} in @.billAccountDetails[*].id)].id
-           
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.glcode
-         
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.order
-         type: INT
+            - jsonPath: $.SurveyEntity.active
 
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.accountDescription
-         
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.crAmountToBePaid
-         type: DOUBLE
-         
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.creditAmount
-         type: DOUBLE
-         
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.debitAmount
-         type: DOUBLE
-         
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.isActualDemand
-         type: BOOLEAN
+            - jsonPath: $.SurveyEntity.auditDetails.createdBy
 
-       - jsonPath: $.Bills.*.billDetails.*.billAccountDetails.*.purpose
-          
-       - jsonPath: $.RequestInfo.userInfo.id
-         type: LONG
-         
-       - type: CURRENTDATE
-         dbType: LONG
-         
-       - jsonPath: $.RequestInfo.userInfo.id
-         
-       - type: CURRENTDATE
-         dbType: LONG 
-         
- - version: 1.0
-   name: demand create
-   description: create demand in  egbs_demand
-   fromTopic: save-demand
-   isTransaction: true
-   queryMaps: 
-    - query: INSERT INTO egbs_demand (id,consumerCode,consumerType,businessService,owner,taxPeriodFrom,taxPeriodTo,minimumAmountPayable,createdby,lastModifiedby,createdtime,lastModifiedtime,tenantid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);
-      basePath: $.Demands.*
-      jsonMaps:
-       
-       - jsonPath: $.Demands.*.id
-         type: STRING
+            - jsonPath: $.SurveyEntity.auditDetails.lastModifiedBy
 
-       - jsonPath: $.Demands.*.consumerCode
-         type: STRING
-         
-       - jsonPath: $.Demands.*.consumerType
-         type: STRING
-         
-       - jsonPath: $.Demands.*.businessService
-         type: STRING
+            - jsonPath: $.SurveyEntity.auditDetails.createdTime
 
-       - jsonPath: $.Demands.*.owner.id
-         type: STRING
-         
-       - jsonPath: $.Demands.*.taxPeriodFrom
-         type: LONG                  
-       
-       - jsonPath: $.Demands.*.taxPeriodTo
-         type: LONG
+            - jsonPath: $.SurveyEntity.auditDetails.lastModifiedTime
 
-       - jsonPath: $.Demands.*.minimumAmountPayable
-         type: DOUBLE
-         
-       - jsonPath: $.Demands.*.auditDetail.createdBy
-         type: STRING
-         
-       - jsonPath: $.Demands.*.auditDetail.lastModifiedBy
-         type: STRING
-         
-       - jsonPath: $.Demands.*.auditDetail.createdTime
-         type: LONG
-         
-       - jsonPath: $.Demands.*.auditDetail.lastModifiedTime
-         type: LONG
+        - query: INSERT INTO eg_ss_question( uuid,surveyid,questionstatement,options,status,type,required,createdby,lastmodifiedby,createdtime,lastmodifiedtime,qorder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);
+          basePath: SurveyEntity.questions.*
+          jsonMaps:
+            - jsonPath: $.SurveyEntity.questions.*.uuid
 
-       - jsonPath: $.Demands.*.tenantId
-         type: STRING                
+            - jsonPath: $.SurveyEntity.questions.*.surveyId
 
-    - query: INSERT INTO egbs_demanddetail (id,demandid,taxHeadCode,taxamount,collectionamount,createdby,lastModifiedby,createdtime,lastModifiedtime,tenantid) VALUES (?,?,?,?,?,?,?,?,?,?);
-      basePath: $.Demands.*.demandDetails.*
-      jsonMaps:
-       - jsonPath: $.Demands.*.demandDetails.*.id
-         type: STRING
+            - jsonPath: $.SurveyEntity.questions.*.questionStatement
 
-       - jsonPath: $.Demands.*.demandDetails.*.demandId
-         type: STRING
-         
-       - jsonPath: $.Demands.*.demandDetails.*.taxHeadMasterCode
-         type: STRING
-         
-       - jsonPath: $.Demands.*.demandDetails.*.taxAmount
-         type: DOUBLE
+            - jsonPath: $.SurveyEntity.questions.*.options
+              type: ARRAY
+              dbType: STRING
 
-       - jsonPath: $.Demands.*.demandDetails.*.collectionAmount
-         type: DOUBLE
-         
-       - jsonPath: $.Demands.*.demandDetails.*.auditDetail.createdBy
-         type: STRING
-         
-       - jsonPath: $.Demands.*.demandDetails.*.auditDetail.lastModifiedBy
-         type: STRING
-         
-       - jsonPath: $.Demands.*.demandDetails.*.auditDetail.createdTime
-         type: LONG
-         
-       - jsonPath: $.Demands.*.demandDetails.*.auditDetail.lastModifiedTime
-         type: LONG
+            - jsonPath: $.SurveyEntity.questions.*.status
 
-       - jsonPath: $.Demands.*.demandDetails.*.tenantId
-         type: STRING
+            - jsonPath: $.SurveyEntity.questions.*.type
 
+            - jsonPath: $.SurveyEntity.questions.*.required
 
- - version: 1.0
-   name: demand update
-   description: update demand in  egbs_demand
-   fromTopic: update-demand
-   isTransaction: true
-   queryMaps: 
-    - query: UPDATE egbs_demand SET consumerCode=?,consumerType=?,businessService=?,owner=?,taxPeriodFrom=?,taxPeriodTo=?,minimumAmountPayable=?,lastModifiedby=?,lastModifiedtime=? WHERE id=? AND tenantid=?;
-      basePath: $.Demands.*
-      jsonMaps:
-       
-       - jsonPath: $.Demands.*.consumerCode
-         
-       - jsonPath: $.Demands.*.consumerType
-         
-       - jsonPath: $.Demands.*.businessService
+            - jsonPath: $.SurveyEntity.questions.*.auditDetails.createdBy
 
-       - jsonPath: $.Demands.*.owner.id
-         
-       - jsonPath: $.Demands.*.taxPeriodFrom
-         type: LONG                  
-       
-       - jsonPath: $.Demands.*.taxPeriodTo
-         type: LONG
+            - jsonPath: $.SurveyEntity.questions.*.auditDetails.lastModifiedBy
 
-       - jsonPath: $.Demands.*.minimumAmountPayable
-         type: DOUBLE
-         
-       - jsonPath: $.Demands.*.auditDetail.lastModifiedBy
-         
-       - jsonPath: $.Demands.*.auditDetail.lastModifiedTime
-         type: LONG
-         
-       - jsonPath: $.Demands.*.id
+            - jsonPath: $.SurveyEntity.questions.*.auditDetails.createdTime
 
-       - jsonPath: $.Demands.*.tenantId
+            - jsonPath: $.SurveyEntity.questions.*.auditDetails.lastModifiedTime
 
-    - query: UPDATE egbs_demanddetail SET demandid=?,taxHeadCode=?,taxamount=?,collectionamount=?,lastModifiedby=?,lastModifiedtime=? WHERE id=? AND tenantid=?;
-      basePath: $.Demands.*.demandDetails.*
-      jsonMaps:
+            - jsonPath: $.SurveyEntity.questions.*.qorder
 
-       - jsonPath: $.Demands.*.demandDetails.*.demandId
-         
-       - jsonPath: $.Demands.*.demandDetails.*.taxHeadMasterCode
-         
-       - jsonPath: $.Demands.*.demandDetails.*.taxAmount
-         type: DOUBLE
+    - version: 1.0
+      description: Persists answers in eg_ss_answer table
+      fromTopic: save-ss-answer
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_ss_answer( uuid,questionid,surveyid,answer,citizenid,createdby,lastmodifiedby,createdtime,lastmodifiedtime) VALUES (?,?,?,?,?,?,?,?,?);
+          basePath: AnswerEntity.answers.*
+          jsonMaps:
+            - jsonPath: $.AnswerEntity.answers.*.uuid
 
-       - jsonPath: $.Demands.*.demandDetails.*.collectionAmount
-         type: DOUBLE
-         
-       - jsonPath: $.Demands.*.demandDetails.*.auditDetail.lastModifiedBy
-         
-       - jsonPath: $.Demands.*.demandDetails.*.auditDetail.lastModifiedTime
-         type: LONG
-         
-       - jsonPath: $.Demands.*.demandDetails.*.id
+            - jsonPath: $.AnswerEntity.answers.*.questionId
 
-       - jsonPath: $.Demands.*.demandDetails.*.tenantId
+            - jsonPath: $.AnswerEntity.surveyId
+
+            - jsonPath: $.AnswerEntity.answers.*.answer
+              type: ARRAY
+              dbType: STRING
+
+            - jsonPath: $.AnswerEntity.answers.*.citizenId
+
+            - jsonPath: $.AnswerEntity.answers.*.auditDetails.createdBy
+
+            - jsonPath: $.AnswerEntity.answers.*.auditDetails.lastModifiedBy
+
+            - jsonPath: $.AnswerEntity.answers.*.auditDetails.createdTime
+
+            - jsonPath: $.AnswerEntity.answers.*.auditDetails.lastModifiedTime
+
+    - version: 1.0
+      description: Updates survey in tables
+      fromTopic: update-ss-survey
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE eg_ss_survey SET tenantid=?, title=?, description=?, status=?, postedBy=?, startDate = ?, endDate = ?, lastmodifiedby=?, lastmodifiedtime=? WHERE uuid=?;
+          basePath: SurveyEntity
+          jsonMaps:
+            - jsonPath: $.SurveyEntity.tenantId
+
+            - jsonPath: $.SurveyEntity.title
+
+            - jsonPath: $.SurveyEntity.description
+
+            - jsonPath: $.SurveyEntity.status
+
+            - jsonPath: $.SurveyEntity.postedBy
+
+            - jsonPath: $.SurveyEntity.startDate
+
+            - jsonPath: $.SurveyEntity.endDate
+
+            - jsonPath: $.SurveyEntity.auditDetails.lastModifiedBy
+
+            - jsonPath: $.SurveyEntity.auditDetails.lastModifiedTime
+
+            - jsonPath: $.SurveyEntity.uuid
+
+        - query: UPDATE eg_ss_question SET questionstatement = ?, options = ?, status = ?, type = ?, required = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE uuid = ?;
+          basePath: SurveyEntity.questions.*
+          jsonMaps:
+
+            - jsonPath: $.SurveyEntity.questions.*.questionStatement
+
+            - jsonPath: $.SurveyEntity.questions.*.options
+              type: ARRAY
+              dbType: STRING
+
+            - jsonPath: $.SurveyEntity.questions.*.status
+
+            - jsonPath: $.SurveyEntity.questions.*.type
+
+            - jsonPath: $.SurveyEntity.questions.*.required
+
+            - jsonPath: $.SurveyEntity.questions.*.auditDetails.lastModifiedBy
+
+            - jsonPath: $.SurveyEntity.questions.*.auditDetails.lastModifiedTime
+
+            - jsonPath: $.SurveyEntity.questions.*.uuid
+
+        - query: INSERT INTO eg_ss_question( uuid,surveyid,questionstatement,options,status,type,required,createdby,lastmodifiedby,createdtime,lastmodifiedtime,qorder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);
+          basePath: SurveyEntity.insertQuestionsForUpdate.*
+          jsonMaps:
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.uuid
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.surveyId
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.questionStatement
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.options
+              type: ARRAY
+              dbType: STRING
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.status
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.type
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.required
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.auditDetails.createdBy
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.auditDetails.lastModifiedBy
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.auditDetails.createdTime
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.auditDetails.lastModifiedTime
+
+            - jsonPath: $.SurveyEntity.insertQuestionsForUpdate.*.qorder
+
+    - version: 1.0
+      description: Deletes survey in tables
+      fromTopic: delete-ss-survey
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE eg_ss_survey SET active=? WHERE uuid=?;
+          basePath: SurveyEntity
+          jsonMaps:
+            - jsonPath: $.SurveyEntity.active
+
+            - jsonPath: $.SurveyEntity.uuid
