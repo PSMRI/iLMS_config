@@ -3558,8 +3558,8 @@
         "module": "PGR",
         "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.tenantId\"}",
         "dateRefField": "Data.dateOfComplaint",
-        "indexName": "pgrindex-v1",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Complaints By Channels\":{\"terms\":{\"field\":\"Data.source.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.dateOfComplaint\"}}}}}}}}"
+        "indexName": "pgr-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Complaints By Channels\":{\"terms\":{\"field\":\"Data.service.source.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}}}}"
       }
     ],
     "chartType": "pie",
