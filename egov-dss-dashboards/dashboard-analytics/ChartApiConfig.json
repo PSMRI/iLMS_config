@@ -3963,9 +3963,9 @@
       {
         "module": "PGR",
         "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.tenantId\"}",
-        "dateRefField": "Data.dateOfComplaint",
-        "indexName": "pgrindex-v1",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Complain Category\":{\"terms\":{\"field\":\"Data.complainCategory.keyword\",\"size\":6,\"order\":{\"Count\":\"desc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.complainCategory.keyword\"}}}}}}}}"
+        "dateRefField": "Data.service.dateOfIncident",
+        "indexName": "pgr-servies",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Complain Category\":{\"terms\":{\"field\":\"Data.service.serviceCode.keyword\",\"size\":6,\"order\":{\"Count\":\"desc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.serviceCode.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "pie",
