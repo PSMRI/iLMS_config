@@ -2878,8 +2878,14 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Open",
-      "Closed"
+      "PENDINGATLEVEL1",
+      "PENDINGATLEVEL2",
+      "PENDINGATLEVEL3",
+      "REJECTED",
+      "RESOLVED",
+      "CLOSEDAFTERRESOLUTION",
+      "CLOSEDAFTERREJECTION"
+
     ],
     "isCumulative": false,
     "interval": "month",
