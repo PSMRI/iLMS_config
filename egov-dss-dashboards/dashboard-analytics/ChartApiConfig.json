@@ -2884,7 +2884,8 @@
       "REJECTED",
       "RESOLVED",
       "CLOSEDAFTERRESOLUTION",
-      "CLOSEDAFTERREJECTION"
+      "CLOSEDAFTERREJECTION",
+      "REOPEN"
 
     ],
     "isCumulative": false,
