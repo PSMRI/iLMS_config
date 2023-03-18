@@ -1283,6 +1283,35 @@
     "_comment": " totalApplication is the chartId"
   },
 
+    "totalComplaintsbySource": {
+      "chartName": "DSS_PGR_TOTAL_COMPLAINTS_BY_SOURCE",
+      "queries": [
+        {
+          "module": "PGR",
+          "dateRefField": "Data.service.dateOfIncident",
+          "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.service.tenantId\"}",
+          "indexName": "pgr-services",
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Ivr\":{\"date_histogram\":{\"field\":\"Data.service.dateOfIncident\",\"interval\":\"month\"},\"aggs\":{\"ivr\":{\"filter\":{\"terms\":{\"Data.service.source.keyword\":[\"ivr\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}},\"Web\":{\"date_histogram\":{\"field\":\"Data.service.dateOfIncident\",\"interval\":\"month\"},\"aggs\":{\"web\":{\"filter\":{\"terms\":{\"Data.service.source.keyword\":[\"web\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}},\"Whatsapp\":{\"date_histogram\":{\"field\":\"Data.service.dateOfIncident\",\"interval\":\"month\"},\"aggs\":{\"whatapp\":{\"filter\":{\"terms\":{\"Data.service.source.keyword\":[\"whatsapp\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}},\"Mobileapp\":{\"date_histogram\":{\"field\":\"Data.service.dateOfIncident\",\"interval\":\"month\"},\"aggs\":{\"mobileapp\":{\"filter\":{\"terms\":{\"Data.service.source.keyword\":[\"mobileapp\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}}}}}}"
+        }
+      ],
+      "chartType": "line",
+      "valueType": "number",
+      "action": "",
+      "drillChart": "none",
+      "documentType": "_doc",
+      "aggregationPaths": [
+        "Ivr",
+        "Web",
+        "Whatsapp",
+        "Mobileapp"
+      ],
+      "isCumulative": false,
+      "interval": "month",
+      "insight": {
+      },
+      "_comment": " "
+    },
+
   "_comment": "COMMON COLLECTION CHARTS",
   "targetCollection": {
     "chartName": "DSS_TARGET_COLLECTION",
