@@ -2133,7 +2133,7 @@ ReportDefinitions:
       SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla
     
       from pgr_data
-      INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
+      INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
       WHERE 1=1
   groupby: GROUP BY tenantid,rating
   orderby: ORDER BY tenantid,rating
