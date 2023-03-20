@@ -3002,10 +3002,10 @@
     "queries": [
       {
         "module": "PGR",
-        "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\" , \"departmentId\" : \"Data.department.keyword\"}",
+        "requestQueryMap": "{ \"tenantId\" : \"Data.service.tenantId.keyword\" , \"state\" : \"Data.service.address.state.keyword\"}",
         "dateRefField": "Data.service,dateOfIncident",
         "indexName": "pgr-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"ULBs \":{\"terms\":{\"field\":\"Data.service.tenantId.keyword\",\"size\":1000},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}},\"Closed_Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"CLOSED\",\"REJECTED\",\"RESOLVED\"]}},\"aggs\":{\"Closed Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Open_Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"PENDINGATLEVEL1\",\"PENDINGATLEVEL2\",\"PENDINGATLEVEL3\"]}},\"aggs\":{\"Open Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Reopened_Complaints\":{\"filter\":{\"terms\":{\"Data.history.state.actions.action.keyword\":[\"REOPEN\"]}},\"aggs\":{\"Reopened Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"ulb\":{\"terms\":{\"field\":\"Data.service.tenantId.keyword\",\"size\":10000},\"aggs\":{\"region\":{\"terms\":{\"field\":\"Data.service.address.region.keyword\",\"size\":10000},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}},\"Closed_Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"CLOSED\",\"REJECTED\",\"RESOLVED\"]}},\"aggs\":{\"Closed Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Open_Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"PENDINGATLEVEL1\",\"PENDINGATLEVEL2\",\"PENDINGATLEVEL3\"]}},\"aggs\":{\"Open Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Reopened_Complaints\":{\"filter\":{\"terms\":{\"Data.history.state.actions.action.keyword\":[\"REOPEN\"]}},\"aggs\":{\"Reopened Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -3021,13 +3021,6 @@
         "actionName": "PercentageComputedField",
         "fields" : ["Closed Complaints", "Total Complaints"],
         "newField" : "Completion Rate",
-        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
-      },
-      {
-        "postAggregationTheory" : "",
-        "actionName": "PercentageComputedField",
-        "fields" : ["Total Complaints", "withinSLA"],
-        "newField" : "Sla Achieved",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
       }
     ],
