@@ -2743,7 +2743,7 @@
               "vizType": "chart",
               "label": "",
               "noUnit": false,
-              "isCollapsible": false,
+              "isCollapsible": true,
               "charts": [
                 {
                   "id": "xpgrStatusByDDR",
