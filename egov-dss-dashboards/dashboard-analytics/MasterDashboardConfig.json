@@ -1210,15 +1210,6 @@
                   "tabName": "Boundary"
                 },
                 {
-                  "id": "xpgrStatusByDept",
-                  "name": "DSS_PGR_STATUS_BY_DEPARTMENT",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Department"
-                },
-                {
                   "id": "mcReportByDDRv2",
                   "name": "DSS_MC_REPORT_BY_TENANT",
                   "code": "",
