@@ -2265,8 +2265,9 @@ ReportDefinitions:
       (select designation from eg_hrms_assignment where employeeid = assignee)) as designation,
       SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVED') and (resolvedtime - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedwithinsla,
       SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVED') and (resolvedtime - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedoutsidesla,
-      SUM (CASE WHEN applicationstatus in ('PENDINGATLME', 'PENDINGFORREASSIGNMENT') THEN 1 ELSE 0 END) as assigned,
-      SUM (CASE WHEN applicationstatus in ('PENDINGFORASSIGNMENT') THEN 1 ELSE 0 END) as open,
+      SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2') THEN 1 ELSE 0 END) as assigned,
+      SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
+      SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL1') THEN 1 ELSE 0 END) as open,
       SUM (CASE WHEN action in ('REOPEN') THEN 1 ELSE 0 END) as reopen,
       rating    
       from pgr_data
