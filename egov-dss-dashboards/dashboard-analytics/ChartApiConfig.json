@@ -3009,7 +3009,8 @@
       }
     ],
     "filterKeys": [
-      {"key": "tenantId", "column": "Boundary"}
+      {"key": "tenantId", "column": "Boundary"},
+      {"key": "state", "column": "Boundary"}
     ],
     "chartType": "xtable",
     "valueType": "number",
