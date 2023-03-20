@@ -2978,7 +2978,7 @@
     ],
     "isMdmsEnabled": true,
     "filterKeys": [
-      {"key": "tenantId", "column": "DDRs"}
+      {"key": "state", "column": "DDRs"}
     ],
     "chartType": "xtable",
     "valueType": "number",
