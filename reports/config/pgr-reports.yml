@@ -2119,8 +2119,7 @@ ReportDefinitions:
       where
       tenantid = $tenantid)
     select
-      initcap(split_part(tenantid, '.', 2)) as tenantid,      
-      deptmap_def.name as department,    
+      initcap(split_part(tenantid, '.', 2)) as tenantid,          
       SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
       count(applicationstatus) as received,
       rating,
