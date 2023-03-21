@@ -3009,8 +3009,6 @@
       }
     ],
     "filterKeys": [
-      {"key": "tenantId", "column": "tenantId"},
-      {"key": "state","column": "state"},
       {"key": "region","column": "Boundary"}
     ],
     "chartType": "xtable",
