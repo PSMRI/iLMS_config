@@ -3040,7 +3040,9 @@
       }
     ],
     "filterKeys": [
-      {"key": "tenantId", "column": "region"}
+      {"key": "tenantId", "column": "tenantId"},
+      {"key": "state","column": "state"},
+      {"key": "region","column": "region"}
     ],
     "chartType": "xtable",
     "valueType": "number",
