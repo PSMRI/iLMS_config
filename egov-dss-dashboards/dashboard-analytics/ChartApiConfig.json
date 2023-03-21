@@ -3040,7 +3040,7 @@
       }
     ],
     "filterKeys": [
-      {"key": "tenantId", "column": "Boundary"}
+      {"key": "tenantId", "column": "wardId"}
     ],
     "chartType": "xtable",
     "valueType": "number",
