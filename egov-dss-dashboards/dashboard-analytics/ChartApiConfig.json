@@ -3061,14 +3061,14 @@
     "_comment": ""
   },
   "xpgrStatusByComplaintCategory": {
-      "chartName": "DSS_PGR_STATUS_BY_COMPLAINT_CATEGORY",
+      "chartName": "DSS_PGR_STATUS_BY_TENANT",
       "queries": [
         {
           "module": "PGR",
-          "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.code.keyword\", \"tenantId\" : \"Data.tenantId.keyword\" , \"departmentId\" : \"Data.department.keyword\"}",
-          "dateRefField": "Data.dateOfComplaint",
-          "indexName": "pgrindex-v1",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Category \":{\"terms\":{\"field\":\"Data.complainCategory.keyword\",\"size\":1000},\"aggs\":{\"withinSLA\":{\"range\":{\"script\":{\"lang\":\"painless\",\"source\":\"doc['Data.slaHours'].value\"},\"ranges\":[{\"key\":\"withinSLA\",\"from\":0,\"to\":360}]}},\"Total Complaints\":{\"value_count\":{\"field\":\"Data.dateOfComplaint\"}},\"Closed_Complaints\":{\"filter\":{\"terms\":{\"Data.status.keyword\":[\"closed\",\"rejected\",\"resolved\"]}},\"aggs\":{\"Closed Complaints\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}},\"Open_Complaints\":{\"filter\":{\"terms\":{\"Data.status.keyword\":[\"open\"]}},\"aggs\":{\"Open Complaints\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}},\"Reopened_Complaints\":{\"filter\":{\"terms\":{\"Data.status.keyword\":[\"reopen\"]}},\"aggs\":{\"Reopened Complaints\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}}}"
+          "requestQueryMap": "{\"wardId\" : \"Data.service.address.village.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
+          "dateRefField": "Data.service.dateOfIncident",
+          "indexName": "pgr-services",
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Ward \":{\"terms\":{\"field\":\"Data.service.address.village.keyword\",\"size\":1000},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}},\"Closed Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"CLOSED\",\"REJECTED\",\"RESOLVED\"]}},\"aggs\":{\"Closed Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Open Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"PENDINGATLEVEL1\",\"PENDINGATLEVEL2\",\"PENDINGATLEVEL3\"]}},\"aggs\":{\"Open Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Reopened Complaints\":{\"filter\":{\"terms\":{\"Data.history.state.actions.action.keyword\":[\"REOPEN\"]}},\"aggs\":{\"Reopened Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}}}}}}}}"
         }
       ],
       "filterKeys": [
