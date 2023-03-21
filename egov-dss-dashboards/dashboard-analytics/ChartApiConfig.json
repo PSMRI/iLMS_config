@@ -3009,7 +3009,7 @@
       }
     ],
     "filterKeys": [
-      {"key": "tenantId", "column": "tenantId"},
+      {"key": "tenantId", "column": "Boundary"},
       {"key": "state","column": "state"},
       {"key": "region","column": "region"}
     ],
