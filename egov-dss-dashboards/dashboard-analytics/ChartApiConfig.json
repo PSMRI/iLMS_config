@@ -3041,7 +3041,7 @@
     ],
     "filterKeys": [
       {
-        "Key": "district", "column": "Boundary"
+        "key": "district", "column": "Boundary"
       }
     ],
     "chartType": "xtable",
