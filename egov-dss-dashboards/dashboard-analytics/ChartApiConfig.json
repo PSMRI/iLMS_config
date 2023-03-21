@@ -3009,7 +3009,7 @@
       }
     ],
     "filterKeys": [
-      {"key": "region","column": "Boundary"}
+      {"key": "region","column": "region"}
     ],
     "chartType": "xtable",
     "valueType": "number",
@@ -3041,7 +3041,7 @@
     ],
     "filterKeys": [
       {
-        "key": "district", "column": "Boundary"
+        "key": "district", "column": "district"
       }
     ],
     "chartType": "xtable",
@@ -3074,7 +3074,7 @@
         }
       ],
       "filterKeys": [
-        {"key": "village", "column": "Boundary"},
+        {"key": "village", "column": "Village"},
         {"key": "district", "column": "district"}
       ],
       "chartType": "xtable",
