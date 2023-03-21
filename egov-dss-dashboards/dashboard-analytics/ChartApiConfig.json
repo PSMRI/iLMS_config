@@ -3033,10 +3033,10 @@
     "queries": [
       {
         "module": "PGR",
-        "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.tenantId.keyword\" , \"departmentId\" : \"Data.department.keyword\"}",
+        "requestQueryMap": "{\"wardId\" : \"Data.service.address.district.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
         "dateRefField": "Data.dateOfComplaint",
-        "indexName": "pgrindex-v1",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Ward \":{\"terms\":{\"field\":\"Data.complaintWard.name.keyword\",\"size\":1000},\"aggs\":{\"withinSLA\":{\"range\":{\"script\":{\"lang\":\"painless\",\"source\":\"doc['Data.slaHours'].value\"},\"ranges\":[{\"key\":\"withinSLA\",\"from\":0,\"to\":360}]}},\"Total Complaints\":{\"value_count\":{\"field\":\"Data.dateOfComplaint\"}},\"Closed_Complaints\":{\"filter\":{\"terms\":{\"Data.status.keyword\":[\"closed\",\"rejected\",\"resolved\"]}},\"aggs\":{\"Closed Complaints\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}},\"Open_Complaints\":{\"filter\":{\"terms\":{\"Data.status.keyword\":[\"open\"]}},\"aggs\":{\"Open Complaints\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}},\"Reopened_Complaints\":{\"filter\":{\"terms\":{\"Data.status.keyword\":[\"reopen\"]}},\"aggs\":{\"Reopened Complaints\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}}}"
+        "indexName": "pgr-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Ward \":{\"terms\":{\"field\":\"Data.service.address.district.keyword\",\"size\":1000},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}},\"Closed Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"CLOSED\",\"REJECTED\",\"RESOLVED\"]}},\"aggs\":{\"Closed Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Open Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"OPEN\"]}},\"aggs\":{\"Open Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Reopened Complaints\":{\"filter\":{\"terms\":{\"Data.history.state.actions.action.keyword\":[\"REOPEN\"]}},\"aggs\":{\"Reopened Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -3045,24 +3045,15 @@
     "chartType": "xtable",
     "valueType": "number",
     "drillChart": "xpgrStatusByComplaintCategory",
-
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Ward",
-    "excludedColumns": ["withinSLA"],
     "computedFields": [
       {
         "postAggregationTheory" : "",
         "actionName": "PercentageComputedField",
         "fields" : ["Closed Complaints", "Total Complaints"],
         "newField" : "Completion Rate",
-        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
-      },
-      {
-        "postAggregationTheory" : "",
-        "actionName": "PercentageComputedField",
-        "fields" : ["Total Complaints", "withinSLA"],
-        "newField" : "Sla Achieved",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
       }
     ],
