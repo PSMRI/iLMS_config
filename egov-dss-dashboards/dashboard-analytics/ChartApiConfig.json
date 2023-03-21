@@ -3079,7 +3079,7 @@
       "drillChart": "none",
       "documentType": "_doc",
       "action": "",
-      "plotLabel": "Complaint Category",
+      "plotLabel": "Village",
       "computedFields": [
         {
           "postAggregationTheory" : "",
