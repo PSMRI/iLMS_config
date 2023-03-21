@@ -3009,12 +3009,12 @@
       }
     ],
     "filterKeys": [
-      {"key": "state", "column": "state"}
+      {"key": "tenentId", "column": "Boundary"}
     ],
     "chartType": "xtable",
     "valueType": "number",
     "drillChart": "xpgrStatusByWard",
-    "plotLabel": "state",
+    "plotLabel": "Boundary",
     "computedFields": [
       {
         "postAggregationTheory" : "",
