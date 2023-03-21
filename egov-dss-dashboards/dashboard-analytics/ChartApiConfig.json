@@ -3005,7 +3005,7 @@
         "requestQueryMap": "{ \"tenantId\" : \"Data.service.tenantId.keyword\" , \"state\" : \"Data.service.address.state.keyword\"}",
         "dateRefField": "Data.service.dateOfIncident",
         "indexName": "pgr-services",
-        "aggrQuery": "{\"aggs\":{\"ulb\":{\"terms\":{\"field\":\"Data.service.tenantId.keyword\",\"size\":10000},\"aggs\":{\"region\":{\"terms\":{\"field\":\"Data.service.address.region.keyword\",\"size\":10000},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}},\"Closed Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"CLOSED\",\"REJECTED\",\"RESOLVED\"]}},\"aggs\":{\"Closed Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Open Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"PENDINGATLEVEL1\",\"PENDINGATLEVEL2\",\"PENDINGATLEVEL3\"]}},\"aggs\":{\"Open Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Reopened Complaints\":{\"filter\":{\"terms\":{\"Data.history.state.actions.action.keyword\":[\"REOPEN\"]}},\"aggs\":{\"Reopened Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Ward \":{\"terms\":{\"field\":\"Data.service.address.region.keyword\",\"size\":1000},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}},\"Closed Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"CLOSED\",\"REJECTED\",\"RESOLVED\"]}},\"aggs\":{\"Closed Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Open Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"PENDINGATLEVEL1\",\"PENDINGATLEVEL2\",\"PENDINGATLEVEL3\"]}},\"aggs\":{\"Open Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Reopened Complaints\":{\"filter\":{\"terms\":{\"Data.history.state.actions.action.keyword\":[\"REOPEN\"]}},\"aggs\":{\"Reopened Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -3046,7 +3046,6 @@
     "valueType": "number",
     "drillChart": "xpgrStatusByComplaintCategory",
     "documentType": "_doc",
-    "action": "",
     "plotLabel": "Ward",
     "computedFields": [
       {
