@@ -3014,7 +3014,7 @@
     "chartType": "xtable",
     "valueType": "number",
     "drillChart": "xpgrStatusByWard",
-    "plotLabel": "Boundary",
+    "plotLabel": "region",
     "computedFields": [
       {
         "postAggregationTheory" : "",
@@ -3048,7 +3048,7 @@
     "valueType": "number",
     "drillChart": "xpgrStatusByComplaintCategory",
     "documentType": "_doc",
-    "plotLabel": "Boundary",
+    "plotLabel": "district",
     "computedFields": [
       {
         "postAggregationTheory" : "",
