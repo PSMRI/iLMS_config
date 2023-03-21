@@ -1208,24 +1208,6 @@
                   "filter": "",
                   "headers": [],
                   "tabName": "Boundary"
-                },
-                {
-                  "id": "mcReportByDDRv2",
-                  "name": "DSS_MC_REPORT_BY_TENANT",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "BoundaryNew"
-                },
-                {
-                  "id": "mcReportByCategoryv2",
-                  "name": "DSS_MC_REPORT_BY_CATEGORY",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Category"
                 }
               ]
             }
