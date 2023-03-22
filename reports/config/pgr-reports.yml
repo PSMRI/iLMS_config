@@ -2128,21 +2128,21 @@
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.name
           isMandatory: false
-          searchClause: AND tbl_boundary.boundary = $state
+          searchClause: AND pgr_data.state = $state
         - name: region
           label: reports.pgr.boundary.region
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
           isMandatory: false
-          searchClause: AND tbl_boundary.boundary.children = $region
+          searchClause: AND pgr_data.region = $region
         - name: district
           label: reports.pgr.boundary.district
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
           isMandatory: false
-          searchClause: AND tbl_boundary.boundary.children.children = $district
+          searchClause: AND pgr_data.district = $district
       query: |
         with pgr_data as (select
           servicerequestid,
@@ -2152,7 +2152,10 @@
           tenantid,
           rating,
           (select max(createdtime) from eg_wf_processinstance_v2 where action='RESOLVE' and businessid = servicerequestid) as resolvedtime,
-          (select min(createdtime) from eg_wf_processinstance_v2 where action='APPLY' and businessid = servicerequestid) as opentime
+          (select min(createdtime) from eg_wf_processinstance_v2 where action='APPLY' and businessid = servicerequestid) as opentime,
+          state,
+          region,
+          district
           from eg_pgr_service_v2 as ps
           where
           tenantid = $tenantid)
