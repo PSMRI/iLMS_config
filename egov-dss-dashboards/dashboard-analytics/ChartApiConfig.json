@@ -2982,7 +2982,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "xpgrStatusByTenant",
+    "drillChart": "xpgrStatusByRegion",
     "plotLabel": "state",
     "computedFields": [
       {
@@ -2997,8 +2997,8 @@
     },
     "_comment": ""
   },
-  "xpgrStatusByTenant": {
-    "chartName": "DSS_PGR_STATUS_BY_TENANT",
+  "xpgrStatusByRegion": {
+    "chartName": "DSS_PGR_STATUS_BY_Region",
     "queries": [
       {
         "module": "PGR",
@@ -3013,7 +3013,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "xpgrStatusByWard",
+    "drillChart": "xpgrStatusByDistrict",
     "plotLabel": "region",
     "computedFields": [
       {
@@ -3028,8 +3028,8 @@
     },
     "_comment": ""
   },
-  "xpgrStatusByWard": {
-    "chartName": "DSS_PGR_STATUS_BY_TENANT",
+  "xpgrStatusByDistrict": {
+    "chartName": "DSS_PGR_STATUS_BY_DISTRICT",
     "queries": [
       {
         "module": "PGR",
