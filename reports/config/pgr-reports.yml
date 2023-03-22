@@ -2094,7 +2094,7 @@ ReportDefinitions:
       label: reports.pgr.boundary.state
       type: singlevaluelist
       source: eg_pgr_service
-      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[*].boundary.code|$.MdmsRes.egov-location.TenantBoundary[*].boundary.name
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[1].boundary.code|$.MdmsRes.egov-location.TenantBoundary[1].boundary.name
       isMandatory: false
       searchClause: AND tbl_boundary.boundary = $state
     - name: region
@@ -2108,7 +2108,7 @@ ReportDefinitions:
       label: reports.pgr.boundary.district
       type: singlevaluelist
       source: eg_pgr_service
-      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[1].boundary.children[?(@.name == $region)].children[*].code|$.MdmsRes.egov-location.TenantBoundary[1].boundary.children[?(@.name == $region)].children[*].name
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[1].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[1].boundary.children[*].children[*].name
       isMandatory: false
       searchClause: AND tbl_boundary.boundary.children.children = $district
   query: |
