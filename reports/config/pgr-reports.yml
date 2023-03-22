@@ -2143,7 +2143,9 @@ ReportDefinitions:
     
       from pgr_data
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
-      INNER JOIN (VALUES tbl_boundary) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
+      INNER JOIN (VALUES tbl_boundary) AS boundarystate(hierarchyType,boundary) ON boundarystate.tbl_boundary.boundary = pgr_data.state
+      INNER JOIN (VALUES tbl_boundary) AS boundaryregion(hierarchyType,boundary) ON boundaryregion.tbl_boundary.boundary.children = pgr_data.region
+      INNER JOIN (VALUES tbl_boundary) AS boundarydistrict(hierarchyType,boundary) ON boundarydistrict.tbl_boundary.boundary.children.children = pgr_data.district
       WHERE 1=1
   groupby: GROUP BY tenantid,rating
   orderby: ORDER BY tenantid,rating
