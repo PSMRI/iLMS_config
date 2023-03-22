@@ -2147,15 +2147,18 @@
         with pgr_data as (select
           servicerequestid,
           servicecode,
-          createdtime,
+          ps.createdtime,
           applicationstatus,
-          tenantid,
+          ps.tenantid,
           rating,
+          ad.state as state,
+          ad.region as region,
+          ad.district as district,
           (select max(createdtime) from eg_wf_processinstance_v2 where action='RESOLVE' and businessid = servicerequestid) as resolvedtime,
           (select min(createdtime) from eg_wf_processinstance_v2 where action='APPLY' and businessid = servicerequestid) as opentime
-          from eg_pgr_service_v2 as ps
+          from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
           where
-          tenantid = $tenantid)
+          ps.tenantid = $tenantid)
         select
           initcap(split_part(tenantid, '.', 2)) as tenantid,          
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
