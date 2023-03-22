@@ -2152,10 +2152,7 @@
           tenantid,
           rating,
           (select max(createdtime) from eg_wf_processinstance_v2 where action='RESOLVE' and businessid = servicerequestid) as resolvedtime,
-          (select min(createdtime) from eg_wf_processinstance_v2 where action='APPLY' and businessid = servicerequestid) as opentime,
-          state,
-          region,
-          district
+          (select min(createdtime) from eg_wf_processinstance_v2 where action='APPLY' and businessid = servicerequestid) as opentime
           from eg_pgr_service_v2 as ps
           where
           tenantid = $tenantid)
