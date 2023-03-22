@@ -2035,6 +2035,21 @@ ReportDefinitions:
       type: string
       source: eg_pgr_service
       total: false
+    - name: state
+      label: reports.pgr.state
+      type: string
+      source: eg_pgr_service
+      total: true
+    - name: region
+      label: reports.pgr.region
+      type: string
+      source: eg_pgr_service
+      total: true
+    - name: district
+      label: reports.pgr.district
+      type: string
+      source: eg_pgr_service
+      total: true
     - name: received
       label: reports.pgr.received
       type: string
@@ -2119,9 +2134,6 @@ ReportDefinitions:
       applicationstatus,
       tenantid,
       rating,
-      (select state from eg_pgr_address_v2) as state,
-      (select region from eg_pgr_address_v2) as region,
-      (select district from eg_pgr_address_v2) as district,
       (select max(createdtime) from eg_wf_processinstance_v2 where action='RESOLVE' and businessid = servicerequestid) as resolvedtime,
       (select min(createdtime) from eg_wf_processinstance_v2 where action='APPLY' and businessid = servicerequestid) as opentime
       from eg_pgr_service_v2 as ps
@@ -2139,13 +2151,12 @@ ReportDefinitions:
       SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
       SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
       SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
-      SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla
-    
+      SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
+      SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.state= tbl_boundary.boundary as state,
+      SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.region= tbl_boundary.boundary.children as region,
+      SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.district= tbl_boundary.boundary.children.children as district
       from pgr_data
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
-      INNER JOIN (VALUES tbl_boundary) AS boundarystate(hierarchyType,boundary) ON boundarystate.(split_part(tbl_boundary.boundary, '.', 1)) = pgr_data.state
-      INNER JOIN (VALUES tbl_boundary) AS boundaryregion(hierarchyType,boundary) ON boundaryregion.(split_part(tbl_boundary.boundary.children, '.', 2)) = pgr_data.region
-      INNER JOIN (VALUES tbl_boundary) AS boundarydistrict(hierarchyType,boundary) ON boundarydistrict.(split_part(tbl_boundary.boundary.children.children, '.', 3)) = pgr_data.district
       WHERE 1=1
   groupby: GROUP BY tenantid,rating
   orderby: ORDER BY tenantid,rating
