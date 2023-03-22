@@ -2130,7 +2130,7 @@
           isMandatory: false
           searchClause: AND tbl_boundary.boundary = $state
         - name: region
-          label: reports.pgr.boundary.regions
+          label: reports.pgr.boundary.region
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
@@ -2169,9 +2169,9 @@
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
-          SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.state= tbl_boundary.boundary as state,
-          SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.region= split_part(tbl_boundary.boundary.children, '.', 2) as region,
-          SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.district= split_part(tbl_boundary.boundary.children.children, '.', 3) as district
+          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.state= tbl_boundary.boundary) as state,
+          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.region= split_part(tbl_boundary.boundary.children, '.', 2)) as region,
+          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.district= split_part(tbl_boundary.boundary.children.children, '.', 3)) as district
           
           from pgr_data
           INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
