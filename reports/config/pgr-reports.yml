@@ -2035,21 +2035,6 @@ ReportDefinitions:
       type: string
       source: eg_pgr_service
       total: false
-    - name: state
-      label: reports.pgr.state
-      type: string
-      source: eg_pgr_service
-      total: true
-    - name: region
-      label: reports.pgr.region
-      type: string
-      source: eg_pgr_service
-      total: true
-    - name: district
-      label: reports.pgr.district
-      type: string
-      source: eg_pgr_service
-      total: true
     - name: received
       label: reports.pgr.received
       type: string
@@ -2086,6 +2071,14 @@ ReportDefinitions:
       source: eg_pgr_service
       total: true
   searchParams:
+    - name: ulb
+      label: ULB
+      type: singlevaluelist
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+      source: pt
+      wrapper: true
+      isMandatory: false
+      searchClause: AND pgr_data.tenantid = $ulb
     - name: fromDate
       label: reports.pgr.datefrom
       type: epoch
@@ -2105,27 +2098,7 @@ ReportDefinitions:
       source: seva
       isMandatory: false
       searchClause: AND pgr_data.applicationstatus = $status
-    - name: state
-      label: reports.pgr.boundary.state
-      type: singlevaluelist
-      source: eg_pgr_service
-      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.name
-      isMandatory: false
-      searchClause: AND tbl_boundary.boundary = $state
-    - name: region
-      label: reports.pgr.boundary.regions
-      type: singlevaluelist
-      source: eg_pgr_service
-      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
-      isMandatory: false
-      searchClause: AND tbl_boundary.boundary.children = $region
-    - name: district
-      label: reports.pgr.boundary.district
-      type: singlevaluelist
-      source: eg_pgr_service
-      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
-      isMandatory: false
-      searchClause: AND tbl_boundary.boundary.children.children = $district
+
   query: |
     with pgr_data as (select
       servicerequestid,
@@ -2151,10 +2124,7 @@ ReportDefinitions:
       SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
       SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
       SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
-      SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
-      SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.state= tbl_boundary.boundary as state,
-      SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.region= split_part(tbl_boundary.boundary.children, '.', 2) as region,
-      SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.district= split_part(tbl_boundary.boundary.children.children, '.', 3) as district
+      SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla
       from pgr_data
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
       WHERE 1=1
