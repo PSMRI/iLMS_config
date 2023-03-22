@@ -3075,7 +3075,8 @@
       ],
       "filterKeys": [
         {"key": "village", "column": "Village"},
-        {"key": "district", "column": "district"}
+        {"key": "district", "column": "district"},
+        {"key": "block", "column": "block"}
       ],
       "chartType": "xtable",
       "valueType": "number",
