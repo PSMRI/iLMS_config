@@ -2035,21 +2035,6 @@ ReportDefinitions:
       type: string
       source: eg_pgr_service
       total: false
-    - name: state
-      label: reports.pgr.state
-      type: string
-      source: eg_pgr_service
-      total: false
-    - name: region
-      label: reports.pgr.region
-      type: string
-      source: eg_pgr_service
-      total: false
-    - name: district
-      label: reports.pgr.district
-      type: string
-      source: eg_pgr_service
-      total: false
     - name: received
       label: reports.pgr.received
       type: string
@@ -2106,10 +2091,31 @@ ReportDefinitions:
       isMandatory: false
       searchClause: AND pgr_data.applicationstatus = $status
     - name: boundary
-      label: reports.pgr.boundary
-      type: multivaluelist
+      label: reports.pgr.boundary.state
+      type: singlevaluelist
       source: eg_pgr_service
-      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[*].boundary.code|$.MdmsRes.egov-location.TenantBoundary[*].boundary.name
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[1].boundary.code
+      isMandatory: false
+      searchClause: AND tbl_boundary.boundary = $boundary
+    - name: boundary
+      label: reports.pgr.boundary.region
+      type: singlevaluelist
+      source: eg_pgr_service
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[1].boundary.code|$.MdmsRes.egov-location.TenantBoundary[1].boundary.code
+      isMandatory: false
+      searchClause: AND tbl_boundary.boundary = $boundary
+    - name: boundary
+      label: reports.pgr.boundary.district
+      type: singlevaluelist
+      source: eg_pgr_service
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[1].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[1].boundary.children[*].children[*].name
+      isMandatory: false
+      searchClause: AND tbl_boundary.boundary = $boundary
+    - name: boundary
+      label: reports.pgr.boundary.regions
+      type: singlevaluelist
+      source: eg_pgr_service
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[1].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[1].boundary.children[*].name
       isMandatory: false
       searchClause: AND tbl_boundary.boundary = $boundary
   query: |
