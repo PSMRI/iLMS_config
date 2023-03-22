@@ -2106,10 +2106,10 @@ ReportDefinitions:
       isMandatory: false
       searchClause: AND pgr_data.applicationstatus = $status
     - name: boundary
-      label: reports.pgr.dept.name
+      label: reports.pgr.boundary
       type: multivaluelist
       source: eg_pgr_service
-      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[*].code|$.MdmsRes.egov-location.TenantBoundary[*].name
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[*].boundary.code|$.MdmsRes.egov-location.TenantBoundary[*].boundary.name
       isMandatory: false
       searchClause: AND tbl_boundary.boundary = $boundary
   query: |
