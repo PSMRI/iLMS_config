@@ -2158,9 +2158,12 @@
           (select min(createdtime) from eg_wf_processinstance_v2 where action='APPLY' and businessid = servicerequestid) as opentime
           from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
           where
-          ps.tenantid = $tenantid,
-          ad.state = $state,
-          ad.region = split_part($region, '.', 2),
+          ps.tenantid = $tenantid
+        OR
+          ad.state = $state
+        OR
+          ad.region = split_part($region, '.', 2)
+        OR
           ad.district = split_part($district, '.', 3)),
         select
           initcap(split_part(tenantid, '.', 2)) as tenantid,          
