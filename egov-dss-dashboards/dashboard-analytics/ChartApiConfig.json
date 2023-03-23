@@ -1301,7 +1301,7 @@
       "documentType": "_doc",
       "aggregationPaths": [
         "Web",
-        "Whatsapp"
+        "Mobileapp"
       ],
       "isCumulative": false,
       "interval": "month",
