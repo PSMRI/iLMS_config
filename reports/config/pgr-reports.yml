@@ -2159,12 +2159,12 @@
           from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
           where
           ps.tenantid = $tenantid
-        OR
+          OR
           ad.state = $state
-        OR
+          OR
           ad.region = split_part($region, '.', 2)
-        OR
-          ad.district = split_part($district, '.', 3)),
+          OR
+          ad.district = split_part($district, '.', 3))
         select
           initcap(split_part(tenantid, '.', 2)) as tenantid,          
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
