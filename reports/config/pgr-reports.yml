@@ -2172,21 +2172,9 @@
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
-
-    IF $state IS NOT NULL
-    BEGIN
-          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.state= $state) as state
-    END
-    
-    IF $region IS NOT NULL
-    BEGIN
-          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.region= split_part($region, '.', 2)) as region
-    END
-    
-    IF $district IS NOT NULL
-    BEGIN
+          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.state= $state) as state,
+          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.region= split_part($region, '.', 2)) as region,
           (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.district= split_part($district, '.', 3)) as district
-    END   
           from pgr_data
           INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
           WHERE 1=1
