@@ -119,7 +119,7 @@ serviceMaps:
 
       - jsonPath: $.service.locationOfIncident
 
-      - jsonPath: $.service.complainanttype
+      - jsonPath: $.service.complainantType
 
       - jsonPath: $.service.institutionType
 
