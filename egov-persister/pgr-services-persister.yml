@@ -7,7 +7,7 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: INSERT INTO eg_pgr_service_v2(id, tenantid, dateofincident, locationofincident, complainantname, complainantmobilenumber, complainanttype, institutiontype, institutionname, grievanceagainstwhom, servicecode, servicerequestid, description, accountid, additionaldetails, applicationstatus, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    - query: INSERT INTO eg_pgr_service_v2(id, tenantid, dateofincident, locationofincident, complainanttype, institutiontype, institutionname, grievanceagainstwhom, servicecode, servicerequestid, description, accountid, additionaldetails, applicationstatus, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: service
       jsonMaps:
       - jsonPath: $.service.id
@@ -17,10 +17,6 @@ serviceMaps:
       - jsonPath: $.service.dateOfIncident
 
       - jsonPath: $.service.locationOfIncident
-
-      - jsonPath: $.service.complainantName
-
-      - jsonPath: $.service.complainantMobileNumber
 
       - jsonPath: $.service.complainantType
 
@@ -115,17 +111,13 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: UPDATE eg_pgr_service_v2 SET dateofincident=?, locationofincident=?, complainantname=?, complainantmobilenumber=?, complainanttype=?, institutiontype=?, institutionname=?, grievanceagainstwhom=?, servicecode=?, rating =?, servicerequestid=?, description=?, accountid=?, additionaldetails=?, applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
+    - query: UPDATE eg_pgr_service_v2 SET dateofincident=?, locationofincident=?, complainanttype=?, institutiontype=?, institutionname=?, grievanceagainstwhom=?, servicecode=?, rating =?, servicerequestid=?, description=?, accountid=?, additionaldetails=?, applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
       basePath: service
       jsonMaps:
 
       - jsonPath: $.service.dateOfIncident
 
       - jsonPath: $.service.locationOfIncident
-
-      - jsonPath: $.service.complainantName
-
-      - jsonPath: $.service.complainantMobileNumber
 
       - jsonPath: $.service.complainantType
 

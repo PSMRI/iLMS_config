@@ -2127,21 +2127,21 @@
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.name
-          isMandatory: false
+          isMandatory: true
           searchClause: OR pgr_data.state = $state
         - name: region
           label: reports.pgr.boundary.region
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
-          isMandatory: false
+          isMandatory: true
           searchClause: OR pgr_data.region = $region
         - name: district
           label: reports.pgr.boundary.district
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
-          isMandatory: false
+          isMandatory: true
           searchClause: OR pgr_data.district = $district
       query: |
         with pgr_data as (select
@@ -2175,7 +2175,6 @@
           (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.state= $state) as state,
           (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.region= split_part($region, '.', 2)) as region,
           (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.district= split_part($district, '.', 3)) as district
-          
           from pgr_data
           INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
           WHERE 1=1
