@@ -2183,7 +2183,7 @@
           ) d2 on true
           INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
     WHERE 1=1
-      groupby: GROUP BY tenantid,rating,state,region,district
+      groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.region,pgr_data.district
       orderby: ORDER BY tenantid,rating
 
     - reportName: LMEPerformanceReport
