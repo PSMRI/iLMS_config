@@ -2169,7 +2169,7 @@
           count(ints)  as opencomplaintswithinsla,
           count(ints1)  as opencomplaintsoutsidesla,
           pgr_data.state as state,
-          pgr_data.region as region,
+          pgr_data.region as region
           pgr_data.district as district
         
           from pgr_data
