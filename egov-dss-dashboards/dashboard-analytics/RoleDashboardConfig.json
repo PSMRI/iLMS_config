@@ -1420,8 +1420,8 @@
                   "isCollapsible": true,
                   "charts": [
                     {
-                      "id": "xpgrStatusByDDR",
-                      "name": "DSS_PGR_STATUS_BY_TENANT",
+                      "id": "xpgrStatusByRegion",
+                      "name": "DSS_PGR_STATUS_BY_Region",
                       "code": "",
                       "chartType": "table",
                       "filter": "",
