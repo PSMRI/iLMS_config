@@ -2048,17 +2048,17 @@ ReportDefinitions:
         label: reports.pgr.state
         type: string
         source: eg_pgr_service
-        total: true
+        total: false
       - name: region
         label: reports.pgr.region
         type: string
         source: eg_pgr_service
-        total: true
+        total: false
       - name: district
         label: reports.pgr.district
         type: string
         source: eg_pgr_service
-        total: true
+        total: false
       - name: received
         label: reports.pgr.received
         type: string
