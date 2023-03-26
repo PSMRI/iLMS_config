@@ -2128,21 +2128,21 @@
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.name
           isMandatory: false
-          searchClause: AND pgr_data.state like $state || '%'
+          searchClause: AND pgr_data.state like $state ||'%'
         - name: region
           label: reports.pgr.boundary.region
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
           isMandatory: false
-          searchClause: AND pgr_data.region like $region || '%'
+          searchClause: AND pgr_data.region like $region ||'%'
         - name: district
           label: reports.pgr.boundary.district
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
           isMandatory: false
-          searchClause: AND pgr_data.district like $district || '%'
+          searchClause: AND pgr_data.district like $district ||'%'
       query: |
         with pgr_data as (select
           servicerequestid,
