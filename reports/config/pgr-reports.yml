@@ -2166,13 +2166,13 @@
           rating,
           SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVED') and (resolvedtime - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedwithinsla,
           SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVED') and (resolvedtime - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedoutsidesla,
-          count(ints )  as opencomplaintswithinsla,
-          count(ints1 )  as opencomplaintsoutsidesla,
+          count(ints)  as opencomplaintswithinsla,
+          count(ints1)  as opencomplaintsoutsidesla,
           pgr_data.state as state,
           pgr_data.region as region,
           pgr_data.district as district
+        
           from pgr_data
-          INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
           left join lateral (
           select pgr_data.applicationstatus  ints where (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000
           limit 1
@@ -2181,6 +2181,7 @@
           select pgr_data.applicationstatus  ints1 where (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000
           limit 1
           ) d2 on true
+          INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
     WHERE 1=1
       groupby: GROUP BY tenantid,rating,state,region,district
       orderby: ORDER BY tenantid,rating
