@@ -2135,14 +2135,14 @@
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
           isMandatory: false
-          searchClause: AND pgr_data.region like $region || '%'
+          searchClause: AND pgr_data.state || '.' ||pgr_data.region like $region || '%'
         - name: district
           label: reports.pgr.boundary.district
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
           isMandatory: false
-          searchClause: AND pgr_data.district like $district || '%'
+          searchClause: AND pgr_data.state || '.' ||pgr_data.region || '.' ||pgr_data.district like $district || '%'
       query: |
         with pgr_data as (select
           servicerequestid,
@@ -2166,19 +2166,23 @@
           rating,
           SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVED') and (resolvedtime - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedwithinsla,
           SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVED') and (resolvedtime - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedoutsidesla,
-          SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL1') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
-          SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL1') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
-          SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
-          SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
-          SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
-          SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
-          count(pgr_data.state) as state,
-          count(pgr_data.region) as region,
-          count(pgr_data.district) as district
+          count(ints )  as opencomplaintswithinsla,
+          count(ints1 )  as opencomplaintsoutsidesla,
+          pgr_data.state as state,
+          pgr_data.region as region,
+          pgr_data.district as district
           from pgr_data
           INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
-          WHERE 1=1
-      groupby: GROUP BY tenantid,rating
+          left join lateral (
+          select pgr_data.applicationstatus  ints where (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000
+          limit 1
+          ) d1 on true
+          left join lateral (
+          select pgr_data.applicationstatus  ints1 where (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000
+          limit 1
+          ) d2 on true
+    WHERE 1=1
+      groupby: GROUP BY tenantid,rating,state,region,district
       orderby: ORDER BY tenantid,rating
 
     - reportName: LMEPerformanceReport
