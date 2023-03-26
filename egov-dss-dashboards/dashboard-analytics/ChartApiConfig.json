@@ -3027,7 +3027,7 @@
     "queries": [
       {
         "module": "PGR",
-        "requestQueryMap": "{ \"state\" : \"Data.service.address.state.keyword\", \"district\" : \"Data.service.address.district.keyword\",\"region\" : \"Data.service.address.region.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
+        "requestQueryMap": "{\"wardId\" : \"Data.complaintWard.name.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\" ,\"stateId\" : \"Data.service.address.state.keyword\"}",
         "dateRefField": "Data.service.dateOfIncident",
         "indexName": "pgr-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}},\"Closed_Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"CLOSED\",\"REJECTED\",\"RESOLVED\"]}},\"aggs\":{\"Closed Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Open_Complaints\":{\"filter\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"PENDINGATLEVEL1\",\"PENDINGATLEVEL2\",\"PENDINGATLEVEL3\"]}},\"aggs\":{\"Open Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}},\"Reopened_Complaints\":{\"filter\":{\"terms\":{\"Data.history.state.actions.action.keyword\":[\"REOPEN\"]}},\"aggs\":{\"Reopened Complaints\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}}}}}}"
@@ -3036,7 +3036,7 @@
     "isMdmsEnabled": true,
     "filterKeys": [
       {
-        "key": "state",
+        "key": "stateId",
         "column": "state"
       }
     ],
@@ -3074,13 +3074,13 @@
     "filterKeys": [
       {
         "key": "region",
-        "column": "region"
+        "column": "regionId"
       }
     ],
     "chartType": "xtable",
     "valueType": "number",
     "drillChart": "xpgrStatusByDistrict",
-    "plotLabel": "region",
+    "plotLabel": "regionId",
     "computedFields": [
       {
         "postAggregationTheory": "",
@@ -3111,14 +3111,14 @@
     "filterKeys": [
       {
         "key": "district",
-        "column": "district"
+        "column": "districtId"
       }
     ],
     "chartType": "xtable",
     "valueType": "number",
     "drillChart": "xpgrStatusByBlock",
     "documentType": "_doc",
-    "plotLabel": "district",
+    "plotLabel": "districtId",
     "computedFields": [
       {
         "postAggregationTheory": "",
@@ -3153,7 +3153,7 @@
       },
       {
         "key": "district",
-        "column": "district"
+        "column": "districtId"
       },
       {
         "key": "block",
