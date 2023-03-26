@@ -1208,6 +1208,15 @@
                   "filter": "",
                   "headers": [],
                   "tabName": "Boundary"
+                },
+                {
+                  "id": "xpgrStatusByDept",
+                  "name": "DSS_PGR_STATUS_BY_DEPARTMENT",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Department"
                 }
               ]
             }
