@@ -2127,22 +2127,22 @@
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.name
-          isMandatory: true
-          searchClause: OR pgr_data.state = $state
+          isMandatory: false
+          searchClause: AND pgr_data.state like $state || '%'
         - name: region
           label: reports.pgr.boundary.region
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
-          isMandatory: true
-          searchClause: OR pgr_data.region = $region
+          isMandatory: false
+          searchClause: AND pgr_data.region like split_part($region,'.',2) || '%'
         - name: district
           label: reports.pgr.boundary.district
           type: singlevaluelist
           source: eg_pgr_service
           pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
-          isMandatory: true
-          searchClause: OR pgr_data.district = $district
+          isMandatory: false
+          searchClause: AND pgr_data.district like split_part($district,'.',3) || '%'
       query: |
         with pgr_data as (select
           servicerequestid,
@@ -2172,9 +2172,9 @@
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END)  as opencomplaintswithinsla,
           SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3') and (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as opencomplaintsoutsidesla,
-          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.state= $state) as state,
-          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.region= split_part($region, '.', 2)) as region,
-          (SELECT count(*) FROM eg_pgr_service_v2 INNER JOIN eg_pgr_address_v2 ON eg_pgr_service_v2.id = eg_pgr_address_v2.parentid where eg_pgr_address_v2.district= split_part($district, '.', 3)) as district
+    count(pgr_data.state) as state,
+    count(pgr_data.region) as region,
+    count(pgr_data.district) as district
           from pgr_data
           INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
           WHERE 1=1
