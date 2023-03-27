@@ -2894,6 +2894,36 @@
     },
     "_comment": " Total Number of Closed Complaints "
   },
+  "openComplaints": {
+    "chartName": "DSS_PGR_OPEN_COMPLAINTS",
+    "queries": [
+      {
+        "module": "PGR",
+        "requestQueryMap": "{ \"state\" : \"Data.service.address.state.keyword\", \"district\" : \"Data.service.address.district.keyword\",\"region\" : \"Data.service.address.region.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
+        "dateRefField": "Data.service.dateOfIncident",
+        "indexName": "pgr-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Open Complaints\":{\"filters\":{\"filters\":{\"open\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"PENDINGATLEVEL1\",\"PENDINGATLEVEL2\",\"PENDINGATLEVEL3\"]}}}}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Open Complaints"
+    ],
+    "insight": {
+      "chartResponseMap": "openedComplaints",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "month"
+    },
+    "_comment": " Total Number of Open Complaints "
+  },
   "cumulativeClosedComplaints": {
     "chartName": "DSS_TOTAL_CUMULATIVE_CLOSED_COMPLAINTS",
     "queries": [

@@ -1030,6 +1030,14 @@
                   "headers": []
                 },
                 {
+                "id": "openComplaints",
+                "name": "DSS_PGR_OPEN_COMPLAINTS",
+                "code": "",
+                "chartType": "metric",
+                "filter": "",
+                "headers": []
+                },
+                {
                   "id": "completionRate",
                   "name": "DSS_PGR_COMPLETION_RATE",
                   "code": "",
