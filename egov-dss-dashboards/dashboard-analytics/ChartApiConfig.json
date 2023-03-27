@@ -1311,7 +1311,8 @@
         "dateRefField": "Data.service.dateOfIncident",
         "requestQueryMap": "{\"state\" : \"Data.service.address.state.keyword\", \"district\" : \"Data.service.address.district.keyword\",\"region\" : \"Data.service.address.region.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
         "indexName": "pgr-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Web\":{\"date_histogram\":{\"field\":\"Data.service.dateOfIncident\",\"interval\":\"month\"},\"aggs\":{\"web\":{\"filter\":{\"terms\":{\"Data.service.source.keyword\":[\"web\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}},\"Mobileapp\":{\"date_histogram\":{\"field\":\"Data.service.dateOfIncident\",\"interval\":\"month\"},\"aggs\":{\"mobileapp\":{\"filter\":{\"terms\":{\"Data.service.source.keyword\":[\"mobileapp\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Web\":{\"date_histogram\":{\"field\":\"Data.service.dateOfIncident\",\"interval\":\"month\"},\"aggs\":{\"web\":{\"filter\":{\"terms\":{\"Data.service.source.keyword\":[\"web\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}},\"IVR\":{\"date_histogram\":{\"field\":\"Data.service.dateOfIncident\",\"interval\":\"month\"},\"aggs\":{\"ivr\":{\"filter\":{\"terms\":{\"Data.service.source.keyword\":[\"IVR\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}},\"Mobileapp\":{\"date_histogram\":{\"field\":\"Data.service.dateOfIncident\",\"interval\":\"month\"},\"aggs\":{\"mobileapp\":{\"filter\":{\"terms\":{\"Data.service.source.keyword\":[\"mobileapp\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}}}}}}}}}}"
+
       }
     ],
     "chartType": "line",
@@ -1321,6 +1322,7 @@
     "documentType": "_doc",
     "aggregationPaths": [
       "Web",
+      "IVR",
       "Mobileapp"
     ],
     "isCumulative": false,
