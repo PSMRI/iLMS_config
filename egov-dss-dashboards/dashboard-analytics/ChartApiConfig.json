@@ -2809,7 +2809,7 @@
         "requestQueryMap": "{\"state\" : \"Data.service.address.state.keyword\", \"district\" : \"Data.service.address.district.keyword\",\"region\" : \"Data.service.address.region.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
         "dateRefField": "Data.service.dateOfIncident",
         "indexName": "pgr-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\n\"aggs\":{\"Total Complaints\":{\n  \"value_count\":{\"field\":\"Data.service.dateOfIncident\"}},\"Closed Complaints\":{\"filters\":{\"filters\":{\"resolved\":{\"match\":{\"Data.service.applicationStatus.keyword\":\"RESOLVED\"}},\"rejected\":{\"match\":{\"Data.service.applicationStatus.keyword\":\"REJECTED\"}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.dateOfIncident\"}},\"Closed Complaints\":{\"filters\":{\"filters\":{\"resolved\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"RESOLVED\",\"RESOLVEDBYL1\",\"RESOLVEDBYL2\",\"RESOLVEDBYL3\",\"CLOSEDAFTERRESOLUTION\"]}},\"rejected\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"REJECTED\",\"REJECTEDBYL1\",\"REJECTEDBYL2\",\"REJECTEDBYL3\",\"CLOSEDAFTERREJECTION\"]}}}}}}}}}"
       }
     ],
     "chartType": "metric",
