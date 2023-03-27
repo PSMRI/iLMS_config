@@ -3075,7 +3075,7 @@
     ],
     "filterKeys": [
       {
-        "key": "region",
+        "key": "regionId",
         "column": "regionId"
       }
     ],
@@ -3112,7 +3112,7 @@
     ],
     "filterKeys": [
       {
-        "key": "district",
+        "key": "districtId",
         "column": "districtId"
       }
     ],
