@@ -90,17 +90,19 @@ ServiceMaps:
                 uriResponseMapping:
                   - inJsonPath: $.MdmsRes.tenant.tenants
                     outJsonPath: $.Data.tenantData
+                    
+                    
     - topic: save-hearing-details-application
       configKey: INDEX
       indexes:
         - name: ilms
           type: general
-          id: $.id
+          id: $.id,$.tenantId
           jsonPath: $.hearing
           isBulk: false
           timeStampField: $.auditDetails.createdTime
           customJsonMapping:
-            indexMapping: {"Data":{"id":"","hearingNumber":"","courtNumber":"","bench":"","@timestamp":"timestamp"},"history":{}}
+            indexMapping: {"Data":{"id":"","hearingNumber":"","courtNumber":"","bench":"","@timestamp":"timestamp"},"history":{},"tenantData":{}}
             fieldMapping:
             - inJsonPath: $.id
               outJsonPath: $.Data.id
