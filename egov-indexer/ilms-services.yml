@@ -57,18 +57,20 @@ ServiceMaps:
           isBulk: false
           timeStampField: $.auditDetails.createdTime
           customJsonMapping:
-            indexMapping: {"Data":{"id":"","number":"","cnrNumber":"","type":""},"history":{},"tenantData":{}}
+            indexMapping: { "Data": { "id": "","number": "","cnrNumber": "","type": "","@timestamp": "timestamp" },"history": { },"tenantData": { } }
             fieldMapping:
-            - inJsonPath: $.id
-              outJsonPath: $.Data.id
-            - inJsonPath: $.number
-              outJsonPath: $.Data.number
-            - inJsonPath: $.cnrNumber
-              outJsonPath: $.Data.cnrNumber
-            - inJsonPath: $.type
-              outJsonPath: $.Data.type
-            - inJsonPath: $
-              outJsonPath: $.Data
+              - inJsonPath: $.id
+                outJsonPath: $.Data.id
+              - inJsonPath: $.number
+                outJsonPath: $.Data.number
+              - inJsonPath: $.cnrNumber
+                outJsonPath: $.Data.cnrNumber
+              - inJsonPath: $.type
+                outJsonPath: $.Data.type
+              - inJsonPath: $.@timestamp
+                outJsonPath: $.Data.@timestamp
+              - inJsonPath: $
+                outJsonPath: $.Data
             externalUriMapping:
               - path: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search
                 queryParam: businessIds=$.id,history=true,tenantId=$.tenantId
