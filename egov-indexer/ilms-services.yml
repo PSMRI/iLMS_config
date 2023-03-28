@@ -229,7 +229,7 @@ ServiceMaps:
             
 
 
-    - topic: save-order-case-application
+    - topic: update-order-case-application
       configKey: INDEX
       indexes:
         - name: ilms
