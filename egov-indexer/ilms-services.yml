@@ -183,7 +183,7 @@ ServiceMaps:
                     outJsonPath: $.Data.tenantData
                     
                     
-     - topic: save-order-case-application
+    - topic: save-order-case-application
       configKey: INDEX
       indexes:
         - name: ilms
