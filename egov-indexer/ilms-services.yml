@@ -47,67 +47,30 @@ ServiceMaps:
                     outJsonPath: $.Data.tenantData
 
 
-    - topic: update-property-registry
+    - topic: update-ilms-case-application
       configKey: INDEX
       indexes:
-        - name: property-services
+        - name: ilms
           type: general
-          id: $.propertyId,$.tenantId
-          jsonPath: $.Property
-          timeStampField: $.auditDetails.lastModifiedTime
+          id: $.id,$.tenantId
+          jsonPath: $.case
+          isBulk: false
+          timeStampField: $.auditDetails.createdTime
           customJsonMapping:
-            indexMapping: {"Data":{"ownerNames":[],"doorNo":"","street":"","owners":[],"acknowldgementNumber":"","propertyType":"","ownershipCategory":"","creationReason":"","usageCategory":"","noOfFloors":"","landArea":"","superBuiltUpArea":"","source":"","channel":"","units":{},"auditDetails":{},"id":"","propertyId":"","surveyId":"","linkedProperties":{},"tenantId":"","accountId":"","oldPropertyId":"","status":"","@timestamp":"timestamp"}}
+            indexMapping: {"Data":{"id":"","number":"","cnrNumber":"","type":"","@timestamp":"timestamp"},"history":{},"tenantData":{}}
             fieldMapping:
-              - inJsonPath: $.owners[*][?(@.status=='ACTIVE')].name
-                outJsonPath: $.Data.ownerNames
-              - inJsonPath: $.address.doorNo
-                outJsonPath: $.Data.doorNo
-              - inJsonPath: $.address.street
-                outJsonPath: $.Data.street
-              - inJsonPath: $.owners.*.uuid
-                outJsonPath: $.Data.owners
-              - inJsonPath: $.acknowldgementNumber
-                outJsonPath: $.Data.acknowldgementNumber
-              - inJsonPath: $.propertyType
-                outJsonPath: $.Data.propertyType
-              - inJsonPath: $.ownershipCategory
-                outJsonPath: $.Data.ownershipCategory
-              - inJsonPath: $.creationReason
-                outJsonPath: $.Data.creationReason
-              - inJsonPath: $.usageCategory
-                outJsonPath: $.Data.usageCategory
-              - inJsonPath: $.noOfFloors
-                outJsonPath: $.Data.noOfFloors
-              - inJsonPath: $.landArea
-                outJsonPath: $.Data.landArea
-              - inJsonPath: $.superBuiltUpArea
-                outJsonPath: $.Data.superBuiltUpArea
-              - inJsonPath: $.source
-                outJsonPath: $.Data.source
-              - inJsonPath: $.channel
-                outJsonPath: $.Data.channel
-              - inJsonPath: $.units
-                outJsonPath: $.Data.units
-              - inJsonPath: $.auditDetails
-                outJsonPath: $.Data.auditDetails
-              - inJsonPath: $.id
-                outJsonPath: $.Data.id
-              - inJsonPath: $.propertyId
-                outJsonPath: $.Data.propertyId
-              - inJsonPath: $.surveyId
-                outJsonPath: $.Data.surveyId
-              - inJsonPath: $.linkedProperties
-                outJsonPath: $.Data.linkedProperties
-              - inJsonPath: $.tenantId
-                outJsonPath: $.Data.tenantId
-              - inJsonPath: $.accountId
-                outJsonPath: $.Data.accountId
-              - inJsonPath: $.oldPropertyId
-                outJsonPath: $.Data.oldPropertyId
-              - inJsonPath: $.status
-                outJsonPath: $.Data.status
-              - inJsonPath: $.@timestamp
-                outJsonPath: $.Data.@timestamp
+            - inJsonPath: $.id
+              outJsonPath: $.Data.id
+            - inJsonPath: $.number
+              outJsonPath: $.Data.number
+            - inJsonPath: $.cnrNumber
+              outJsonPath: $.Data.cnrNumber
+            - inJsonPath: $.type
+              outJsonPath: $.Data.type              
+            - inJsonPath: $.@timestamp
+              outJsonPath: $.Data.@timestamp 
+            - inJsonPath: $
+              outJsonPath: $.Data
             externalUriMapping:
               - path: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search
                 queryParam: hierarchyTypeCode=REVENUE,boundaryType=Block,codes=$.address.locality.code,tenantId=$.tenantId
