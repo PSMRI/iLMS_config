@@ -97,7 +97,7 @@ ServiceMaps:
       indexes:
         - name: ilms
           type: general
-          id: $.id,$.case_id
+          id: $.id,$.caseId
           jsonPath: $.hearing
           isBulk: false
           timeStampField: $.auditDetails.createdTime
