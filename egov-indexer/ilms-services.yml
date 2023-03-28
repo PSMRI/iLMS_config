@@ -95,12 +95,12 @@ ServiceMaps:
       indexes:
         - name: ilms
           type: general
-          id: $.id,$.tenantId
+          id: $.id
           jsonPath: $.hearing
           isBulk: false
           timeStampField: $.auditDetails.createdTime
           customJsonMapping:
-            indexMapping: {"Data":{"id":"","hearingNumber":"","courtNumber":"","bench":"","@timestamp":"timestamp"},"history":{},"tenantData":{}}
+            indexMapping: {"Data":{"id":"","hearingNumber":"","courtNumber":"","bench":"","@timestamp":"timestamp"},"history":{}}
             fieldMapping:
             - inJsonPath: $.id
               outJsonPath: $.Data.id
@@ -121,6 +121,18 @@ ServiceMaps:
                 uriResponseMapping:
                   - inJsonPath: $.ProcessInstances
                     outJsonPath: $.Data.history
+            mdmsMapping:
+              - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
+                moduleName: tenant
+                masterName: tenants
+                tenantId: mp
+                filter: "[?(@.code == $tenant)]"
+                filterMapping:
+                  - variable: $tenant
+                    valueJsonpath: $.tenantId
+                uriResponseMapping:
+                  - inJsonPath: $.MdmsRes.tenant.tenants
+                    outJsonPath: $.Data.tenantData        
             
 
 
