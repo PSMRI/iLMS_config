@@ -143,7 +143,7 @@ ServiceMaps:
       indexes:
         - name: ilms
           type: general
-          id: $.id,$.tenantId
+          id: $.id,$.caseId
           jsonPath: $.hearing
           isBulk: false
           timeStampField: $.auditDetails.lastModifiedTime
