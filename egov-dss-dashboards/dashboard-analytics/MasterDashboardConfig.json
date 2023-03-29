@@ -35,8 +35,8 @@
                   "headers": []
                 },
                 {
-                  "id": "inactiveCase",
-                  "name": "DSS_INACTIVE_CASES",
+                  "id": "resolveCase",
+                  "name": "DSS_RESOLVE_CASES",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
