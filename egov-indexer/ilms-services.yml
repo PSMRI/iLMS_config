@@ -92,7 +92,7 @@ ServiceMaps:
                     outJsonPath: $.Data.tenantData
                     
               - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
-                  moduleName: iLMS
+                  moduleName: tenant
                   masterName: UsageCategory
                   tenantId: mp
                   filter: "[?(@.code == $usageCategory)]"
@@ -100,7 +100,7 @@ ServiceMaps:
                     - variable: $usageCategory
                       valueJsonpath: $.usageCategory
                   uriResponseMapping:
-                    - inJsonPath: $.MdmsRes.PropertyTax.UsageCategory[0].name
+                    - inJsonPath: $.MdmsRes.tenant.UsageCategory[0].name
                       outJsonPath: $.Data.usageCategory
                     
     - topic: save-hearing-details-application
