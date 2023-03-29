@@ -55,7 +55,7 @@
               "name": "DSS_CASES_BY_STATUS",
               "dimensions": {
                 "height": 250,
-                "width": 4
+                "width": 3
               },
               "vizType": "chart",
               "isCollapsible": false,
