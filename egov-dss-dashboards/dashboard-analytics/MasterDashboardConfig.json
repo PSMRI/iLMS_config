@@ -45,6 +45,33 @@
               ]
             }
           ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_iLMS",
+          "vizArray": [
+            {
+              "id": 421,
+              "name": "DSS_CASES_BY_STATUS",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "casesByStatus",
+                  "name": "DSS_CASES_BY_STATUS",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
         }
       ]
     },

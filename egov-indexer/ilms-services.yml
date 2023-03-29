@@ -90,6 +90,7 @@ ServiceMaps:
                 uriResponseMapping:
                   - inJsonPath: $.MdmsRes.tenant.tenants
                     outJsonPath: $.Data.tenantData
+
     - topic: save-hearing-details-application
       configKey: INDEX
       indexes:
