@@ -90,7 +90,7 @@
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "ilms",
-        "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.status.keyword\":\"INACTIVE\"}},{\"term\":{\"Data.tenantId\":\"mp\"}}]}},\"aggs\":{\"Resolve Cases\":{\"value_count\":{\"field\":\"Data.status.keyword\"}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Closed Complaints\":{\"filters\":{\"filters\":{\"closed\":{\"terms\":{\"Data.status.keyword\":[\"INACTIVE\"]}}}}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -99,7 +99,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Resolve Cases"
+      "Closed Complaints"
     ],
     "insight": {
       "chartResponseMap": "RESOLVECASE",
