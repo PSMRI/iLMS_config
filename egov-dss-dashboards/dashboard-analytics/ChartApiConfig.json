@@ -7,7 +7,7 @@
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "ilms",
-        "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.tenantId\":\"mp\"}}]}},\"aggs\":{\"total number of cases\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Cases\":{\"filters\":{\"filters\":{\"total\":{\"terms\":{\"Data.status.keyword\":[\"ACTIVE\",\"INACTIVE\"]}}}}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -16,7 +16,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "total number of cases"
+      "Total Cases"
     ],
     "insight": {
       "chartResponseMap": "TOTALCASE",
@@ -60,7 +60,7 @@
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "ilms",
-        "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.status.keyword\":\"ACTIVE\"}},{\"term\":{\"Data.tenantId\":\"mp\"}}]}},\"aggs\":{\"Active Cases\":{\"value_count\":{\"field\":\"Data.status.keyword\"}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Active Cases\":{\"filters\":{\"filters\":{\"open\":{\"terms\":{\"Data.status.keyword\":[\"ACTIVE\"]}}}}}}}}}"
       }
     ],
     "chartType": "metric",
