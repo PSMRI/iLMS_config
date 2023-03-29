@@ -7,7 +7,7 @@
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "ilms",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.registrationDate\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.tenantId\":\"mp\"}}]}},\"aggs\":{\"total number of cases\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -88,7 +88,7 @@
       {
         "module": "iLMS",
         "dateRefField": "Data.registrationDate",
-        "requestQueryMap": "{\"cases\" : \"Data.respondent.status.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "ilms",
         "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.status.keyword\":\"INACTIVE\"}},{\"term\":{\"Data.tenantId\":\"mp\"}}]}},\"aggs\":{\"Resolve Cases\":{\"value_count\":{\"field\":\"Data.status.keyword\"}}}}"
       }
