@@ -92,7 +92,7 @@ ServiceMaps:
                     outJsonPath: $.Data.tenantData
                     
               - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
-                  moduleName: ilms
+                  moduleName: iLMS
                   masterName: UsageCategory
                   tenantId: mp
                   filter: "[?(@.code == $usageCategory)]"
