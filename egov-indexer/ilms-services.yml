@@ -91,17 +91,17 @@ ServiceMaps:
                   - inJsonPath: $.MdmsRes.tenant.tenants
                     outJsonPath: $.Data.tenantData
                     
-            - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
-                moduleName: PropertyTax
-                masterName: UsageCategory
-                tenantId: mp
-                filter: "[?(@.code == $usageCategory)]"
-                filterMapping:
-                  - variable: $usageCategory
-                    valueJsonpath: $.usageCategory
-                uriResponseMapping:
-                  - inJsonPath: $.MdmsRes.PropertyTax.UsageCategory[0].name
-                    outJsonPath: $.Data.usageCategory
+              - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
+                  moduleName: PropertyTax
+                  masterName: UsageCategory
+                  tenantId: mp
+                  filter: "[?(@.code == $usageCategory)]"
+                  filterMapping:
+                    - variable: $usageCategory
+                      valueJsonpath: $.usageCategory
+                  uriResponseMapping:
+                    - inJsonPath: $.MdmsRes.PropertyTax.UsageCategory[0].name
+                      outJsonPath: $.Data.usageCategory
                     
     - topic: save-hearing-details-application
       configKey: INDEX
