@@ -7,7 +7,7 @@
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "ilms",
-        "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.tenantId\":\"mp\"}}]}},\"aggs\":{\"total number of cases\":{\"value_count\":{\"field\":\"Data.status.keyword\"}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.registrationDate\"}}}}}}"
       }
     ],
     "chartType": "metric",
