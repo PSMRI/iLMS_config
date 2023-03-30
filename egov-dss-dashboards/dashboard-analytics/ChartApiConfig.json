@@ -52,6 +52,29 @@
     },
     "_comment": " Complaints By Their Statuses"
   },
+  "casesByType": {
+    "chartName": "DSS_CASES_BY_TYPE",
+    "queries": [
+      {
+        "module": "iLMS",
+        "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
+        "dateRefField": "Data.registrationDate",
+        "indexName": "ilms",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Complaints By CaseType\":{\"terms\":{\"field\":\"Data.type.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.registrationDate\"}}}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "action": "",
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Complaints By CaseType"
+    ],
+    "insight": {
+    },
+    "_comment": " Complaints By Their CaseType"
+  },
   "DSSactiveCase": {
     "chartName": "DSS_ACTIVE_CASES",
     "queries": [

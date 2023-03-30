@@ -72,6 +72,33 @@
               ]
             }
           ]
+        },
+        {
+          "row": 5,
+          "name": "DSS_ILMS",
+          "vizArray": [
+            {
+              "id": 421,
+              "name": "DSS_CASES_BY_TYPE",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "casesByType",
+                  "name": "DSS_CASES_BY_TYPE",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
         }
       ]
     },
