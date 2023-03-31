@@ -75,6 +75,37 @@
     },
     "_comment": " Complaints By Their CaseType"
   },
+  "PendencyReport": {
+    "chartName": "DSS_PENDENCY_REPORT",
+    "queries": [
+      {
+        "module": "iLMS",
+        "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
+        "dateRefField": "Data.registrationDate",
+        "indexName": "ilms",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.registrationDate\"}}}},\"Data entry by DEC\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Data entry by DEC\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"DE-DEC\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for Compliance\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for Compliance\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"CMO\",\"CMD\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for OIC appointment\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for OIC appointment\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"DA-OIC\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for OIC Approval\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for OIC Approval\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"DER-OIC\",\"APP-OIC\",\"DER-OIC\",\"PU-SOF\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for SOF approval\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for SOF approval\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"AF-SOF\",\"ULR-LA\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for Final Affidavit\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for Final Affidavit\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"FA-OIC\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "number",
+    "action": "",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "aggregationPaths": [
+      "Data entry by DEC",
+      "Cases pending for Compliance",
+      "Cases pending for OIC appointment",
+      "Cases pending for OIC Approval",
+      "Cases pending for SOF approval",
+      "Cases pending for Final Affidavit",
+      "Total Complaints"
+    ],
+    "isCumulative": true,
+    "interval": "month",
+    "insight": {
+    },
+    "_comment": " "
+  },
   "DSSactiveCase": {
     "chartName": "DSS_ACTIVE_CASES",
     "queries": [
