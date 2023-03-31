@@ -6,7 +6,7 @@ serviceMaps:
       fromTopic: save-ss-survey
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_ss_survey( uuid,tenantid,title,description,status,postedby,startDate,endDate,active,createdby,lastmodifiedby,createdtime,lastmodifiedtime) VALUES (?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_ss_survey( uuid,tenantid,title,description,status,postedby,startDate,endDate,active,isallowmultiple,createdby,lastmodifiedby,createdtime,lastmodifiedtime) VALUES (?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: SurveyEntity
           jsonMaps:
             - jsonPath: $.SurveyEntity.uuid
@@ -26,6 +26,8 @@ serviceMaps:
             - jsonPath: $.SurveyEntity.endDate
 
             - jsonPath: $.SurveyEntity.active
+
+            - jsonPath: $.SurveyEntity.isAllowMultiple
 
             - jsonPath: $.SurveyEntity.auditDetails.createdBy
 
@@ -97,7 +99,7 @@ serviceMaps:
       fromTopic: update-ss-survey
       isTransaction: true
       queryMaps:
-        - query: UPDATE eg_ss_survey SET tenantid=?, title=?, description=?, status=?, postedBy=?, startDate = ?, endDate = ?, lastmodifiedby=?, lastmodifiedtime=? WHERE uuid=?;
+        - query: UPDATE eg_ss_survey SET tenantid=?, title=?, description=?, status=?, isallowmultiple=?, postedBy=?, startDate = ?, endDate = ?, lastmodifiedby=?, lastmodifiedtime=? WHERE uuid=?;
           basePath: SurveyEntity
           jsonMaps:
             - jsonPath: $.SurveyEntity.tenantId
@@ -107,6 +109,8 @@ serviceMaps:
             - jsonPath: $.SurveyEntity.description
 
             - jsonPath: $.SurveyEntity.status
+
+            - jsonPath: $.SurveyEntity.isAllowMultiple
 
             - jsonPath: $.SurveyEntity.postedBy
 
