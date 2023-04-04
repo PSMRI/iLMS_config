@@ -1410,35 +1410,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "row": 4,
-              "name": "DSS_SERVICE",
-              "vizArray": [
-                {
-                  "id": 431,
-                  "name": "DSS_PGR_STATUS_BY_TENANT",
-                  "dimensions": {
-                    "height": 350,
-                    "width": 12
-                  },
-                  "vizType": "chart",
-                  "label": "",
-                  "noUnit": false,
-                  "isCollapsible": true,
-                  "charts": [
-                    {
-                      "id": "xpgrStatusByRegion",
-                      "name": "DSS_PGR_STATUS_BY_Region",
-                      "code": "",
-                      "chartType": "table",
-                      "filter": "",
-                      "headers": [],
-                      "tabName": "Boundary"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         }
