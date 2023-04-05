@@ -2138,12 +2138,12 @@ ReportDefinitions:
         isMandatory: false
         searchClause: AND pgr_data.institutiontype = $institutionType
       - name: menuPath
-        label: reports.pgr.service.code
+        label: reports.pgr.menu.path
         type: singlevaluelist
         source: eg_pgr_service
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=ServiceDefs|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[*].menuPath|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[*].menuPath
         isMandatory: true
-        searchClause: AND pgr_data.servicecode = $serviceCode
+        searchClause: AND pgr_data.servicecode = $menuPath
       - name: serviceCode
         label: reports.pgr.service.code
         type: singlevaluelist
