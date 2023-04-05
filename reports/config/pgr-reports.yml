@@ -2113,7 +2113,7 @@ ReportDefinitions:
       - name: status
         label: reports.pgr.status
         type: singlevaluelist
-        pattern: 'list://PENDINGATLEVEL1:PENDINGATLEVEL1,PENDINGATLEVEL2:PENDINGATLEVEL2,PENDINGATLEVEL3:PENDINGATLEVEL3,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,REJECTED:REJECTED,RESOLVED:RESOLVED'
+        pattern: 'list://PENDINGATLEVEL1:PENDINGATLEVEL1,PENDINGATLEVEL2:PENDINGATLEVEL2,PENDINGATLEVEL3:PENDINGATLEVEL3,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,REJECTEDBYL1:REJECTEDBYL1,REJECTEDBYL2:REJECTEDBYL2,REJECTEDBYL3:REJECTEDBYL3,RESOLVEDBYL1:RESOLVEDBYL1,RESOLVEDBYL2:RESOLVEDBYL2,RESOLVEDBYL3:RESOLVEDBYL3'
         source: seva
         isMandatory: false
         searchClause: AND pgr_data.applicationstatus = $status
@@ -2149,18 +2149,18 @@ ReportDefinitions:
         ad.state as state,
         ad.region as region,
         ad.district as district,
-        (select max(createdtime) from eg_wf_processinstance_v2 where action='RESOLVE' and businessid = servicerequestid) as resolvedtime,
+        (select max(createdtime) from eg_wf_processinstance_v2 where action LIKE 'RESOLVE%' and businessid = servicerequestid) as resolvedtime,
         (select min(createdtime) from eg_wf_processinstance_v2 where action='APPLY' and businessid = servicerequestid) as opentime
         from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
         where
         ps.tenantid = $tenantid)
         select
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
-        SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
+        SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
         rating,
-        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVED') and (resolvedtime - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedwithinsla,
-        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVED') and (resolvedtime - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedoutsidesla,
+        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') and (resolvedtime - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedwithinsla,
+        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') and (resolvedtime - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedoutsidesla,
         count(ints)  as opencomplaintswithinsla,
         count(ints1)  as opencomplaintsoutsidesla,
         pgr_data.state as state,
