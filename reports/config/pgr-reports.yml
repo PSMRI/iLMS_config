@@ -2109,13 +2109,6 @@ ReportDefinitions:
         source: seva
         isMandatory: false
         searchClause: AND pgr_data.applicationstatus = $status
-      - name: state
-        label: reports.pgr.boundary.state
-        type: singlevaluelist
-        source: eg_pgr_service
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.name
-        isMandatory: false
-        searchClause: AND pgr_data.state like $state || '%'
       - name: region
         label: reports.pgr.boundary.region
         type: singlevaluelist
