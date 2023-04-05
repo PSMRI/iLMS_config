@@ -2158,7 +2158,6 @@ ReportDefinitions:
         ps.createdtime,
         applicationstatus,
         ps.tenantid,
-        servicecode,
         complainanttype,
         institutiontype,
         rating,
