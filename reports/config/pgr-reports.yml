@@ -2148,7 +2148,7 @@ ReportDefinitions:
         label: reports.pgr.complainant.type
         type: singlevaluelist
         source: eg_pgr_service
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=ServiceDefs|$.MdmsRes.RAINMAKER-PGR.ServiceDefs.serviceCode
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=ServiceDefs
         isMandatory: false
         searchClause: AND pgr_data.servicecode = $serviceCode
     query: |
