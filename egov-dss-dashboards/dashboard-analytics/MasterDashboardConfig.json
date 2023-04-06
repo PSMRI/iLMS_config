@@ -1229,7 +1229,7 @@
               "name": "DSS_PGR_CITIZENS",
               "dimensions": {
                 "height": 250,
-                "width": 3
+                "width": 5
               },
               "vizType": "chart",
               "isCollapsible": false,
@@ -1250,7 +1250,7 @@
               "name": "DSS_PGR_TOP_COMPLAINTS",
               "dimensions": {
                 "height": 250,
-                "width": 5
+                "width": 7
               },
               "vizType": "chart",
               "isCollapsible": false,
