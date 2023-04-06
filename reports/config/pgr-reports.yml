@@ -2162,14 +2162,14 @@ ReportDefinitions:
         type: singlevaluelist
         source: eg_pgr_service
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=ServiceDefs|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[*].menuPath|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[*].menuPath
-        isMandatory: true
+        isMandatory: false
         searchClause: AND deptmap.menuPath = $menuPath
       - name: serviceCode
         label: reports.pgr.service.code
         type: singlevaluelist
         source: eg_pgr_service
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=ServiceDefs|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[?(@.menuPath==$menuPath)].serviceCode|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[?(@.menuPath==$menuPath)].name
-        isMandatory: true
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=ServiceDefs|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[*].serviceCode|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[*].name
+        isMandatory: false
         searchClause: AND pgr_data.servicecode = $serviceCode
     query: |
       with pgr_data as (select
