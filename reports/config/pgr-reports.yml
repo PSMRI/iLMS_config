@@ -2054,6 +2054,26 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: false
+      - name: complainanttype
+        label: reports.pgr.complainanttype
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: institutiontype
+        label: reports.pgr.institutiontype
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: menupath
+        label: reports.pgr.menupath
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: servicecode
+        label: reports.pgr.servicecode
+        type: string
+        source: eg_pgr_service
+        total: false
       - name: received
         label: reports.pgr.received
         type: string
@@ -2180,8 +2200,11 @@ ReportDefinitions:
         count(ints1)  as opencomplaintsoutsidesla,
         pgr_data.state as state,
         pgr_data.region as region,
-        pgr_data.district as district
-      
+        pgr_data.district as district,
+        pgr_data.complainanttype as complainanttype,
+        pgr_data.institutiontype as institutiontype,
+        deptmap.menuPath as menupath,
+        pgr_data.servicecode as servicecode
         from pgr_data
         left join lateral (
         select pgr_data.applicationstatus  ints where (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000
