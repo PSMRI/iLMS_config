@@ -2148,7 +2148,7 @@ ReportDefinitions:
         label: reports.pgr.service.code
         type: singlevaluelist
         source: eg_pgr_service
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=ServiceDefs|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[?(@.menuPath==$menuPath)].serviceCode|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[?(@.menuPath==$menuPath)].name
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=ServiceDefs|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[*].serviceCode|$.MdmsRes.RAINMAKER-PGR.ServiceDefs[*].name
         isMandatory: true
         searchClause: AND pgr_data.servicecode = $serviceCode
     query: |
@@ -2160,7 +2160,6 @@ ReportDefinitions:
         ps.tenantid,
         complainanttype,
         institutiontype,
-        pgr_data.menupath,
         rating,
         ad.state as state,
         ad.region as region,
@@ -2193,6 +2192,7 @@ ReportDefinitions:
         limit 1
         ) d2 on true
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, menuPath, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
+      
       WHERE 1=1
       
     groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.region,pgr_data.district
