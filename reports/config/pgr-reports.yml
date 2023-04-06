@@ -2157,7 +2157,6 @@ ReportDefinitions:
         servicecode,
         ps.createdtime,
         applicationstatus,
-        menupath,
         ps.tenantid,
         complainanttype,
         institutiontype,
