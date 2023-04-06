@@ -1135,7 +1135,7 @@
               "charts": [
                 {
                   "id": "cumulativeClosedComplaints",
-                  "name": "Monthly",
+                  "name": "Yearly",
                   "code": "",
                   "chartType": "line",
                   "filter": "",
@@ -1162,7 +1162,7 @@
               "charts": [
                 {
                   "id": "totalComplaintsbySource",
-                  "name": "Monthly",
+                  "name": "Yearly",
                   "code": "",
                   "chartType": "line",
                   "filter": "",
