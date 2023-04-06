@@ -2160,7 +2160,7 @@ ReportDefinitions:
         ps.tenantid,
         complainanttype,
         institutiontype,
-        pgr_data.menupath
+        pgr_data.menupath,
         rating,
         ad.state as state,
         ad.region as region,
