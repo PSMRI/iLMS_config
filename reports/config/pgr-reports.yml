@@ -2218,7 +2218,7 @@ ReportDefinitions:
       
       WHERE 1=1
       
-    groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.region,pgr_data.district
+    groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.region,pgr_data.district,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
     orderby: ORDER BY tenantid,rating
 
   - reportName: LMEPerformanceReport
