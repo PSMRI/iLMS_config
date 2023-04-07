@@ -2085,22 +2085,22 @@ ReportDefinitions:
         source: eg_pgr_service
         total: true
       - name: complainanttype
-        label: reports.pgr.complainanttype
+        label: reports.pgr.complainant.type
         type: string
         source: eg_pgr_service
         total: false
       - name: institutiontype
-        label: reports.pgr.institutiontype
+        label: reports.pgr.institution.type
         type: string
         source: eg_pgr_service
         total: false
       - name: menupath
-        label: reports.pgr.menupath
+        label: reports.pgr.menu.path
         type: string
         source: eg_pgr_service
         total: false
       - name: servicecode
-        label: reports.pgr.servicecode
+        label: reports.pgr.service.code
         type: string
         source: eg_pgr_service
         total: false
