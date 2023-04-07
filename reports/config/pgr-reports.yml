@@ -2084,6 +2084,26 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: true
+      - name: complainanttype
+        label: reports.pgr.complainanttype
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: institutiontype
+        label: reports.pgr.institutiontype
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: menupath
+        label: reports.pgr.menupath
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: servicecode
+        label: reports.pgr.servicecode
+        type: string
+        source: eg_pgr_service
+        total: false
       - name: rating
         label: reports.pgr.rating
         type: number
@@ -2178,7 +2198,11 @@ ReportDefinitions:
         count(ints1)  as opencomplaintsoutsidesla,
         pgr_data.state as state,
         pgr_data.region as region,
-        pgr_data.district as district
+        pgr_data.district as district,
+        pgr_data.complainanttype as complainanttype,
+        pgr_data.institutiontype as institutiontype,
+        deptmap.menuPath as menupath,
+        pgr_data.servicecode as servicecode
         from pgr_data
         left join lateral (
         select pgr_data.applicationstatus  ints where (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000
@@ -2192,7 +2216,7 @@ ReportDefinitions:
       
       WHERE 1=1
       
-    groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.region,pgr_data.district
+    groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.region,pgr_data.district,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
     orderby: ORDER BY tenantid,rating
 
   - reportName: LMEPerformanceReport
