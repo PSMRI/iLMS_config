@@ -2104,11 +2104,6 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: false
-      - name: rating
-        label: reports.pgr.rating
-        type: number
-        source: eg_pgr_service
-        total: true
     searchParams:
       - name: fromDate
         label: reports.pgr.datefrom
@@ -2193,7 +2188,7 @@ ReportDefinitions:
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
         SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
-        rating,
+        count(rating) as rating,
         SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') and (resolvedtime - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedwithinsla,
         SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') and (resolvedtime - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedoutsidesla,
         count(ints)  as opencomplaintswithinsla,
