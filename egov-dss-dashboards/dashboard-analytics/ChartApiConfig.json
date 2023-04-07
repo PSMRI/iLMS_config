@@ -370,8 +370,8 @@
       "Total Complaints"
     ],
     "isCumulative": true,
+    "interval": "month",
     "insight": {
-      "insightInterval": "month"
     },
     "_comment": " "
   },
@@ -402,8 +402,8 @@
       "REOPEN"
     ],
     "isCumulative": false,
+    "interval": "month",
     "insight": {
-      "insightInterval": "month"
     },
     "_comment": " "
   },
@@ -427,7 +427,6 @@
       "Complaints By Status"
     ],
     "insight": {
-      "insightInterval": "month"
     },
     "_comment": " Complaints By Their Statuses"
   },
