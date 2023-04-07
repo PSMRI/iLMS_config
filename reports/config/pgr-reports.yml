@@ -2328,6 +2328,8 @@ ReportDefinitions:
         ps.createdtime,
         ps.servicecode,
         ps.applicationstatus,
+        complainanttype,
+        institutiontype,
         ps.rating,
         ps.tenantid,
         epa.action,
