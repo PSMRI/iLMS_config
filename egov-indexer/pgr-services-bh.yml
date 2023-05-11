@@ -8,7 +8,7 @@ ServiceMaps:
         - name: pgr-services
           type: general
           id: $.service.serviceRequestId
-          jsonPath: $
+          jsonPath: $.service
           timeStampField: $.service.auditDetails.lastModifiedTime
           fieldsToBeMasked: ["$.service.citizen.userName", "$.service.citizen.name", "$.service.citizen.mobileNumber", "$.service.citizen.emailId"]
           customJsonMapping:
@@ -59,7 +59,7 @@ ServiceMaps:
         - name: pgr-services
           type: general
           id: $.service.serviceRequestId
-          jsonPath: $
+          jsonPath: $.service
           timeStampField: $.service.auditDetails.lastModifiedTime
           fieldsToBeMasked: ["$.service.citizen.userName", "$.service.citizen.name", "$.service.citizen.mobileNumber", "$.service.citizen.emailId"]
           customJsonMapping:
@@ -106,7 +106,7 @@ ServiceMaps:
           customJsonMapping:
             indexMapping: {"Data":{"PGREntity":{},"ward":{},"tenantData":{}, "history":{}}}
             fieldMapping:
-              - inJsonPath: $
+              - inJsonPath: $.service
                 outJsonPath: $.Data.PGREntity
             externalUriMapping:
               - path: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search
