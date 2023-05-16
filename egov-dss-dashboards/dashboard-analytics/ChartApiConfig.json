@@ -3,7 +3,7 @@
     "chartName": "DSS_TOTAL_CASES",
     "queries": [
       {
-        "module": "legal-services",
+        "module": "iLMS",
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
@@ -33,7 +33,7 @@
     "chartName": "DSS_CASES_BY_STATUS",
     "queries": [
       {
-        "module": "legal-services",
+        "module": "iLMS",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.registrationDate",
         "indexName": "legal-services",
@@ -56,7 +56,7 @@
     "chartName": "DSS_CASES_BY_TYPE",
     "queries": [
       {
-        "module": "legal-services",
+        "module": "iLMS",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.registrationDate",
         "indexName": "legal-services",
@@ -79,7 +79,7 @@
     "chartName": "DSS_PENDENCY_REPORT",
     "queries": [
       {
-        "module": "legal-services",
+        "module": "iLMS",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.registrationDate",
         "indexName": "legal-services",
@@ -110,7 +110,7 @@
     "chartName": "DSS_ACTIVE_CASES",
     "queries": [
       {
-        "module": "legal-services",
+        "module": "iLMS",
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
@@ -140,7 +140,7 @@
     "chartName": "DSS_RESOLVE_CASES",
     "queries": [
       {
-        "module": "legal-services",
+        "module": "iLMS",
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",

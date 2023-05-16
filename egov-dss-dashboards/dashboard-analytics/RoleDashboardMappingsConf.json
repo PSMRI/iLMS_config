@@ -13,8 +13,8 @@
           "id": "home"
         },
         {
-          "name": "legal-services",
-          "id": "legal-services"
+          "name": "iLMS Service",
+          "id": "iLMS"
         }      
       ]
     },
@@ -27,7 +27,7 @@
       "dashboards": [
         {
           "name": "My Dashboard",
-          "id": "legal-services"
+          "id": "iLMS"
         },
         {
           "name": "PGR",
