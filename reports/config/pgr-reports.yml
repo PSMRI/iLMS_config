@@ -2168,7 +2168,7 @@ ReportDefinitions:
         searchClause: AND pgr_data.servicecode = $serviceCode
     query: |
       with pgr_data as (select
-        servicerequestid,
+        servicerequestids,
         servicecode,
         ps.createdtime,
         applicationstatus,
