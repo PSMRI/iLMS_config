@@ -3,10 +3,10 @@
     "chartName": "DSS_TOTAL_CASES",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal-services",
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
-        "indexName": "ilms",
+        "indexName": "legal-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Cases\":{\"filters\":{\"filters\":{\"total\":{\"terms\":{\"Data.caseStatus.keyword\":[\"PFA001\",\"NTC002\",\"AOA003\",\"LIT-ON\",\"FO004\",\"JC005\",\"DIS006\",\"DEO008\",\"DIO009\",\"Pending_for_Notice\"]}}}}}}}}}"
       }
     ],
@@ -33,10 +33,10 @@
     "chartName": "DSS_CASES_BY_STATUS",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal-services",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.registrationDate",
-        "indexName": "ilms",
+        "indexName": "legal-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Complaints By Status\":{\"terms\":{\"field\":\"Data.caseStatus.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.registrationDate\"}}}}}}}}"
       }
     ],
@@ -56,10 +56,10 @@
     "chartName": "DSS_CASES_BY_TYPE",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal-services",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.registrationDate",
-        "indexName": "ilms",
+        "indexName": "legal-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Complaints By CaseType\":{\"terms\":{\"field\":\"Data.type.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.registrationDate\"}}}}}}}}"
       }
     ],
@@ -79,10 +79,10 @@
     "chartName": "DSS_PENDENCY_REPORT",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal-services",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.registrationDate",
-        "indexName": "ilms",
+        "indexName": "legal-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.registrationDate\"}}}},\"Data entry by DEC\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Data entry by DEC\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"DE-DEC\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for Compliance\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for Compliance\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"CMO\",\"CMD\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for OIC appointment\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for OIC appointment\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"DA-OIC\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for OIC Approval\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for OIC Approval\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"DER-OIC\",\"APP-OIC\",\"DER-OIC\",\"PU-SOF\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for SOF approval\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for SOF approval\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"AF-SOF\",\"ULR-LA\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Cases pending for Final Affidavit\":{\"date_histogram\":{\"field\":\"Data.registrationDate\",\"interval\":\"month\"},\"aggs\":{\"Cases pending for Final Affidavit\":{\"filter\":{\"terms\":{\"Data.subStage.keyword\":[\"FA-OIC\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}}}"
       }
     ],
@@ -110,10 +110,10 @@
     "chartName": "DSS_ACTIVE_CASES",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal-services",
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
-        "indexName": "ilms",
+        "indexName": "legal-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Active Cases\":{\"filters\":{\"filters\":{\"total\":{\"terms\":{\"Data.caseStatus.keyword\":[\"PFA001\",\"NTC002\",\"AOA003\",\"LIT-ON\",\"FO004\",\"JC005\",\"DEO008\",\"Pending_for_Notice\"]}}}}}}}}}"
       }
     ],
@@ -140,10 +140,10 @@
     "chartName": "DSS_RESOLVE_CASES",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal-services",
         "dateRefField": "Data.registrationDate",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
-        "indexName": "ilms",
+        "indexName": "legal-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Closed Complaints\":{\"filters\":{\"filters\":{\"total\":{\"terms\":{\"Data.caseStatus.keyword\":[\"DIS006\",\"DIO009\"]}}}}}}}}}"
       }
     ],

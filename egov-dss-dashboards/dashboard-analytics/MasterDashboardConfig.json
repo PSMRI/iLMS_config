@@ -3,7 +3,7 @@
   "dashboards": [
     {
       "name": "DSS_ILMS",
-      "id": "iLMS",
+      "id": "legal-services",
       "isActive": "",
       "style": "",
       "visualizations": [
