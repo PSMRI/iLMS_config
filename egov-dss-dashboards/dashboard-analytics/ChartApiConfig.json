@@ -101,7 +101,7 @@
       "Total Complaints"
     ],
     "isCumulative": true,
-    "interval": "month",
+    "interval": "day",
     "insight": {
     },
     "_comment": " "
@@ -132,7 +132,7 @@
       "downwardIndicator": "negative",
       "textMessage": "$indicator$value% than last $insightInterval",
       "colorCode": "#228B22",
-      "insightInterval": "month"
+      "insightInterval": "day"
     },
     "_comment": " "
   },
@@ -162,7 +162,7 @@
       "downwardIndicator": "negative",
       "textMessage": "$indicator$value% than last $insightInterval",
       "colorCode": "#228B22",
-      "insightInterval": "month"
+      "insightInterval": "day"
     },
     "_comment": " "
   },
