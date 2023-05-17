@@ -94,7 +94,7 @@ ServiceMaps:
     - topic: save-hearing-details-application
       configKey: INDEX
       indexes:
-        - name: legal
+        - name: legal-services
           type: general
           id: $.id,$.tenantId
           jsonPath: $.hearing
@@ -140,7 +140,7 @@ ServiceMaps:
     - topic: update-hearing-details-application
       configKey: INDEX
       indexes:
-        - name: legal
+        - name: legal-services
           type: general
           id: $.id,$.tenantId
           jsonPath: $.hearing
@@ -184,7 +184,7 @@ ServiceMaps:
     - topic: save-judgement-case-application
       configKey: INDEX
       indexes:
-        - name: legal
+        - name: legal-services
           type: general
           id: $.id,$.tenantId
           jsonPath: $.judgement
@@ -230,7 +230,7 @@ ServiceMaps:
     - topic: update-judgement-case-application
       configKey: INDEX
       indexes:
-        - name: legal
+        - name: legal-services
           type: general
           id: $.id,$.tenantId
           jsonPath: $.judgement
