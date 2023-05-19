@@ -2064,23 +2064,13 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: true
-      - name: resolvedwithinsla
-        label: reports.pgr.resolvedwithinsla
+      - name: resolved
+        label: reports.pgr.resolved
         type: string
         source: eg_pgr_service
         total: true
-      - name: resolvedoutsidesla
-        label: reports.pgr.resolvedoutsidesla
-        type: string
-        source: eg_pgr_service
-        total: true
-      - name: opencomplaintswithinsla
-        label: reports.pgr.opencomplaintswithinsla
-        type: string
-        source: eg_pgr_service
-        total: true
-      - name: opencomplaintsoutsidesla
-        label: reports.pgr.opencomplaintsoutsidesla
+      - name: canbereopen
+        label: reports.pgr.canbereopen
         type: string
         source: eg_pgr_service
         total: true
@@ -2188,11 +2178,8 @@ ReportDefinitions:
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
         SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
-        count(rating) as rating,
-        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') and (resolvedtime - opentime) < 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedwithinsla,
-        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') and (resolvedtime - opentime) >= 14 * 86400 * 1000 THEN 1 ELSE 0 END) as resolvedoutsidesla,
-        count(ints)  as opencomplaintswithinsla,
-        count(ints1)  as opencomplaintsoutsidesla,
+        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as resolved,
+        SUM (CASE WHEN applicationstatus in ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3', 'REJECTEDBYL1', 'REJECTEDBYL2', 'REJECTEDBYL3') THEN 1 ELSE 0 END) as canbereopen,
         pgr_data.state as state,
         pgr_data.region as region,
         pgr_data.district as district,
@@ -2201,14 +2188,6 @@ ReportDefinitions:
         deptmap.menuPath as menupath,
         pgr_data.servicecode as servicecode
         from pgr_data
-        left join lateral (
-        select pgr_data.applicationstatus  ints where (extract(epoch from now()) * 1000 - opentime) < 14 * 86400 * 1000
-        limit 1
-        ) d1 on true
-        left join lateral (
-        select pgr_data.applicationstatus  ints1 where (extract(epoch from now()) * 1000 - opentime) >= 14 * 86400 * 1000
-        limit 1
-        ) d2 on true
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, menuPath, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
       
       WHERE 1=1
