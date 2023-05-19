@@ -2069,6 +2069,11 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: true
+      - name: canbereopen
+        label: reports.pgr.canbereopen
+        type: string
+        source: eg_pgr_service
+        total: true
       - name: complainanttype
         label: reports.pgr.complainant.type
         type: string
@@ -2174,6 +2179,7 @@ ReportDefinitions:
         SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
         SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as resolved,
+        SUM (CASE WHEN applicationstatus in ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3', 'REJECTEDBYL1', 'REJECTEDBYL2', 'REJECTEDBYL3') THEN 1 ELSE 0 END) as canbereopen,
         pgr_data.state as state,
         pgr_data.region as region,
         pgr_data.district as district,
