@@ -12,7 +12,7 @@ serviceMaps:
       transactionCodeJsonPath: $.id
       auditAttributeBasePath: case
       queryMaps:
-        - query: INSERT INTO eg_lg_case(id, tenant_id, case_number, cnr_number, parent_case_id, linked_cases, case_type, case_category, filing_number, filing_date, case_summary, arising_details, policy_or_nonpolicy_matter, case_status, application_status, priority, recommend_oic, remarks, additional_details, status, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_lg_case(id, tenant_id, case_number, cnr_number, parent_case_id, linked_cases, case_type, case_category, filing_number, filing_date, case_summary, arising_details, policy_or_nonpolicy_matter, case_status, application_status, priority, recommend_oic, remarks, additional_details, status, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: case
           jsonMaps:
             - jsonPath: $.case.id
