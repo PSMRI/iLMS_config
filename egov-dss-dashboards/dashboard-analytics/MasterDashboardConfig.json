@@ -1113,8 +1113,16 @@
                 "headers": []
                 },
                 {
-                "id": "canBeReopnclosedComplaints",
-                "name": "DSS_PGR_CAN_BE_REOPEN_CLOSED_COMPLAINTS",
+                "id": "closedAsRejectedComplaints",
+                "name": "DSS_PGR_CLOSED_AS_REJECTED_COMPLAINTS",
+                "code": "",
+                "chartType": "metric",
+                "filter": "",
+                "headers": []
+                },
+                {
+                "id": "closedAsResolvedComplaints",
+                "name": "DSS_PGR_CLOSED_AS_RESOLVED_COMPLAINTS",
                 "code": "",
                 "chartType": "metric",
                 "filter": "",
