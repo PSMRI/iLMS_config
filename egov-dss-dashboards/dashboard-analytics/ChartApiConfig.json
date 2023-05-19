@@ -318,15 +318,45 @@
     },
     "_comment": " Total Number of Closed Complaints "
   },
-  "canBeReopnclosedComplaints": {
-    "chartName": "DSS_PGR_CAN_BE_REOPEN_CLOSED_COMPLAINTS",
+  "closedAsResolvedComplaints": {
+    "chartName": "DSS_PGR_CLOSED_AS_RESOLVED_COMPLAINTS",
     "queries": [
       {
         "module": "PGR",
         "requestQueryMap": "{ \"state\" : \"Data.service.address.state.keyword\", \"district\" : \"Data.service.address.district.keyword\",\"region\" : \"Data.service.address.region.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
         "dateRefField": "Data.service.auditDetails.createdTime",
         "indexName": "pgr-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Closed Complaints Can Be Reopen\":{\"filters\":{\"filters\":{\"resolved\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"RESOLVED\",\"RESOLVEDBYL1\",\"RESOLVEDBYL2\",\"RESOLVEDBYL3\"]}},\"rejected\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"REJECTEDBYL1\",\"REJECTEDBYL2\",\"REJECTEDBYL3\",\"REJECTED\"]}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Closed Complaints Can Be Reopen\":{\"filters\":{\"filters\":{\"resolved\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"RESOLVED\",\"RESOLVEDBYL1\",\"RESOLVEDBYL2\",\"RESOLVEDBYL3\"]}}}}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Closed Complaints Can Be Reopen"
+    ],
+    "insight": {
+      "chartResponseMap": "closedComplaints",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "month"
+    },
+    "_comment": " Total Number of Closed Complaints "
+  },
+  "closedAsRejectedComplaints": {
+    "chartName": "DSS_PGR_CLOSED_AS_REJECTED_COMPLAINTS",
+    "queries": [
+      {
+        "module": "PGR",
+        "requestQueryMap": "{ \"state\" : \"Data.service.address.state.keyword\", \"district\" : \"Data.service.address.district.keyword\",\"region\" : \"Data.service.address.region.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
+        "dateRefField": "Data.service.auditDetails.createdTime",
+        "indexName": "pgr-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Closed Complaints Can Be Reopen\":{\"filters\":{\"filters\":{\"rejected\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"REJECTEDBYL1\",\"REJECTEDBYL2\",\"REJECTEDBYL3\",\"REJECTED\"]}}}}}}}}}"
       }
     ],
     "chartType": "metric",
