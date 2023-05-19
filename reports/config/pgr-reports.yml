@@ -2028,7 +2028,6 @@ ReportDefinitions:
       and ctype.code = (select code from egpgr_complainttype where name = $complaintcode and tenantid = $tenantid) and sa.code::bigint = (select id from eg_boundary where name = $wardname and tenantid = $tenantid) and cs.status IN ($status);
 
 
-
   - reportName: ULBReport
     summary: Fetches complaint stats based on department types for a ULB
     version: 1.0.0
@@ -2064,13 +2063,18 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: true
+      - name: closed
+        label: reports.pgr.closed
+        type: string
+        source: eg_pgr_service
+        total: true
       - name: resolved
         label: reports.pgr.resolved
         type: string
         source: eg_pgr_service
         total: true
-      - name: canbereopen
-        label: reports.pgr.canbereopen
+      - name: rejected
+        label: reports.pgr.rejected
         type: string
         source: eg_pgr_service
         total: true
@@ -2178,8 +2182,9 @@ ReportDefinitions:
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
         SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
-        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as resolved,
-        SUM (CASE WHEN applicationstatus in ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3', 'REJECTEDBYL1', 'REJECTEDBYL2', 'REJECTEDBYL3') THEN 1 ELSE 0 END) as canbereopen,
+        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as closed,
+        SUM (CASE WHEN applicationstatus in ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') THEN 1 ELSE 0 END) as resolved,   
+        SUM (CASE WHEN applicationstatus in ('REJECTEDBYL1', 'REJECTEDBYL2', 'REJECTEDBYL3') THEN 1 ELSE 0 END) as rejected,
         pgr_data.state as state,
         pgr_data.region as region,
         pgr_data.district as district,
