@@ -2173,7 +2173,7 @@ ReportDefinitions:
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
         SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
-        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as resolved
+        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as resolved,
         pgr_data.state as state,
         pgr_data.region as region,
         pgr_data.district as district,
