@@ -154,7 +154,7 @@
           "vizArray": [
             {
               "id": 421,
-              "name": "DSS_PGR_JUDGEMENT_REPORT",
+              "name": "DSS_JUDGEMENT_REPORT",
               "dimensions": {
                 "height": 250,
                 "width": 4
@@ -181,7 +181,7 @@
           "vizArray": [
             {
               "id": 421,
-              "name": "DSS_PGR_JUDGEMENT",
+              "name": "DSS_JUDGEMENT",
               "dimensions": {
                 "height": 250,
                 "width": 4
