@@ -200,8 +200,9 @@
       "Total Complaints"
     ],
     "isCumulative": false,
-    "interval": "year",
+    
     "insight": {
+      "insightInterval": "year"
     },
     "_comment": " Complaints By Their Statuses"
   },
