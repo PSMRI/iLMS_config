@@ -147,6 +147,33 @@
               ]
             }
           ]
+        },
+        {
+          "row": 7,
+          "name": "DSS_ILMS",
+          "vizArray": [
+            {
+              "id": 421,
+              "name": "DSS_PGR_JUDGEMENT_REPORT",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "DSSJudgementReport",
+                  "name": "Yearly",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
         }
       ]
     },
