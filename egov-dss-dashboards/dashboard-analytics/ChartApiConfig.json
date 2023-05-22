@@ -211,8 +211,8 @@
     "queries": [
       {
         "module": "iLMS",
-        "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
+        "dateRefField": "Data.auditDetails.createdTime",
         "indexName": "legal-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Total Complaints\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"JUDGEMENT\",\"judgement has been reviewed/appealed\",\"judgement has been Complied\",\"Judgement Created\",\"Judgment review or forward by RO\",\"Pending at AO\",\"Pending at OIC for Decision\",\"Judgement Initiated\",\"JUDGEMENT_COMPLETED\",\"JUDGEMENT_APPEALED_REVIEW\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}}}},\"JUDGEMENT\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"JUDGEMENT\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"JUDGEMENT\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"judgement has been reviewed/appealed\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"judgement has been reviewed/appealed\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"judgement has been reviewed/appealed\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"judgement has been Complied\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"judgement has been Complied\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"judgement has been Complied\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Judgement Created\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Judgement Created\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Judgement Created\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Judgment review or forward by RO\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Judgment review or forward by RO\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Judgment review or forward by RO\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending at AO\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending at AO\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending at AO\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending at OIC for Decision\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending at OIC for Decision\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending at OIC for Decision\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Judgement Initiated\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Judgement Initiated\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Judgement Initiated\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"JUDGEMENT_COMPLETED\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"JUDGEMENT_COMPLETED\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"JUDGEMENT_COMPLETED\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"JUDGEMENT_APPEALED_REVIEW\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"JUDGEMENT_APPEALED_REVIEW\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"JUDGEMENT_APPEALED_REVIEW\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}}}}}}}"
       }
@@ -232,12 +232,10 @@
       "Pending at OIC for Decision",
       "Judgement Initiated",
       "JUDGEMENT_COMPLETED",
-      "JUDGEMENT_APPEALED_REVIEW"
+      "JUDGEMENT_APPEALED_REVIEW",
+      "Total Complaints"
     ],
-    "isCumulative": false,
-
     "insight": {
-      "insightInterval": "year"
     },
     "_comment": " Complaints By Their Statuses"
   },
