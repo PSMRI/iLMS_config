@@ -200,7 +200,7 @@
       "Total Complaints"
     ],
     "isCumulative": false,
-    "interval": "month",
+    "interval": "year",
     "insight": {
     },
     "_comment": " Complaints By Their Statuses"
