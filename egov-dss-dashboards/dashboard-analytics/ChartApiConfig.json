@@ -83,7 +83,7 @@
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.auditDetails.createdTime",
         "indexName": "legal-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Total Complaints\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending At DEC\",\"Pending at Reviewing Officer\",\"Pending at OICA Officer\",\"Pending at AO\",\"Pending for Counter Affidavit from hearing\",\"Pending for supplementary Affidavit from hearing wf\",\"Inactive\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}}}},\"Pending At DEC\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending At DEC\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending At DEC\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending at Reviewing Officer\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending at Reviewing Officer\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending at Reviewing Officer\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending at OICA Officer\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending at OICA Officer\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending at OICA Officer\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending at AO\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending at AO\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending at AO\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending for Counter Affidavit from hearing\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending for Counter Affidavit from hearing\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending for Counter Affidavit from hearing\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending for supplementary Affidavit from hearing wf\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending for supplementary Affidavit from hearing wf\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending for supplementary Affidavit from hearing wf\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Inactive\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Inactive\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Inactive\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Total Complaints\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending At DEC\",\"Pending at Reviewing Officer\",\"Pending at OICA Officer\",\"Pending at AO\",\"Pending for Counter Affidavit from hearing\",\"Pending for supplementary Affidavit from hearing wf\",\"Inactive\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}}}},\"Pending At DEC\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending At DEC\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending At DEC\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending at Reviewing Officer\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending at Reviewing Officer\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending at Reviewing Officer\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending at OICA Officer\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending at OICA Officer\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending at OICA Officer\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending at AO\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending at AO\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending at AO\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending for Counter Affidavit from hearing\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending for Counter Affidavit from hearing\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending for Counter Affidavit from hearing\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending for supplementary Affidavit from hearing wf\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending for supplementary Affidavit from hearing wf\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending for supplementary Affidavit from hearing wf\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"JUDGEMENT\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"JUDGEMENT\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"JUDGEMENT\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"judgement has been reviewed/appealed\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"judgement has been reviewed/appealed\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"judgement has been reviewed/appealed\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"judgement has been Complied\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"judgement has been Complied\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"judgement has been Complied\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Inactive\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Inactive\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Inactive\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -98,6 +98,9 @@
       "Pending at AO",
       "Pending for Counter Affidavit from hearing",
       "Pending for supplementary Affidavit from hearing wf",
+      "JUDGEMENT",
+      "judgement has been reviewed/appealed",
+      "judgement has been Complied",
       "Inactive",
       "Total Complaints"
     ],
@@ -166,6 +169,29 @@
       "insightInterval": "day"
     },
     "_comment": " "
+  },
+  "complaintsByTrend": {
+    "chartName": "DSS_PGR_COMPLAINTS_BY_TREND",
+    "queries": [
+      {
+        "module": "iLMS",
+        "dateRefField": "Data.auditDetails.createdTime",
+        "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
+        "indexName": "legal-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Complaints By Status\":{\"terms\":{\"field\":\"Data.applicationStatus.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "action": "",
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Complaints By Status"
+    ],
+    "insight": {
+    },
+    "_comment": " Complaints By Their Statuses"
   },
 
   "_comment": "COMMON NON-COLLECTION CHARTS",
