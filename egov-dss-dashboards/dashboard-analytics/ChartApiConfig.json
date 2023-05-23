@@ -110,6 +110,34 @@
     },
     "_comment": " "
   },
+  "PendencyReportForDocs": {
+    "chartName": "DSS_PENDENCY_REPORT_FOR_DOCS",
+    "queries": [
+      {
+        "module": "iLMS",
+        "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
+        "dateRefField": "Data.auditDetails.createdTime",
+        "indexName": "legal-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Complaints\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Total Complaints\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending for Counter Affidavit from hearing\",\"Pending for supplementary Affidavit from hearing wf\",\"judgement has been Complied\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}}}},\"Pending for Counter Affidavit from hearing\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending for Counter Affidavit from hearing\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending for Counter Affidavit from hearing\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Pending for supplementary Affidavit from hearing wf\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"Pending for supplementary Affidavit from hearing wf\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending for supplementary Affidavit from hearing wf\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"judgement has been Complied\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"day\"},\"aggs\":{\"judgement has been Complied\":{\"filter\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"judgement has been Complied\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "number",
+    "action": "",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "aggregationPaths": [
+      "Pending for Counter Affidavit from hearing",
+      "Pending for supplementary Affidavit from hearing wf",
+      "judgement has been Complied",
+      "Total Complaints"
+    ],
+    "isCumulative": true,
+    "interval": "day",
+    "insight": {
+    },
+    "_comment": " "
+  },
   "DSSactiveCase": {
     "chartName": "DSS_ACTIVE_CASES",
     "queries": [

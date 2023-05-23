@@ -57,7 +57,7 @@
               "charts": [
                 {
                   "id": "PendencyReport",
-                  "name": "Monthly",
+                  "name": "day",
                   "code": "",
                   "chartType": "line",
                   "filter": "",
@@ -87,6 +87,27 @@
                   "name": "DSS_CASES_BY_STATUS",
                   "code": "",
                   "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 412,
+              "name": "DSS_PENDENCY_REPORT_FOR_DOCS",
+              "dimensions": {
+                "height": 350,
+                "width": 7
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "PendencyReportForDocs",
+                  "name": "day",
+                  "code": "",
+                  "chartType": "line",
                   "filter": "",
                   "headers": []
                 }
