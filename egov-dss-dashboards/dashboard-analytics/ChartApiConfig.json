@@ -149,6 +149,7 @@
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Closed Complaints\":{\"filters\":{\"filters\":{\"total\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"judgement has been reviewed/appealed\",\"Inactive\"]}}}}}}}}}"
+
       }
     ],
     "chartType": "metric",
