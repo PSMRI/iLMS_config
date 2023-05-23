@@ -190,9 +190,8 @@
               ]
             }
           ]
-        }
-      ]
-    },  {
+        },
+        {
       "row": 7,
       "name": "DSS_ILMS",
       "vizArray": [
@@ -241,7 +240,7 @@
         }
 
       ]
-    }
+    },
 
       {
       "name": "DSS_OVERVIEW_DASHBOARD",
