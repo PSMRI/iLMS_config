@@ -148,7 +148,7 @@
         "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Closed Complaints\":{\"filters\":{\"filters\":{\"total\":{\"terms\":{\"Data.caseStatus.keyword\":[\"DIS006\",\"DIO009\"]}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Closed Complaints\":{\"filters\":{\"filters\":{\"total\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"judgement has been Complied\",\"Inactive\"]}}}}}}}}}"
       }
     ],
     "chartType": "metric",
