@@ -63,7 +63,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Complaints By Category\":{\"terms\":{\"field\":\"Data.category.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}}}}}}"
       }
     ],
-    "chartType": "line",
+    "chartType": "pie",
     "valueType": "number",
     "action": "",
     "documentType": "_doc",
