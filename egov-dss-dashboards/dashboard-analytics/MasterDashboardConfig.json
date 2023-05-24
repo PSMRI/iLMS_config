@@ -245,20 +245,21 @@
           "row": 8,
           "name": "DSS_ILMS",
           "vizArray": [
+            
             {
-              "id": 421,
-              "name": "DSS_CASES_BY_DEPARTMENT",
+              "id": 412,
+              "name": "DSS_PENDENCY_REPORT_FOR_DOCS",
               "dimensions": {
-                "height": 250,
-                "width": 4
+                "height": 350,
+                "width": 7
               },
               "vizType": "chart",
               "isCollapsible": false,
               "label": "",
               "charts": [
                 {
-                  "id": "casesByDepartment",
-                  "name": "DSS_CASES_BY_DEPARTMENT",
+                  "id": "PendencyReportForDocs",
+                  "name": "day",
                   "code": "",
                   "chartType": "line",
                   "filter": "",
