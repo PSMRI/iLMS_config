@@ -160,7 +160,7 @@
               "charts": [
                 {
                   "id": "DSSJudgementReport",
-                  "name": "Yearly",
+                  "name": "DSS_JUDGEMENT_REPORT",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
@@ -181,7 +181,7 @@
               "charts": [
                 {
                   "id": "DSSJudgement",
-                  "name": "Yearly",
+                  "name": "DSS_JUDGEMENT",
                   "code": "",
                   "chartType": "donut",
                   "filter": "",
