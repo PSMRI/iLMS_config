@@ -252,7 +252,7 @@
                 "height": 250,
                 "width": 4
               },
-              "vizType": "graph",
+              "vizType": "chart",
               "isCollapsible": false,
               "label": "",
               "charts": [
