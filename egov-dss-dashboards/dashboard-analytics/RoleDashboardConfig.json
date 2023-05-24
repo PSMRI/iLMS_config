@@ -642,7 +642,7 @@
       "dashboards": [
         {
           "name": "DSS_ILMS",
-          "id": "iLMS",
+          "id": "legal",
           "isActive": "",
           "style" : "tabbed",
           "visualizations": [
