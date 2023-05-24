@@ -3,7 +3,7 @@
     "chartName": "DSS_TOTAL_CASES",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
@@ -33,7 +33,7 @@
     "chartName": "DSS_CASES_BY_STATUS",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.auditDetails.createdTime",
         "indexName": "legal-services",
@@ -56,7 +56,7 @@
     "chartName": "DSS_CASES_BY_TYPE",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.auditDetails.createdTime",
         "indexName": "legal-services",
@@ -79,7 +79,7 @@
     "chartName": "DSS_PENDENCY_REPORT",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.auditDetails.createdTime",
         "indexName": "legal-services",
@@ -114,7 +114,7 @@
     "chartName": "DSS_PENDENCY_REPORT_FOR_DOCS",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.auditDetails.createdTime",
         "indexName": "legal-services",
@@ -142,7 +142,7 @@
     "chartName": "DSS_ACTIVE_CASES",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
@@ -172,7 +172,7 @@
     "chartName": "DSS_RESOLVE_CASES",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
@@ -203,7 +203,7 @@
     "chartName": "DSS_JUDGEMENT_REPORT",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
@@ -239,7 +239,7 @@
     "chartName": "DSS_JUDGEMENT",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.auditDetails.createdTime",
         "indexName": "legal-services",
@@ -272,7 +272,7 @@
     "chartName": "DSS_PGR_COMPLAINTS_BY_TREND",
     "queries": [
       {
-        "module": "iLMS",
+        "module": "legal",
         "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
