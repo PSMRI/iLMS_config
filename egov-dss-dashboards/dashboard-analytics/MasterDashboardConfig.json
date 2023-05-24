@@ -294,8 +294,34 @@
               ]
             }
           ]
-        }
-      ]},
+        },
+        {
+          "row": 9,
+          "name": "DSS_ILMS",
+          "vizArray": [
+            {
+              "id": 421,
+              "name": "DSS_CASES_FOR_GEO",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "casesByGEO",
+                  "name": "DSS_CASES_FOR_GEO",
+                  "code": "",
+                  "chartType": "line",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        }]},
 
       {
       "name": "DSS_OVERVIEW_DASHBOARD",

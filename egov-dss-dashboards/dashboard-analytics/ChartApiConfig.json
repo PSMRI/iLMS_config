@@ -350,6 +350,31 @@
     },
     "_comment": " Complaints By Their Statuses"
   },
+  "casesByGEO": {
+    "chartName": "DSS_CASES_FOR_GEO",
+    "queries": [
+      {
+        "module": "legal",
+        "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
+        "dateRefField": "Data.auditDetails.createdTime",
+        "indexName": "legal-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Complaints By division\":{\"terms\":{\"field\":\"Data.court.division.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}},\"Complaints By district\":{\"terms\":{\"field\":\"Data.court.district.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "action": "",
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Complaints By division",
+      "Complaints By district"
+    ],
+    "insight": {
+    },
+    "_comment": " Complaints By Their Statuses"
+  },
+
 
   "_comment": "COMMON NON-COLLECTION CHARTS",
   "citizenRegistered": {
