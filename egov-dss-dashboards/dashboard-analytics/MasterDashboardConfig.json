@@ -115,6 +115,33 @@
             }
           ]
         },
+        {
+          "row": 4,
+          "name": "DSS_ILMS",
+          "vizArray": [
+            {
+              "id": 421,
+              "name": "DSS_CASES_BY_CATEGORY",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "casesByCategory",
+                  "name": "DSS_CASES_BY_CATEGORY",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
 
         {
           "row": 5,
@@ -267,7 +294,8 @@
               ]
             }
           ]
-        }]},
+        }
+      ]},
 
       {
       "name": "DSS_OVERVIEW_DASHBOARD",

@@ -52,6 +52,29 @@
     },
     "_comment": " Complaints By Their Statuses"
   },
+  "casesByCategory": {
+    "chartName": "DSS_CASES_BY_CATEGORY",
+    "queries": [
+      {
+        "module": "legal",
+        "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
+        "dateRefField": "Data.auditDetails.createdTime",
+        "indexName": "legal-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Complaints By Category\":{\"terms\":{\"field\":\"Data.category.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "number",
+    "action": "",
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Complaints By Category"
+    ],
+    "insight": {
+    },
+    "_comment": " Complaints By Their Statuses"
+  },
   "casesByType": {
     "chartName": "DSS_CASES_BY_TYPE",
     "queries": [
