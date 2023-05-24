@@ -304,6 +304,29 @@
     },
     "_comment": " Complaints By Their Statuses"
   },
+  "casesByDepartment": {
+    "chartName": "DSS_CASES_BY_DEPARTMENT",
+    "queries": [
+      {
+        "module": "legal",
+        "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
+        "dateRefField": "Data.auditDetails.createdTime",
+        "indexName": "legal-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Complaints By Department\":{\"terms\":{\"field\":\"Data.department.keyword\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.auditDetails.createdTime\"}}}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "action": "",
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Complaints By Department"
+    ],
+    "insight": {
+    },
+    "_comment": " Complaints By Their Statuses"
+  },
 
   "_comment": "COMMON NON-COLLECTION CHARTS",
   "citizenRegistered": {
