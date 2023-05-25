@@ -1,0 +1,53 @@
+ReportDefinitions:
+  - reportName: CASEReport
+    summary: Fetches report of cases
+    version: 1.0.0
+    moduleName: legal
+    sourceColumns:
+      - name: casenumber
+        label: reports.legal.casenumber
+        type: string
+        source: eg_lg_case
+        total: false
+      - name: casetype
+        label: reports.legal.casetype
+        type: string
+        source: eg_lg_case
+        total: false
+      - name: casecategory
+        label: reports.legal.casecategory
+        type: string
+        source: eg_lg_case
+        total: false
+      - name: status
+        label: reports.legal.status
+        type: string
+        source: eg_lg_case
+        total: false
+    searchParams:
+      - name: fromDate
+        label: reports.legal.datefrom
+        type: epoch
+        source: eg_lg_case
+        isMandatory: false
+        searchClause: AND legal_data.createdtime >= $fromDate
+      - name: toDate
+        label: reports.legal.dateto
+        type: epoch
+        source: eg_lg_case
+        isMandatory: false
+        searchClause: AND legal_data.createdtime <= $toDate
+
+    query: |
+      with legal_data as (SELECT
+        case_number,
+        case_type,
+        case_category,
+        status
+        FROM public.eg_lg_case)
+      select
+        legal_data.case_number as casenumber,
+        legal_data.case_type as casetype,
+        legal_data.case_category as casecategory,
+        legal_data.status as status
+        from legal_data;
