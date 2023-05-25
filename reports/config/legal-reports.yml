@@ -43,6 +43,7 @@ ReportDefinitions:
         case_number,
         case_type,
         case_category,
+        createdtime,
         status
         FROM public.eg_lg_case)
       select
