@@ -117,6 +117,7 @@ ReportDefinitions:
       hearing_date, 
       case_number,
       next_hearing_date,
+      createdtime,
       status
       FROM
       public.eg_lg_hearing)
