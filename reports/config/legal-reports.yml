@@ -77,7 +77,8 @@ ReportDefinitions:
         total: false
       - name: judgename
         label: reports.legal.judgename
-        type: string
+        type: JSON
+        dbType: JSONB
         source: eg_lg_hearing
         total: false
       - name: hearingDate
