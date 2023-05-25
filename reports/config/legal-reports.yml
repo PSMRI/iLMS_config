@@ -53,3 +53,80 @@ ReportDefinitions:
         legal_data.status as status
         from legal_data 
         WHERE 1=1 
+
+
+  - reportName: HearingReport
+    summary: Fetches report of Hearing
+    version: 1.0.0
+    moduleName: legal
+    sourceColumns:
+      - name: courtnumber
+        label: reports.legal.courtnumber
+        type: string
+        source: eg_lg_hearing
+        total: false
+      - name: bench
+        label: reports.legal.bench
+        type: string
+        source: eeg_lg_hearing
+        total: false
+      - name: casenumber
+        label: reports.legal.casenumber
+        type: string
+        source: eg_lg_hearing
+        total: false
+      - name: judgename
+        label: reports.legal.judgename
+        type: string
+        source: eg_lg_hearing
+        total: false
+      - name: hearingDate
+        label: reports.legal.hearingDate
+        type: string
+        source: eg_lg_hearing
+        total: false
+      - name: nextHearingDate
+        label: reports.legal.nextHearingDate
+        type: string
+        source: eg_lg_hearing
+        total: false
+      - name: status
+        label: reports.legal.status
+        type: string
+        source: eg_lg_hearing
+        total: false
+    searchParams:
+      - name: fromDate
+        label: reports.legal.datefrom
+        type: epoch
+        source: eg_lg_hearing
+        isMandatory: false
+        searchClause: AND legal_data.createdtime >= $fromDate
+      - name: toDate
+        label: reports.legal.dateto
+        type: epoch
+        source: eg_lg_hearing
+        isMandatory: false
+        searchClause: AND legal_data.createdtime <= $toDate
+
+    query: |
+      with legal_data as (SELECT 
+      court_number, 
+      bench, 
+      judge_name,
+      hearing_date, 
+      case_number,
+      next_hearing_date,
+      status
+      FROM
+      public.eg_lg_hearing)
+      select
+        legal_data.court_number as courtnumber,
+        legal_data.bench as bench,
+        legal_data.judge_name as judgename,
+        legal_data.hearing_date as hearingDate,
+        legal_data.case_number as casenumber,
+        legal_data.next_hearing_date as nextHearingDate,
+        legal_data.status as status
+        from legal_data 
+        WHERE 1=1 
