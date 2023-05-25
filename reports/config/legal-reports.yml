@@ -75,11 +75,6 @@ ReportDefinitions:
         type: string
         source: eg_lg_hearing
         total: false
-      - name: judgename
-        label: reports.legal.judgename
-        type: JSON
-        source: eg_lg_hearing
-        total: false
       - name: hearingDate
         label: reports.legal.hearingDate
         type: string
@@ -113,7 +108,6 @@ ReportDefinitions:
       with legal_data as (SELECT 
       court_number, 
       bench, 
-      judge_name,
       hearing_date, 
       case_number,
       next_hearing_date,
@@ -124,7 +118,6 @@ ReportDefinitions:
       select
         legal_data.court_number as courtnumber,
         legal_data.bench as bench,
-        legal_data.judge_name as judgename,
         legal_data.hearing_date as hearingDate,
         legal_data.case_number as casenumber,
         legal_data.next_hearing_date as nextHearingDate,
