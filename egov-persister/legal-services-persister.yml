@@ -258,43 +258,6 @@ serviceMaps:
 
             - jsonPath: $.hearing.auditDetails.createdTime
 
-        - query: INSERT INTO eg_lg_advocate(id, first_name, last_name, contact_number, status, createdby, createdtime) VALUES ( ?, ?, ?, ?, ?, ?, ?);
-          basePath: hearing.parties.*.advocate.*
-          jsonMaps:
-            - jsonPath: $.hearing.parties.*.advocate.*.id
-
-            - jsonPath: $.hearing.parties.*.advocate.*.firstName
-
-            - jsonPath: $.hearing.parties.*.advocate.*.lastName
-
-            - jsonPath: $.hearing.parties.*.advocate.*.contactNumber
-
-            - jsonPath: $.hearing.parties.*.advocate.*.status
-
-            - jsonPath: $.hearing.parties.*.advocate.*.auditDetails.createdBy
-
-            - jsonPath: $.hearing.parties.*.advocate.*.auditDetails.createdTime
-
-        - query: INSERT INTO eg_lg_party_advocate_bridge(id, case_id, party_id, party_type, advocate_id, advocate_contact_number, status, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
-          basePath: hearing.PartyAdv.*
-          jsonMaps:
-            - jsonPath: $.hearing.PartyAdv.*.id
-
-            - jsonPath: $.hearing.caseId
-
-            - jsonPath: $.hearing.parties.*.partyId
-
-            - jsonPath: $.hearing.PartyAdv.*.partyType
-
-            - jsonPath: $.hearing.parties.*.advocate.*.advocateId
-
-            - jsonPath: $.hearing.parties.*.advocate.*.advocateContactNumber
-
-            - jsonPath: $.hearing.PartyAdv.*.status
-
-            - jsonPath: $.hearing.PartyAdv.*.auditDetails.createdBy
-
-            - jsonPath: $.hearing.PartyAdv.*.auditDetails.createdTime
 
         - query: INSERT INTO eg_lg_payment(id, case_id, hearing_id, fine_imposed_date, fine_due_date, fine_amount, status, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: hearing.payment
@@ -543,6 +506,26 @@ serviceMaps:
 
             - jsonPath: $.case.documents.*.id
 
+        - query: INSERT INTO eg_lg_party_advocate_bridge(id, case_id, party_id, party_type, advocate_id, status, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: case.PartyAdv.*
+          jsonMaps:
+            - jsonPath: $.case.PartyAdv.*.id
+
+            - jsonPath: $.case.id
+
+            - jsonPath: $.case.parties.*.partyId
+
+            - jsonPath: $.case.PartyAdv.*.partyType
+
+            - jsonPath: $.case.parties.*.advocate.*.advocateId
+
+            - jsonPath: $.case.PartyAdv.*.status
+
+            - jsonPath: $.case.PartyAdv.*.auditDetails.createdBy
+
+            - jsonPath: $.case.PartyAdv.*.auditDetails.createdTime
+
+
     - version: 1.0
       description: update Hearing Details in hearing_details table
       fromTopic: update-hearing-details-application
@@ -611,29 +594,6 @@ serviceMaps:
             - jsonPath: $.hearing.id
 
 
-        - query: UPDATE eg_lg_advocate SET  hearing_id=?, first_name=?, last_name=?, contact_number=?, status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE  id = ?;
-          basePath: hearing.parties.*.advocate.*
-          jsonMaps:
-
-            - jsonPath: $.hearing.parties.*.id
-
-            - jsonPath: $.hearing.parties.*.advocate.*.hearingId
-
-            - jsonPath: $.hearing.parties.*.advocate.*.firstName
-
-            - jsonPath: $.hearing.parties.*.advocate.*.lastName
-
-            - jsonPath: $.hearing.parties.*.advocate.*.contactNumber
-
-            - jsonPath: $.hearing.parties.*.advocate.*.status
-
-            - jsonPath: $.hearing.parties.*.advocate.*.auditDetails.lastModifiedBy
-
-            - jsonPath: $.hearing.parties.*.advocate.*.auditDetails.lastModifiedTime
-
-            - jsonPath: $.hearing.parties.*.advocate.*.id
-
-
         - query: UPDATE eg_lg_payment SET fine_imposed_date=?, fine_due_date=?, fine_amount=?, status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id = ?;
           basePath: hearing.payment
           jsonMaps:
@@ -664,13 +624,6 @@ serviceMaps:
       transactionCodeJsonPath: $.id
       auditAttributeBasePath: judgement
       queryMaps:
-        - query: INSERT INTO eg_lg_judgement_auditlog SELECT * FROM eg_lg_judgement where id = ? AND case_id = ? ;
-          basePath: judgement
-          jsonMaps:
-
-            - jsonPath: $.judgement.id
-
-            - jsonPath: $.judgement.caseId
 
         - query: Update eg_lg_judgement  SET case_id=?, order_type=?, order_date=?, decision_status=?, compliance_date=?, revised_compliance_date=?, order_no_override=?, revised_complaince_reason=?, compliance_status=?, remarks=?, application_status=?, additional_details=?, status=?, lastmodifiedby=?, lastmodifiedtime=?  WHERE id=? ;
           basePath: judgement
@@ -794,21 +747,21 @@ serviceMaps:
       auditAttributeBasePath: advocate
       queryMaps:
         - query: INSERT INTO eg_lg_advocate(id, first_name, last_name, contact_number, status, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?);
-          basePath: advocate.*
+          basePath: advocate
           jsonMaps:
-            - jsonPath: $.advocate.*.id
+            - jsonPath: $.advocate.id
 
-            - jsonPath: $.advocate.*.firstName
+            - jsonPath: $.advocate.firstName
 
-            - jsonPath: $.advocate.*.lastName
+            - jsonPath: $.advocate.lastName
 
-            - jsonPath: $.advocate.*.contactNumber
+            - jsonPath: $.advocate.contactNumber
 
-            - jsonPath: $.advocate.*.status
+            - jsonPath: $.advocate.status
 
-            - jsonPath: $.advocate.*.auditDetails.createdBy
+            - jsonPath: $.advocate.auditDetails.createdBy
 
-            - jsonPath: $.advocate.*.auditDetails.createdTime
+            - jsonPath: $.advocate.auditDetails.createdTime
 
     - version: 1.0
       description: Update advocate in eg_lg_advocate
@@ -837,6 +790,26 @@ serviceMaps:
             - jsonPath: $.advocate.*.auditDetails.lastModifiedTime
 
             - jsonPath: $.advocate.*.id
+
+    - version: 1.0
+      description: update party advocate in eg_lg_party_advocate_bridge table
+      fromTopic: update-party-advocate-bridge
+      isTransaction: true
+      queryMaps:
+        - query: update eg_lg_party_advocate_bridge set status = ?, lastmodifiedby=?, lastmodifiedtime=?  where advocate_id =? AND case_id = ? AND party_id = ?;
+          basePath: partyAdv
+          jsonMaps:
+            - jsonPath: $.partyAdv.status
+
+            - jsonPath: $.partyAdv.auditDetails.lastModifiedBy
+
+            - jsonPath: $.partyAdv.auditDetails.lastModifiedTime
+
+            - jsonPath: $.partyAdv.advocateId
+
+            - jsonPath: $.partyAdv.caseId
+
+            - jsonPath: $.partyAdv.partyId
 
     - version: 1.0
       description: update application status in eg_lg_case table
