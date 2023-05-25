@@ -52,3 +52,4 @@ ReportDefinitions:
         legal_data.case_category as casecategory,
         legal_data.status as status
         from legal_data 
+        WHERE 1=1 
