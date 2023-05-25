@@ -1,5 +1,5 @@
 pgr=file:///work-dir/configs/reports/config/pgr-reports.yml
-ilms=file:///work-dir/configs/reports/config/ilms-reports.yml
+legal=file:///work-dir/configs/reports/config/legal-reports.yml
 rainmaker-pt=file:///work-dir/configs/reports/config/pt-reports.yml
 rainmaker-tl=file:///work-dir/configs/reports/config/tl-reports.yml
 hrms=file:///work-dir/configs/reports/config/employee-report.yml
