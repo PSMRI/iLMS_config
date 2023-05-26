@@ -57,7 +57,7 @@
               "charts": [
                 {
                   "id": "PendencyReport",
-                  "name": "day",
+                  "name": "intervalvalue",
                   "code": "",
                   "chartType": "line",
                   "filter": "",
@@ -105,7 +105,7 @@
               "charts": [
                 {
                   "id": "PendencyReportForDocs",
-                  "name": "day",
+                  "name": "intervalvalue",
                   "code": "",
                   "chartType": "line",
                   "filter": "",
