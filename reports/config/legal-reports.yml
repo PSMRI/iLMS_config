@@ -234,7 +234,7 @@ ReportDefinitions:
           h.court_number,
           h.hearing_date,
           h.next_hearing_date,
-          h.createdtime,
+          h.createdtime as latesthearing,
           p.fine_imposed_date,
           p.fine_due_date,
           p.fine_amount,
@@ -243,7 +243,7 @@ ReportDefinitions:
           j.decision_status,
           j.order_date,
           j.order_type,
-          ROW_NUMBER() OVER (PARTITION BY c.id ORDER BY h.createdtime DESC) AS rn
+          ROW_NUMBER() OVER (PARTITION BY c.id ORDER BY latesthearing DESC) AS rn
           FROM
           eg_lg_case c
           LEFT JOIN eg_lg_hearing h ON h.case_id = c.id
