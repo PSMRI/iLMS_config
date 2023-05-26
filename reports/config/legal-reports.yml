@@ -222,43 +222,43 @@ ReportDefinitions:
 
     query: |
       with legal_data as (SELECT 
-                    c.id,
-                    C.case_number,
-                    c.case_type,
-                    c.case_category,
-                    c.filing_date,
-                    c.application_status,
-                    c.createdtime, 
-                    h.hearing_number,
-                    h.court_number,
-                    h.hearing_date,
-                    h.next_hearing_date,
-                    p.fine_imposed_date,
-                    p.fine_due_date,
-                    p.fine_amount,
-                    court.district,
-                    court.division,
-                    j.decision_status,
-                    j.order_date, 
-                    j.order_type FROM eg_lg_case c 
-                    INNER JOIN eg_lg_hearing h ON h.case_id = c.id 
-                    INNER JOIN eg_lg_judgement j ON j.case_id = c.id 
-                    INNER JOIN eg_lg_payment p ON p.case_id = c.id 
-                    INNER JOIN eg_lg_court court ON court.case_id = c.id) 
-                    SELECT
-                    legal_data.case_number AS casenumber,
-                    legal_data.case_type AS casetype,
-                    legal_data.case_category AS casecategory,
-                    legal_data.filing_date AS filingdate,
-                    legal_data.application_status AS applicationstatus,
-                    legal_data.hearing_number AS hearingnumber,
-                    legal_data.court_number AS courtnumber,
-                    legal_data.next_hearing_date AS nexthearingdate,
-                    legal_data.fine_imposed_date AS fineimposeddate,
-                    legal_data.fine_due_date AS fineduedate,
-                    legal_data.fine_amount AS fineammount,
-                    legal_data.district AS district,
-                    legal_data.division AS division,
-                    legal_data.decision_status AS decisionstatus,
-                    legal_data.order_date AS orderdate FROM legal_data
-                    where 1=1
+                      c.id,
+                      c.case_number,
+                      c.case_type,
+                      c.case_category,
+                      c.filing_date,
+                      c.application_status,
+                      c.createdtime, 
+                      h.hearing_number,
+                      h.court_number,
+                      h.hearing_date,
+                      h.next_hearing_date,
+                      p.fine_imposed_date,
+                      p.fine_due_date,
+                      p.fine_amount,
+                      court.district,
+                      court.division,
+                      j.decision_status,
+                      j.order_date, 
+                      j.order_type FROM eg_lg_case c 
+                      INNER JOIN eg_lg_hearing h ON h.case_id = c.id 
+                      INNER JOIN eg_lg_judgement j ON j.case_id = c.id 
+                      INNER JOIN eg_lg_payment p ON p.case_id = c.id 
+                      INNER JOIN eg_lg_court court ON court.case_id = c.id) 
+                      SELECT
+                      legal_data.case_number AS casenumber,
+                      legal_data.case_type AS casetype,
+                      legal_data.case_category AS casecategory,
+                      legal_data.filing_date AS filingdate,
+                      legal_data.application_status AS applicationstatus,
+                      legal_data.hearing_number AS hearingnumber,
+                      legal_data.court_number AS courtnumber,
+                      legal_data.next_hearing_date AS nexthearingdate,
+                      legal_data.fine_imposed_date AS fineimposeddate,
+                      legal_data.fine_due_date AS fineduedate,
+                      legal_data.fine_amount AS fineammount,
+                      legal_data.district AS district,
+                      legal_data.division AS division,
+                      legal_data.decision_status AS decisionstatus,
+                      legal_data.order_date AS orderdate FROM legal_data
+                      where 1=1
