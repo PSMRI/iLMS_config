@@ -243,7 +243,7 @@ ReportDefinitions:
           j.decision_status,
           j.order_date,
           j.order_type,
-          ROW_NUMBER() OVER (PARTITION BY c.id ORDER BY latesthearing DESC) AS rn
+          ROW_NUMBER() OVER (PARTITION BY c.id ORDER BY h.createdtime DESC) AS rn
           FROM
           eg_lg_case c
           LEFT JOIN eg_lg_hearing h ON h.case_id = c.id
