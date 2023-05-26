@@ -126,7 +126,7 @@ ReportDefinitions:
         WHERE 1=1 
 
 
-  - reportName: OverAllReport
+  - reportName: LegalReport
     summary: Fetches report of Entire Case
     version: 1.0.0
     moduleName: legal
