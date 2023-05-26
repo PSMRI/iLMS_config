@@ -234,7 +234,7 @@ ReportDefinitions:
           h.court_number,
           h.hearing_date,
           h.next_hearing_date,
-          h.createdtime as latesthearing,
+          h.createdtime as hearing_createdtime,
           p.fine_imposed_date,
           p.fine_due_date,
           p.fine_amount,
