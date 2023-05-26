@@ -1,7 +1,7 @@
 ReportDefinitions:
 - reportName: PTReceiptRegister
   decryptionPathId: PTReceiptRegister
-  summary: Report is used for audit, intervalvalue-end, and year-end finance reconciliation activities
+  summary: Report is used for audit, day-end, and year-end finance reconciliation activities 
   version: 1.0.0
   moduleName: pt-reports
   sourceColumns:
