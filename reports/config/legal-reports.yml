@@ -78,7 +78,7 @@ ReportDefinitions:
         c.case_category,
         c.case_status,
         c.case_type,
-      c.application_status
+      c.application_status,
         court.district,
         court.division,
         p.petitioner_type     
