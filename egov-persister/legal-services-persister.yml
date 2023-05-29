@@ -62,22 +62,7 @@ serviceMaps:
             - jsonPath: $.case.auditDetails.createdBy
 
             - jsonPath: $.case.auditDetails.createdTime
-        - query: INSERT INTO eg_lg_advocate(id, first_name, last_name, contact_number, status, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?);
-          basePath: case.parties.*.advocate.*
-          jsonMaps:
-            - jsonPath: $.case.parties.*.advocate.*.id
 
-            - jsonPath: $.case.parties.*.advocate.*.firstName
-
-            - jsonPath: $.case.parties.*.advocate.*.lastName
-
-            - jsonPath: $.case.parties.*.advocate.*.contactNumber
-
-            - jsonPath: $.case.parties.*.advocate.*.status
-
-            - jsonPath: $.case.parties.*.advocate.*.auditDetails.createdBy
-
-            - jsonPath: $.case.parties.*.advocate.*.auditDetails.createdTime
 
         - query: INSERT INTO eg_lg_case_party(id,  case_id, first_name, last_name, gender, petitioner_type, address, department_name, contact_number, party_type, status, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: case.parties.*
@@ -199,7 +184,7 @@ serviceMaps:
       transactionCodeJsonPath: $.id
       auditAttributeBasePath: hearing
       queryMaps:
-        - query: INSERT INTO eg_lg_hearing(id, tenant_id, hearing_number, court_number, bench, case_id, judge_name, hearing_date, business_date, hearing_purpose, required_officer, affidavit_filing_date, affidavit_filing_due_date, case_number, oath_number, next_hearing_date, is_presence_required, hearing_type, department_officer, remarks, application_status, first_hearing_date, additional_details, status , createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_lg_hearing(id, tenant_id, hearing_number, court_number, bench, case_id, judge_name, hearing_date, business_date, hearing_purpose, required_officer, affidavit_filing_date, affidavit_filing_due_date, case_number, oath_number, next_hearing_date, is_presence_required, hearing_type, department_officer, remarks, application_status, first_hearing_date, additional_details, status ,respondent_advocate, petitioner_advocate, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: hearing
           jsonMaps:
             - jsonPath: $.hearing.id
@@ -253,6 +238,10 @@ serviceMaps:
               dbType: JSONB
 
             - jsonPath: $.hearing.status
+
+            - jsonPath: $.hearing.respondentAdvocate.id
+
+            - jsonPath: $.hearing.petitionerAdvocate.id
 
             - jsonPath: $.hearing.auditDetails.createdBy
 
@@ -425,23 +414,6 @@ serviceMaps:
 
             - jsonPath: $.case.parties.*.id
 
-        - query: UPDATE eg_lg_advocate SET first_name=?, last_name=?, contact_number=?, status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE  id = ?;
-          basePath: case.parties.*.advocate.*
-          jsonMaps:
-
-            - jsonPath: $.case.parties.*.advocate.*.firstName
-
-            - jsonPath: $.case.parties.*.advocate.*.lastName
-
-            - jsonPath: $.case.parties.*.advocate.*.contactNumber
-
-            - jsonPath: $.case.parties.*.advocate.*.status
-
-            - jsonPath: $.case.parties.*.advocate.*.auditDetails.lastModifiedBy
-
-            - jsonPath: $.case.parties.*.advocate.*.auditDetails.lastModifiedTime
-
-            - jsonPath: $.case.parties.*.advocate.*.id
 
         - query: UPDATE eg_lg_court SET case_id=?, court_name=?, district=?, state=?, division=?, status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id = ?;
           basePath: case.court
@@ -537,7 +509,7 @@ serviceMaps:
       auditAttributeBasePath: hearing
       queryMaps:
 
-        - query: UPDATE eg_lg_hearing SET hearing_number=?, court_number=?, bench=?, judge_name=?, hearing_date=?, business_date=?, hearing_purpose=?, required_officer=?, affidavit_filing_date=?, affidavit_filing_due_date=?, case_number=?, oath_number=?, next_hearing_date=?, is_presence_required=?, hearing_type=?, department_officer=?, remarks=?, first_hearing_date=?, application_status=?, additional_details=?, status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id = ?;
+        - query: UPDATE eg_lg_hearing SET hearing_number=?, court_number=?, bench=?, judge_name=?, hearing_date=?, business_date=?, hearing_purpose=?, required_officer=?, affidavit_filing_date=?, affidavit_filing_due_date=?, case_number=?, oath_number=?, next_hearing_date=?, is_presence_required=?, hearing_type=?, department_officer=?, remarks=?, first_hearing_date=?, application_status=?, additional_details=?, status=?,respondent_advocate=?, petitioner_advocate=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id = ?;
           basePath: hearing
           jsonMaps:
 
@@ -587,6 +559,10 @@ serviceMaps:
 
             - jsonPath: $.hearing.status
 
+            - jsonPath: $.hearing.respondentAdvocate.id
+
+            - jsonPath: $.hearing.petitionerAdvocate.id
+
             - jsonPath: $.hearing.auditDetails.lastModifiedBy
 
             - jsonPath: $.hearing.auditDetails.lastModifiedTime
@@ -624,7 +600,6 @@ serviceMaps:
       transactionCodeJsonPath: $.id
       auditAttributeBasePath: judgement
       queryMaps:
-
         - query: Update eg_lg_judgement  SET case_id=?, order_type=?, order_date=?, decision_status=?, compliance_date=?, revised_compliance_date=?, order_no_override=?, revised_complaince_reason=?, compliance_status=?, remarks=?, application_status=?, additional_details=?, status=?, lastmodifiedby=?, lastmodifiedtime=?  WHERE id=? ;
           basePath: judgement
           jsonMaps:
