@@ -29,6 +29,11 @@ ReportDefinitions:
         type: string
         source: eg_lg_case
         total: false
+      - name: applicationstatus
+        label: reports.legal.applicationstatus
+        type: string
+        source: eg_lg_case
+        total: false
       - name: district
         label: reports.legal.district
         type: string
@@ -73,6 +78,7 @@ ReportDefinitions:
         c.case_category,
         c.case_status,
         c.case_type,
+      c.application_status
         court.district,
         court.division,
         p.petitioner_type     
@@ -84,6 +90,7 @@ ReportDefinitions:
         legal_data.department_name as departmentname,
         legal_data.case_category as casecategory,
         legal_data.case_type as casetype,
+        legal_data.application_status as applicationstatus,
         legal_data.case_status as casestatus,
         legal_data.district as district,
         legal_data.division as division,
