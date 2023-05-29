@@ -45,6 +45,13 @@ ReportDefinitions:
         source: eg_lg_case
         total: false
     searchParams:
+      - name: status
+        label: reports.legal.status
+        type: singlevaluelist
+        pattern: 'list://Pending At DEC:Pending At DEC,Pending at Reviewing Officer:Pending at Reviewing Officer,Pending at OICA Officer:Pending at OICA Officer,Pending at AO:Pending at AO,Pending for Counter Affidavit from hearing wf:Pending for Counter Affidavit from hearing wf,Pending for supplementary Affidavit from hearing wf:Pending for supplementary Affidavit from hearing wf,Judgement:Judgement,Judgement has been reviewed/appealed:Judgement has been reviewed/appealed,Judgement has been Complied:Judgement has been Complied,Inactive:Inactive'
+        source: seva
+        isMandatory: false
+        searchClause: AND legal_data.applicationstatus = $status
       - name: fromDate
         label: reports.legal.datefrom
         type: epoch
