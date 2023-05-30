@@ -71,6 +71,13 @@ ReportDefinitions:
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
         isMandatory: false
         searchClause: AND legal_data.state || '.' || legal_data.division || '.' || legal_data.district like $district || '%'
+      - name: casetype
+        label: reports.legal.case.type
+        type: singlevaluelist
+        source: eg_lg_case
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=legal&masterName=CaseType|$.MdmsRes.legal.CaseType[*].code|$.MdmsRes.legal.CaseType[*].name
+        isMandatory: false
+        searchClause: AND legal_data.case_type = $casetype
       - name: fromDate
         label: reports.legal.datefrom
         type: epoch
