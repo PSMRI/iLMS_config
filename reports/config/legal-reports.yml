@@ -91,12 +91,22 @@ ReportDefinitions:
         source: eg_lg_case
         isMandatory: false
         searchClause: AND legal_data.createdtime >= $fromDate
+        convertTo: date
       - name: toDate
         label: reports.legal.dateto
         type: epoch
         source: eg_lg_case
         isMandatory: false
         searchClause: AND legal_data.createdtime <= $toDate
+        convertTo: date
+      - name: ConvertEpochToDate
+        type: code
+        source: system
+        script: |
+          import datetime
+          fromDate = datetime.datetime.fromtimestamp(int(fromDate) / 1000).strftime('%Y-%m-%d %H:%M:%S')
+          toDate = datetime.datetime.fromtimestamp(int(toDate) / 1000).strftime('%Y-%m-%d %H:%M:%S')
+          return {'fromDate': fromDate, 'toDate': toDate}
 
     query: |
       WITH legal_data AS (
