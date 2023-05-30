@@ -106,39 +106,34 @@ ReportDefinitions:
         searchClause: AND legal_data.createdtime <= $toDate
 
     query: |
-      WITH legal_data AS (
-      SELECT
-      c.id,
-      TO_CHAR(TIMESTAMP 'epoch' + c.createdtime / 1000 * INTERVAL '1 second', 'DD-MM-YYYY') AS createdtime,
-      p.department_name,
-      c.case_category,
-      c.case_status,
-      c.case_type,
+      with legal_data as (SELECT
+      	c.id,
+        c.createdtime,
+        p.department_name,
+        c.case_category,
+        c.case_status,
+        c.case_type,
       c.application_status,
-      court.district,
-      court.division,
+        court.district,
+        court.division,
       court.state,
-      p.petitioner_type
-      FROM
-      public.eg_lg_case c
-      LEFT JOIN eg_lg_case_party p ON p.case_id = c.id
-      LEFT JOIN eg_lg_court court ON court.case_id = c.id
-      )
-      SELECT
-      legal_data.createdtime AS date,
-      legal_data.department_name AS departmentname,
-      legal_data.case_category AS casecategory,
-      legal_data.case_type AS casetype,
-      legal_data.application_status AS applicationstatus,
-      legal_data.case_status AS casestatus,
-      legal_data.district AS district,
-      legal_data.division AS division,
-      legal_data.state AS state,
-      legal_data.petitioner_type AS petitionertype
-      FROM
-      legal_data
-      WHERE
-      1=1;
+        p.petitioner_type     
+        FROM public.eg_lg_case c
+        LEFT JOIN eg_lg_case_party p ON p.case_id = c.id
+        LEFT JOIN eg_lg_court court ON court.case_id = c.id)
+        select
+        legal_data.createdtime as date,
+        legal_data.department_name as departmentname,
+        legal_data.case_category as casecategory,
+        legal_data.case_type as casetype,
+        legal_data.application_status as applicationstatus,
+        legal_data.case_status as casestatus,
+        legal_data.district as district,
+        legal_data.division as division,
+        legal_data.state as state,
+        legal_data.petitioner_type as petitionertype
+        from legal_data
+        WHERE 1=1
   
 
   - reportName: HearingReport
