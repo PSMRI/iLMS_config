@@ -72,14 +72,14 @@ ReportDefinitions:
         isMandatory: false
         searchClause: AND legal_data.state || '.' || legal_data.division || '.' || legal_data.district like $district || '%'
       - name: casetype
-        label: reports.legal.case.type
+        label: reports.legal.casetype
         type: singlevaluelist
         source: eg_lg_case
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=legal&masterName=CaseType|$.MdmsRes.legal.CaseType[*].code|$.MdmsRes.legal.CaseType[*].name
         isMandatory: false
         searchClause: AND legal_data.case_type = $casetype
       - name: casecategory
-        label: reports.legal.case.category
+        label: reports.legal.casecategory
         type: singlevaluelist
         source: eg_lg_case
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=legal&masterName=CaseCategory|$.MdmsRes.legal.CaseCategory[*].code|$.MdmsRes.legal.CaseCategory[*].name
