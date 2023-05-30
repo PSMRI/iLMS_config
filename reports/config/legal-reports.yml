@@ -78,6 +78,13 @@ ReportDefinitions:
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=legal&masterName=CaseType|$.MdmsRes.legal.CaseType[*].code|$.MdmsRes.legal.CaseType[*].name
         isMandatory: false
         searchClause: AND legal_data.case_type = $casetype
+      - name: casecategory
+        label: reports.legal.case.category
+        type: singlevaluelist
+        source: eg_lg_case
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=legal&masterName=CaseCategory|$.MdmsRes.legal.CaseCategory[*].code|$.MdmsRes.legal.CaseCategory[*].name
+        isMandatory: false
+        searchClause: AND legal_data.case_category = $casecategory
       - name: departmentname
         label: reports.legal.departmentname
         type: singlevaluelist
