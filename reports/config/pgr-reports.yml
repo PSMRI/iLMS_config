@@ -2164,7 +2164,7 @@ ReportDefinitions:
       with pgr_data as (select
         servicerequestid,
         servicecode,
-        ps.createdtim,
+        ps.createdtime,
         applicationstatus,
         ps.tenantid,
         complainanttype,
