@@ -7,7 +7,7 @@
         "dateRefField": "Data.auditDetails.lastModifiedTime",
         "requestQueryMap": "{\"state\" : \"Data.court.state.keyword\", \"district\" : \"Data.court.district.keyword\",\"region\" : \"Data.court.division.keyword\", \"tenantId\" : \"Data.tenantId.keyword\"}",
         "indexName": "legal-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Cases\":{\"filters\":{\"filters\":{\"total\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending At DEC\",\"Pending at Reviewing Officer\",\"Pending at OICA Officer\",\"Pending at AO\",\"Pending for Counter Affidavit from hearing\",\"Pending for supplementary Affidavit from hearing wf\",\"Judgement has been reviewed/appealed\",\"Judgement has been Complied\",\"Inactive\"]}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp.health\"}}]}},\"aggs\":{\"Total Cases\":{\"filters\":{\"filters\":{\"total\":{\"terms\":{\"Data.applicationStatus.keyword\":[\"Pending At DEC\",\"Pending at Reviewing Officer\",\"Pending at OICA Officer\",\"Pending at AO\",\"Pending for Counter Affidavit from hearing\",\"Pending for supplementary Affidavit from hearing wf\",\"Judgement has been reviewed/appealed\",\"Judgement has been Complied\",\"Inactive\",\"Judgement\"]}}}}}}}}}"
       }
     ],
     "chartType": "metric",
