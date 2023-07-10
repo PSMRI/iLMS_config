@@ -2273,7 +2273,7 @@ ReportDefinitions:
       
       WHERE 1=1
 
-    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.district,pgr_data.taluka,pgr_data.complainanttype,deptmap.menuPath
+    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.district,pgr_data.taluka,deptmap.menuPath
     orderby: ORDER BY tenantid
 
 
