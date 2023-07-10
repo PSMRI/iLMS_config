@@ -2114,19 +2114,19 @@ ReportDefinitions:
       - name: status
         label: reports.pgr.status
         type: singlevaluelist
-        pattern: 'list://PENDINGATLEVEL1:PENDINGATLEVEL1,RESOLVEDBYL1:RESOLVEDBYL1,REJECTEDBYL1:REJECTEDBYL1,PENDINGATLEVEL2:PENDINGATLEVEL2,RESOLVEDBYL2:RESOLVEDBYL2,REJECTEDBYL2:REJECTEDBYL2,PENDINGATLEVEL3:PENDINGATLEVEL3,RESOLVEDBYL3:RESOLVEDBYL3,REJECTEDBYL3:REJECTEDBYL3,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION'
+        pattern: 'list://PENDINGATSUPERVISOR:PENDINGATSUPERVISOR,PENDINGATLEVEL1:PENDINGATLEVEL1,RESOLVEDBYL1:RESOLVEDBYL1,REJECTEDBYL1:REJECTEDBYL1,PENDINGATLEVEL2:PENDINGATLEVEL2,RESOLVEDBYL2:RESOLVEDBYL2,REJECTEDBYL2:REJECTEDBYL2,PENDINGATLEVEL3:PENDINGATLEVEL3,RESOLVEDBYL3:RESOLVEDBYL3,REJECTEDBYL3:REJECTEDBYL3,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION,REJECTED:REJECTED'
         source: seva
         isMandatory: false
         searchClause: AND pgr_data.applicationstatus = $status
       - name: region
-        label: reports.pgr.boundary.region
+        label: reports.pgr.boundary.district
         type: singlevaluelist
         source: eg_pgr_service
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
         isMandatory: false
         searchClause: AND pgr_data.state || '.' || pgr_data.region like $region || '%'
       - name: district
-        label: reports.pgr.boundary.district
+        label: reports.pgr.boundary.taluka
         type: singlevaluelist
         source: eg_pgr_service
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
@@ -2171,23 +2171,23 @@ ReportDefinitions:
         institutiontype,
         rating,
         ad.state as state,
-        ad.region as region,
-        ad.district as district,
+        ad.region as district,
+        ad.district as taluka,
         (select max(createdtime) from eg_wf_processinstance_v2 where action LIKE 'RESOLVE%' and businessid = servicerequestid) as resolvedtime,
-        (select min(createdtime) from eg_wf_processinstance_v2 where action='APPLY' and businessid = servicerequestid) as opentime
+        (select min(createdtime) from eg_wf_processinstance_v2 where action LIKE 'APPLY%' and businessid = servicerequestid) as opentime
         from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
         where
         ps.tenantid = $tenantid)
         select
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
-        SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
+        SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1', 'PENDINGATSUPERVISOR') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
-        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as closed,
+        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION', 'REJECTED') THEN 1 ELSE 0 END) as closed,
         SUM (CASE WHEN applicationstatus in ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') THEN 1 ELSE 0 END) as resolved,   
         SUM (CASE WHEN applicationstatus in ('REJECTEDBYL1', 'REJECTEDBYL2', 'REJECTEDBYL3') THEN 1 ELSE 0 END) as rejected,
         pgr_data.state as state,
-        pgr_data.region as region,
         pgr_data.district as district,
+        pgr_data.taluka as taluka,
         pgr_data.complainanttype as complainanttype,
         pgr_data.institutiontype as institutiontype,
         deptmap.menuPath as menupath,
@@ -2196,9 +2196,92 @@ ReportDefinitions:
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, menuPath, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
       
       WHERE 1=1
+
+    groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.district,pgr_data.taluka,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
+    orderby: ORDER BY tenantid,rating
+
+
+  - reportName: SupervisorReport
+    summary: Fetches complaint by Supervisor
+    version: 1.0.0
+    moduleName: pgr
+    externalService:
+      - entity: $.MdmsRes.RAINMAKER-PGR.ServiceDefs
+        apiURL: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?moduleName=RAINMAKER-PGR&masterName=ServiceDefs&tenantId=$tenantId
+        keyOrder: serviceCode,menuPath,slaHours
+        tableName: tbl_dept
+    sourceColumns:
+      - name: grievanceid
+        label: reports.pgr.grievanceid
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: region
+        label: reports.pgr.region
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: district
+        label: reports.pgr.district
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: createdtime
+        label: reports.pgr.createdtime
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: validationdate
+        label: reports.pgr.validationdate
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: validationstatus
+        label: reports.pgr.validationstatus
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: supervisorid
+        label: reports.pgr.supervisorid
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: menupath
+        label: reports.pgr.menu.path
+        type: string
+        source: eg_pgr_service
+        total: false
+    query: |
+      with pgr_data as (select
+        servicerequestid,
+        servicecode,
+        ps.createdtime as gr_createdtime,
+        applicationstatus,
+        ps.tenantid,
+        complainanttype,
+        institutiontype,
+        rating,
+        ad.state as state,
+        ad.region as region,
+        ad.district as district,
+        from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
+        where
+        ps.tenantid = $tenantid)
+        select
+        pgr_data.servicerequestid as grievanceid,
+        pgr_data.gr_createdtime as createdtime,
+        pgr_data.region as region,
+        pgr_data.district as district,
+        deptmap.menuPath as menupath,
+        from pgr_data
+      INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, menuPath, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
       
+      WHERE 1=1
+
     groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.region,pgr_data.district,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
     orderby: ORDER BY tenantid,rating
+
+
 
   - reportName: LMEPerformanceReport
     decryptionPathId: LMEPerformanceReport
