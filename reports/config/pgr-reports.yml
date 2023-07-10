@@ -2241,11 +2241,6 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: false
-      - name: supervisorid
-        label: reports.pgr.supervisorid
-        type: string
-        source: eg_pgr_service
-        total: false
       - name: menupath
         label: reports.pgr.menu.path
         type: string
@@ -2255,25 +2250,28 @@ ReportDefinitions:
       with pgr_data as (select  
         servicerequestid, 
         servicecode,
+        ROW_NUMBER() OVER (PARTITION BY SERVICEREQUESTID ORDER BY ACTION desc) as RN,
         ps.createdtime as gr_createdtime,
         ps.tenantid,
         ad.state as state,
         ad.region as district,
         ad.district as taluka
-        from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
+        from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id 
         where
-        ps.tenantid = $tenantid)
+        ps.tenantid = $tenantid and ACTION IN ('EDIT','APPLY_BY_HELPDESK') ))
         select  pgr_data.servicerequestid as grievanceid,
         (select to_char(to_timestamp(pgr_data.gr_createdtime/1000), 'DD/MM/YYYY')) as createdtime,
+        (SELECT TO_CHAR(TO_TIMESTAMP(PGR_DATA.WF_CREATEDTIME / 1000), 'DD/MM/YYYY')  ) AS VALIDATIONDATE,
         pgr_data.district as district,
         pgr_data.taluka as taluka,
+        pgr_data.action as validationstatus,
         deptmap.menuPath as menupath 
         from pgr_data
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, menuPath, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
       
-      WHERE 1=1
+      WHERE 1=1 and RN = 1
 
-    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.district,pgr_data.taluka,deptmap.menuPath
+    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.validationstatus,pgr_data.district,pgr_data.taluka,deptmap.menuPath
     orderby: ORDER BY tenantid
 
 
