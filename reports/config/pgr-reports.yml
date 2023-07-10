@@ -2252,33 +2252,28 @@ ReportDefinitions:
         source: eg_pgr_service
         total: false
     query: |
-      with pgr_data as (select
-        servicerequestid,
+      with pgr_data as (select  
+        servicerequestid, 
         servicecode,
         ps.createdtime as gr_createdtime,
-        applicationstatus,
         ps.tenantid,
-        complainanttype,
-        institutiontype,
-        rating,
         ad.state as state,
-        ad.region as region,
-        ad.district as district,
+        ad.region as district,
+        ad.district as taluka
         from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
         where
         ps.tenantid = $tenantid)
-        select
-        pgr_data.servicerequestid as grievanceid,
-        pgr_data.gr_createdtime as createdtime,
-        pgr_data.region as region,
+        select  pgr_data.servicerequestid as grievanceid,
+        (select to_char(to_timestamp(pgr_data.gr_createdtime/1000), 'DD/MM/YYYY')) as createdtime,
         pgr_data.district as district,
-        deptmap.menuPath as menupath,
+        pgr_data.taluka as taluka,
+        deptmap.menuPath as menupath 
         from pgr_data
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, menuPath, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
       
       WHERE 1=1
 
-    groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.region,pgr_data.district,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
+    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,rating,pgr_data.state,pgr_data.district,pgr_data.taluka,pgr_data.complainanttype,deptmap.menuPath
     orderby: ORDER BY tenantid,rating
 
 
