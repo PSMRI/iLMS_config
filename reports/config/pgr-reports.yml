@@ -2202,7 +2202,7 @@ ReportDefinitions:
 
 
   - reportName: SupervisorReport
-    summary: Fetches complaint by Supervisor
+    summary: Fetches complaint for Supervisor
     version: 1.0.0
     moduleName: pgr
     externalService:
@@ -2278,6 +2278,48 @@ ReportDefinitions:
     groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.wf_createdtime,pgr_data.action,pgr_data.district,pgr_data.taluka,deptmap.menuPath
     orderby: ORDER BY tenantid
 
+
+  - reportName: GrievanceReport
+    summary: Fetches Grievance
+    version: 1.0.0
+    moduleName: pgr
+    sourceColumns:
+      - name: grievanceid
+        label: reports.pgr.grievanceid
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: description
+        label: reports.pgr.description
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: comment
+        label: reports.pgr.comment
+        type: string
+        source: eg_pgr_service
+        total: false
+    query: |
+      with pgr_data as (select  
+        servicerequestid,
+        description,
+        applicationstatus,
+        PI.COMMENT,
+        ps.tenantid
+        from eg_pgr_service_v2 ps INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
+        where
+        ps.tenantid = $tenantid and applicationstatus IN ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3')
+        select  pgr_data.servicerequestid as grievanceid,
+        pgr_data.comment as comment,
+        pgr_data.applicationstatus as validationstatus,
+        pgr_data.description as description
+      
+        from pgr_data
+      
+      WHERE 1=1
+
+    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.description
+    orderby: ORDER BY tenantid
 
 
   - reportName: LMEPerformanceReport
