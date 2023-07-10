@@ -2258,7 +2258,7 @@ ReportDefinitions:
         ad.district as taluka
         from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id 
         where
-        ps.tenantid = $tenantid and ACTION IN ('EDIT','APPLY_BY_HELPDESK') ))
+        ps.tenantid = $tenantid and ACTION IN ('EDIT','APPLY_BY_HELPDESK'))
         select  pgr_data.servicerequestid as grievanceid,
         (select to_char(to_timestamp(pgr_data.gr_createdtime/1000), 'DD/MM/YYYY')) as createdtime,
         (SELECT TO_CHAR(TO_TIMESTAMP(PGR_DATA.WF_CREATEDTIME / 1000), 'DD/MM/YYYY')  ) AS VALIDATIONDATE,
