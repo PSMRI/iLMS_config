@@ -2251,12 +2251,15 @@ ReportDefinitions:
         servicerequestid, 
         servicecode,
         ROW_NUMBER() OVER (PARTITION BY SERVICEREQUESTID ORDER BY ACTION desc) as RN,
+        PI.ACTION,
+        PI.CREATEDBY,
         ps.createdtime as gr_createdtime,
         ps.tenantid,
         ad.state as state,
         ad.region as district,
         ad.district as taluka
         from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id 
+        INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
         where
         ps.tenantid = $tenantid and ACTION IN ('EDIT','APPLY_BY_HELPDESK'))
         select  pgr_data.servicerequestid as grievanceid,
