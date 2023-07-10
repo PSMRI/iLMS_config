@@ -2253,6 +2253,7 @@ ReportDefinitions:
         ROW_NUMBER() OVER (PARTITION BY SERVICEREQUESTID ORDER BY ACTION desc) as RN,
         PI.ACTION,
         PI.CREATEDBY,
+        PI.CREATEDTIME as WF_CREATEDTIME,
         ps.createdtime as gr_createdtime,
         ps.tenantid,
         ad.state as state,
@@ -2274,7 +2275,7 @@ ReportDefinitions:
       
       WHERE 1=1 and RN = 1
 
-    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.validationstatus,pgr_data.district,pgr_data.taluka,deptmap.menuPath
+    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.wf_createdtime,pgr_data.action,pgr_data.district,pgr_data.taluka,deptmap.menuPath
     orderby: ORDER BY tenantid
 
 
