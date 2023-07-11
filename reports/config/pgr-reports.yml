@@ -2043,13 +2043,13 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: false
-      - name: region
-        label: reports.pgr.region
+      - name: district
+        label: reports.pgr.district
         type: string
         source: eg_pgr_service
         total: false
-      - name: district
-        label: reports.pgr.district
+      - name: taluka
+        label: reports.pgr.taluka
         type: string
         source: eg_pgr_service
         total: false
