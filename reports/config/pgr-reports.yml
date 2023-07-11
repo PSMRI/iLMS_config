@@ -2308,7 +2308,7 @@ ReportDefinitions:
         ps.tenantid
         from eg_pgr_service_v2 ps INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
         where
-        ps.tenantid = $tenantid and applicationstatus IN ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3')
+        ps.tenantid = $tenantid and applicationstatus IN ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3'))
         select  pgr_data.servicerequestid as grievanceid,
         pgr_data.comment as comment,
         pgr_data.applicationstatus as validationstatus,
