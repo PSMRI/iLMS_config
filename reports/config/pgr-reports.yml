@@ -2098,6 +2098,21 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: false
+      - name: grievanceid
+        label: reports.pgr.grievanceid
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: description
+        label: reports.pgr.description
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: comment
+        label: reports.pgr.comment
+        type: string
+        source: eg_pgr_service
+        total: false
     searchParams:
       - name: fromDate
         label: reports.pgr.datefrom
@@ -2114,7 +2129,7 @@ ReportDefinitions:
       - name: status
         label: reports.pgr.status
         type: singlevaluelist
-        pattern: 'list://PENDINGATSUPERVISOR:PENDINGATSUPERVISOR,PENDINGATLEVEL1:PENDINGATLEVEL1,RESOLVEDBYL1:RESOLVEDBYL1,REJECTEDBYL1:REJECTEDBYL1,PENDINGATLEVEL2:PENDINGATLEVEL2,RESOLVEDBYL2:RESOLVEDBYL2,REJECTEDBYL2:REJECTEDBYL2,PENDINGATLEVEL3:PENDINGATLEVEL3,RESOLVEDBYL3:RESOLVEDBYL3,REJECTEDBYL3:REJECTEDBYL3,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION,REJECTED:REJECTED'
+        pattern: 'list://PENDINGATSUPERVISOR:PENDINGATSUPERVISOR,PENDINGATLEVEL1:PENDINGATLEVEL1,RESOLVEDBYL1:RESOLVEDBYL1,REJECTEDBYL1:REJECTEDBYL1,PENDINGATLEVEL2:PENDINGATLEVEL2,RESOLVEDBYL2:RESOLVEDBYL2,REJECTEDBYL2:REJECTEDBYL2,PENDINGATLEVEL3:PENDINGATLEVEL3,RESOLVEDBYL3:RESOLVEDBYL3,REJECTEDBYL3:REJECTEDBYL3,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION'
         source: seva
         isMandatory: false
         searchClause: AND pgr_data.applicationstatus = $status
@@ -2173,16 +2188,20 @@ ReportDefinitions:
         ad.state as state,
         ad.region as district,
         ad.district as taluka,
+        description,
+        applicationstatus,
+        PI.COMMENT,
         (select max(createdtime) from eg_wf_processinstance_v2 where action LIKE 'RESOLVE%' and businessid = servicerequestid) as resolvedtime,
         (select min(createdtime) from eg_wf_processinstance_v2 where action LIKE 'APPLY%' and businessid = servicerequestid) as opentime
         from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
+        INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
         where
         ps.tenantid = $tenantid)
         select
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
         SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1', 'PENDINGATSUPERVISOR') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
-        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION', 'REJECTED') THEN 1 ELSE 0 END) as closed,
+        SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as closed,
         SUM (CASE WHEN applicationstatus in ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') THEN 1 ELSE 0 END) as resolved,   
         SUM (CASE WHEN applicationstatus in ('REJECTEDBYL1', 'REJECTEDBYL2', 'REJECTEDBYL3') THEN 1 ELSE 0 END) as rejected,
         pgr_data.state as state,
@@ -2192,12 +2211,16 @@ ReportDefinitions:
         pgr_data.institutiontype as institutiontype,
         deptmap.menuPath as menupath,
         pgr_data.servicecode as servicecode
+        pgr_data.servicerequestid as grievanceid,
+        pgr_data.comment as comment,
+        pgr_data.applicationstatus as validationstatus,
+        pgr_data.description as description
         from pgr_data
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, menuPath, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
       
       WHERE 1=1
 
-    groupby: GROUP BY tenantid,rating,pgr_data.state,pgr_data.district,pgr_data.taluka,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
+    groupby: GROUP BY tenantid,rating,pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.description,pgr_data.state,pgr_data.district,pgr_data.taluka,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
     orderby: ORDER BY tenantid,rating
 
 
@@ -2276,49 +2299,6 @@ ReportDefinitions:
       WHERE 1=1 and RN = 1
 
     groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.wf_createdtime,pgr_data.action,pgr_data.district,pgr_data.taluka,deptmap.menuPath
-    orderby: ORDER BY tenantid
-
-
-  - reportName: GrievanceReport
-    summary: Fetches Grievance
-    version: 1.0.0
-    moduleName: pgr
-    sourceColumns:
-      - name: grievanceid
-        label: reports.pgr.grievanceid
-        type: string
-        source: eg_pgr_service
-        total: false
-      - name: description
-        label: reports.pgr.description
-        type: string
-        source: eg_pgr_service
-        total: false
-      - name: comment
-        label: reports.pgr.comment
-        type: string
-        source: eg_pgr_service
-        total: false
-    query: |
-      with pgr_data as (select  
-        servicerequestid,
-        description,
-        applicationstatus,
-        PI.COMMENT,
-        ps.tenantid
-        from eg_pgr_service_v2 ps INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
-        where
-        ps.tenantid = $tenantid and applicationstatus IN ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3'))
-        select  pgr_data.servicerequestid as grievanceid,
-        pgr_data.comment as comment,
-        pgr_data.applicationstatus as validationstatus,
-        pgr_data.description as description
-      
-        from pgr_data
-      
-      WHERE 1=1
-
-    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.description
     orderby: ORDER BY tenantid
 
 
