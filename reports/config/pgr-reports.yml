@@ -2189,12 +2189,10 @@ ReportDefinitions:
         ad.region as district,
         ad.district as taluka,
         description,
-        applicationstatus,
         PI.COMMENT,
         (select max(createdtime) from eg_wf_processinstance_v2 where action LIKE 'RESOLVE%' and businessid = servicerequestid) as resolvedtime,
         (select min(createdtime) from eg_wf_processinstance_v2 where action LIKE 'APPLY%' and businessid = servicerequestid) as opentime
-        from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id
-        INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
+        from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
         where
         ps.tenantid = $tenantid)
         select
@@ -2210,7 +2208,7 @@ ReportDefinitions:
         pgr_data.complainanttype as complainanttype,
         pgr_data.institutiontype as institutiontype,
         deptmap.menuPath as menupath,
-        pgr_data.servicecode as servicecode
+        pgr_data.servicecode as servicecode,
         pgr_data.servicerequestid as grievanceid,
         pgr_data.comment as comment,
         pgr_data.applicationstatus as validationstatus,
@@ -2220,7 +2218,7 @@ ReportDefinitions:
       
       WHERE 1=1
 
-    groupby: GROUP BY tenantid,rating,pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.description,pgr_data.state,pgr_data.district,pgr_data.taluka,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
+    groupby: GROUP BY tenantid,pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.description,pgr_data.state,pgr_data.district,pgr_data.taluka,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
     orderby: ORDER BY tenantid,rating
 
 
