@@ -2184,7 +2184,6 @@ ReportDefinitions:
         ps.tenantid,
         complainanttype,
         institutiontype,
-        rating,
         ad.state as state,
         ad.region as district,
         ad.district as taluka,
@@ -2219,7 +2218,7 @@ ReportDefinitions:
       WHERE 1=1
 
     groupby: GROUP BY tenantid,pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.description,pgr_data.state,pgr_data.district,pgr_data.taluka,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
-    orderby: ORDER BY tenantid,rating
+    orderby: ORDER BY tenantid
 
 
   - reportName: SupervisorReport
