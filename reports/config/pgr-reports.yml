@@ -2137,28 +2137,28 @@ ReportDefinitions:
         label: reports.pgr.boundary.district
         type: singlevaluelist
         source: eg_pgr_service
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
         isMandatory: false
         searchClause: AND pgr_data.state || '.' || pgr_data.district like $region || '%'
       - name: district
         label: reports.pgr.boundary.taluka
         type: singlevaluelist
         source: eg_pgr_service
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
         isMandatory: false
         searchClause: AND pgr_data.state || '.' || pgr_data.district || '.' || pgr_data.taluka like $district|| '%'
       - name: complainantType
         label: reports.pgr.complainant.type
         type: singlevaluelist
         source: eg_pgr_service
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=common-masters&masterName=ComplainantType|$.MdmsRes.common-masters.ComplainantType[*].code|$.MdmsRes.common-masters.ComplainantType[*].name
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=common-masters&masterName=ComplainantType|$.MdmsRes.common-masters.ComplainantType[*].name|$.MdmsRes.common-masters.ComplainantType[*].name
         isMandatory: false
         searchClause: AND pgr_data.complainanttype = $complainantType
       - name: institutionType
         label: reports.pgr.institution.type
         type: singlevaluelist
         source: eg_pgr_service
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=common-masters&masterName=InstitutionType|$.MdmsRes.common-masters.InstitutionType[*].code|$.MdmsRes.common-masters.InstitutionType[*].name
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=common-masters&masterName=InstitutionType|$.MdmsRes.common-masters.InstitutionType[*].name|$.MdmsRes.common-masters.InstitutionType[*].name
         isMandatory: false
         searchClause: AND pgr_data.institutiontype = $institutionType
       - name: menuPath
