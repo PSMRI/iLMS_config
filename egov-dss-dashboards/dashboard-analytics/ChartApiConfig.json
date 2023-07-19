@@ -439,7 +439,7 @@
         "requestQueryMap": "{\"state\" : \"Data.service.address.state.keyword\", \"district\" : \"Data.service.address.district.keyword\",\"region\" : \"Data.service.address.region.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
         "dateRefField": "Data.service.auditDetails.createdTime",
         "indexName": "pgr-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.auditDetails.createdTime\"}},\"Closed Complaints\":{\"filters\":{\"filters\":{\"resolved\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"RESOLVED\",\"RESOLVEDBYL1\",\"RESOLVEDBYL2\",\"RESOLVEDBYL3\",\"CLOSEDAFTERRESOLUTION\"]}},\"rejected\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"REJECTED\",\"REJECTEDBYL1\",\"REJECTEDBYL2\",\"REJECTEDBYL3\",\"CLOSEDAFTERREJECTION\"]}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Total Complaints\":{\"value_count\":{\"field\":\"Data.service.auditDetails.createdTime\"}},\"Closed Complaints\":{\"filters\":{\"filters\":{\"resolved\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"RESOLVED\",\"RESOLVEDBYL1\",\"RESOLVEDBYL2\",\"RESOLVEDBYL3\",\"CLOSEDAFTERRESOLUTION\"]}},\"rejected\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"REJECTEDBYL1\",\"REJECTEDBYL2\",\"REJECTEDBYL3\",\"CLOSEDAFTERREJECTION\"]}}}}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -560,7 +560,7 @@
         "requestQueryMap": "{ \"state\" : \"Data.service.address.state.keyword\", \"district\" : \"Data.service.address.district.keyword\",\"region\" : \"Data.service.address.region.keyword\", \"tenantId\" : \"Data.service.tenantId.keyword\"}",
         "dateRefField": "Data.service.auditDetails.createdTime",
         "indexName": "pgr-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Closed Complaints Can Be Reopen\":{\"filters\":{\"filters\":{\"rejected\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"REJECTEDBYL1\",\"REJECTEDBYL2\",\"REJECTEDBYL3\",\"REJECTED\"]}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"mp\"}}]}},\"aggs\":{\"Closed Complaints Can Be Reopen\":{\"filters\":{\"filters\":{\"rejected\":{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"REJECTEDBYL1\",\"REJECTEDBYL2\",\"REJECTEDBYL3\"]}}}}}}}}}"
       }
     ],
     "chartType": "metric",
