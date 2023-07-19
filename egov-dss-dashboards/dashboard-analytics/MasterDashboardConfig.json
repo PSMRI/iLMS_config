@@ -167,27 +167,6 @@
                   "headers": []
                 }
               ]
-            },
-            {
-              "id": 421,
-              "name": "DSS_JUDGEMENT",
-              "dimensions": {
-                "height": 250,
-                "width": 4
-              },
-              "vizType": "chart",
-              "isCollapsible": false,
-              "label": "",
-              "charts": [
-                {
-                  "id": "DSSJudgement",
-                  "name": "Yearly",
-                  "code": "",
-                  "chartType": "donut",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
             }
           ]
         },
