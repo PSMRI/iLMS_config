@@ -2043,13 +2043,13 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: false
-      - name: district
-        label: reports.pgr.district
+      - name: region
+        label: reports.pgr.region
         type: string
         source: eg_pgr_service
         total: false
-      - name: taluka
-        label: reports.pgr.taluka
+      - name: district
+        label: reports.pgr.district
         type: string
         source: eg_pgr_service
         total: false
@@ -2134,14 +2134,14 @@ ReportDefinitions:
         isMandatory: false
         searchClause: AND pgr_data.applicationstatus = $status
       - name: region
-        label: reports.pgr.boundary.district
+        label: reports.pgr.boundary.region
         type: singlevaluelist
         source: eg_pgr_service
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
         isMandatory: false
         searchClause: AND pgr_data.state || '.' || pgr_data.district like $region || '%'
       - name: district
-        label: reports.pgr.boundary.taluka
+        label: reports.pgr.boundary.district
         type: singlevaluelist
         source: eg_pgr_service
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
@@ -2202,8 +2202,8 @@ ReportDefinitions:
         SUM (CASE WHEN applicationstatus in ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') THEN 1 ELSE 0 END) as resolved,   
         SUM (CASE WHEN applicationstatus in ('REJECTEDBYL1', 'REJECTEDBYL2', 'REJECTEDBYL3') THEN 1 ELSE 0 END) as rejected,
         pgr_data.state as state,
-        pgr_data.district as district,
-        pgr_data.taluka as taluka,
+        pgr_data.district as region,
+        pgr_data.taluka as district,
         pgr_data.complainanttype as complainanttype,
         pgr_data.institutiontype as institutiontype,
         deptmap.menuPath as menupath,
