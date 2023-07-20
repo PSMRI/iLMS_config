@@ -2210,7 +2210,7 @@ ReportDefinitions:
         pgr_data.servicecode as servicecode,
         pgr_data.servicerequestid as grievanceid,
         pgr_data.comment as comment,
-        pgr_data.applicationstatus as validationstatus
+        pgr_data.applicationstatus as validationstatus,
         pgr_data.description as description
         from pgr_data
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, menuPath, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
