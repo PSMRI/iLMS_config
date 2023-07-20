@@ -2043,13 +2043,13 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: false
-      - name: district
-        label: reports.pgr.district
+      - name: region
+        label: reports.pgr.region
         type: string
         source: eg_pgr_service
         total: false
-      - name: taluka
-        label: reports.pgr.taluka
+      - name: district
+        label: reports.pgr.district
         type: string
         source: eg_pgr_service
         total: false
@@ -2129,19 +2129,19 @@ ReportDefinitions:
       - name: status
         label: reports.pgr.status
         type: singlevaluelist
-        pattern: 'list://PENDINGATSUPERVISOR:PENDINGATSUPERVISOR,PENDINGATLEVEL1:PENDINGATLEVEL1,RESOLVEDBYL1:RESOLVEDBYL1,REJECTEDBYL1:REJECTEDBYL1,PENDINGATLEVEL2:PENDINGATLEVEL2,RESOLVEDBYL2:RESOLVEDBYL2,REJECTEDBYL2:REJECTEDBYL2,PENDINGATLEVEL3:PENDINGATLEVEL3,RESOLVEDBYL3:RESOLVEDBYL3,REJECTEDBYL3:REJECTEDBYL3,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION'
+        pattern: 'list://PENDINGATLEVEL1:PENDINGATLEVEL1,RESOLVEDBYL1:RESOLVEDBYL1,REJECTEDBYL1:REJECTEDBYL1,PENDINGATLEVEL2:PENDINGATLEVEL2,RESOLVEDBYL2:RESOLVEDBYL2,REJECTEDBYL2:REJECTEDBYL2,PENDINGATLEVEL3:PENDINGATLEVEL3,RESOLVEDBYL3:RESOLVEDBYL3,REJECTEDBYL3:REJECTEDBYL3,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION'
         source: seva
         isMandatory: false
         searchClause: AND pgr_data.applicationstatus = $status
       - name: region
-        label: reports.pgr.boundary.district
+        label: reports.pgr.boundary.region
         type: singlevaluelist
         source: eg_pgr_service
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].name
         isMandatory: false
         searchClause: AND pgr_data.state || '.' || pgr_data.district like $region || '%'
       - name: district
-        label: reports.pgr.boundary.taluka
+        label: reports.pgr.boundary.district
         type: singlevaluelist
         source: eg_pgr_service
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egov-location&masterName=TenantBoundary|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].code|$.MdmsRes.egov-location.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary.children[*].children[*].name
@@ -2185,8 +2185,8 @@ ReportDefinitions:
         complainanttype,
         institutiontype,
         ad.state as state,
-        ad.region as district,
-        ad.district as taluka,
+        ad.region as region,
+        ad.district as district,
         description,
         PI.COMMENT,
         (select max(createdtime) from eg_wf_processinstance_v2 where action LIKE 'RESOLVE%' and businessid = servicerequestid) as resolvedtime,
@@ -2196,14 +2196,14 @@ ReportDefinitions:
         ps.tenantid = $tenantid AND PI.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = ps.servicerequestid GROUP BY wf.businessid))
         select
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
-        SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1', 'PENDINGATSUPERVISOR') THEN 1 ELSE 0 END) as assigned,
+        SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
         SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as closed,
         SUM (CASE WHEN applicationstatus in ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') THEN 1 ELSE 0 END) as resolved,   
         SUM (CASE WHEN applicationstatus in ('REJECTEDBYL1', 'REJECTEDBYL2', 'REJECTEDBYL3') THEN 1 ELSE 0 END) as rejected,
         pgr_data.state as state,
+        pgr_data.region as region,
         pgr_data.district as district,
-        pgr_data.taluka as taluka,
         pgr_data.complainanttype as complainanttype,
         pgr_data.institutiontype as institutiontype,
         deptmap.menuPath as menupath,
@@ -2217,7 +2217,7 @@ ReportDefinitions:
       
       WHERE 1=1
 
-    groupby: GROUP BY tenantid,pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.description,pgr_data.state,pgr_data.district,pgr_data.taluka,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
+    groupby: GROUP BY tenantid,pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.description,pgr_data.state,pgr_data.region,pgr_data.district,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
     orderby: ORDER BY tenantid
 
 
