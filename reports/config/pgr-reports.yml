@@ -2193,7 +2193,7 @@ ReportDefinitions:
         (select min(createdtime) from eg_wf_processinstance_v2 where action LIKE 'APPLY%' and businessid = servicerequestid) as opentime
         from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
         where
-        ps.tenantid = $tenantid)
+        ps.tenantid = $tenantid AND PI.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = ps.servicerequestid GROUP BY wf.businessid))
         select
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
         SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1', 'PENDINGATSUPERVISOR') THEN 1 ELSE 0 END) as assigned,
