@@ -104,10 +104,10 @@ ServiceMaps:
           timeStampField: $.service.auditDetails.lastModifiedTime
           fieldsToBeMasked: ["$.service.citizen.userName", "$.service.citizen.name", "$.service.citizen.mobileNumber", "$.service.citizen.emailId"]
           customJsonMapping:
-            indexMapping: {"Data":{"service":{},"ward":{},"tenantData":{}, "history":{}}}
+            indexMapping: {"Data":{"ward":{},"tenantData":{}, "history":{}}}
             fieldMapping:
               - inJsonPath: $
-                outJsonPath: $.Data.service
+                outJsonPath: $.Data
             externalUriMapping:
               - path: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search
                 queryParam: hierarchyTypeCode=JURISDICTION,boundaryType=state,codes=$.service.address.locality.code,tenantId=$.service.tenantId
