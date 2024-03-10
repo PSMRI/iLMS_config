@@ -630,6 +630,7 @@
     "documentType": "_doc",
     "aggregationPaths": [
       "Closed Complaints",
+      "Reopened Complaints",
       "Total Complaints"
     ],
     "isCumulative": true,
