@@ -630,6 +630,7 @@
     "documentType": "_doc",
     "aggregationPaths": [
       "Closed Complaints",
+      "Reopened Complaints",
       "Total Complaints"
     ],
     "isCumulative": true,
@@ -687,7 +688,7 @@
     "documentType": "_doc",
     "drillChart": "none",
     "aggregationPaths": [
-      "Complaints By Status2"
+      "Complaints By Status"
     ],
     "insight": {
     },
