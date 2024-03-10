@@ -629,8 +629,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Closed Complaints",
-      "Reopened Complaints",
+      "Closed Complaints",      
       "Total Complaints"
     ],
     "isCumulative": true,
