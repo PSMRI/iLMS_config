@@ -100,24 +100,24 @@ ServiceMaps:
           type: general
           isBulk: true
           id: $.service.serviceRequestId
-          jsonPath: $.service.*
+          jsonPath: $.ServiceWrappers.*
           timeStampField: $.service.auditDetails.lastModifiedTime
-          fieldsToBeMasked: ["$.service.citizen.userName", "$.service.citizen.name", "$.service.citizen.mobileNumber", "$.service.citizen.emailId"]
+          fieldsToBeMasked: [ "$.service.citizen.userName", "$.service.citizen.name", "$.service.citizen.mobileNumber", "$.service.citizen.emailId" ]
           customJsonMapping:
-            indexMapping: {"Data":{"PGREntity":{},"ward":{},"tenantData":{}, "history":{}}}
+            indexMapping: { "Data": { "ward": { },"tenantData": { }, "history": { } } }
             fieldMapping:
               - inJsonPath: $
-                outJsonPath: $.Data.PGREntity
+                outJsonPath: $.Data
             externalUriMapping:
               - path: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search
-                queryParam: hierarchyTypeCode=ADMIN,boundaryType=locality,codes=$.service.address.locality.code,tenantId=$.service.tenantId
-                apiRequest: {"RequestInfo":{"apiId":"org.egov.pt","ver":"1.0","ts":1502890899493,"action":"asd","did":"4354648646","key":"xyz","msgId":"654654","requesterId":"61","authToken":"d9994555-7656-4a67-ab3a-a952a0d4dfc8","userInfo":{"id":1,"uuid":"1fec8102-0e02-4d0a-b283-cd80d5dab067","type":"EMPLOYEE","tenantId":"pg.citya","roles":[{"name":"Employee","code":"EMPLOYEE","tenantId":"pg.citya"}]}}}
+                queryParam: hierarchyTypeCode=JURISDICTION,boundaryType=state,codes=$.service.address.locality.code,tenantId=$.service.tenantId
+                apiRequest: { "RequestInfo": { "apiId": "Rainmaker", "action": "", "did": 1, "key": "", "msgId": "20170310130900|en_IN", "requesterId": "", "ts": 1513579888683, "ver": ".01", "authToken": "1f93a9b5-ddd8-4a63-a5c9-fe19511777b4", "userInfo": { "id": 94, "uuid": "32d0c87b-3d59-40ff-a18f-2120eb874551", "userName": "amit", "name": "Amit Sahu", "mobileNumber": "7002470681", "emailId": "rahul.kumar@walkingtree.tech", "locale": null, "type": "EMPLOYEE", "roles": [ { "name": "HelpDesk", "code": "HELPDESK", "tenantId": "as.health" }, { "name": "Employee", "code": "EMPLOYEE", "tenantId": "as.health" }, { "name": "State Administrator", "code": "STADMIN", "tenantId": "as.health" } ], "active": true, "tenantId": "as.health", "permanentCity": null } } }
                 uriResponseMapping:
-                  - inJsonPath: $.TenantBoundary[0].boundary[0]
+                  - inJsonPath: $.TenantBoundary[?(@.hierarchyType.name == 'JURISDICTION')].boundary[0]
                     outJsonPath: $.Data.ward
               - path: http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search
                 queryParam: businessIds=$.service.serviceRequestId,history=true,tenantId=$.service.tenantId
-                apiRequest: {"RequestInfo":{"apiId":"org.egov.pt","ver":"1.0","ts":1502890899493,"action":"asd","did":"4354648646","key":"xyz","msgId":"654654","requesterId":"61","authToken":"d9994555-7656-4a67-ab3a-a952a0d4dfc8","userInfo":{"id":1,"uuid":"1fec8102-0e02-4d0a-b283-cd80d5dab067","type":"EMPLOYEE","tenantId":"pg.citya","roles":[{"name":"Employee","code":"EMPLOYEE","tenantId":"pg.citya"}]}}}
+                apiRequest: { "RequestInfo": { "apiId": "Rainmaker", "action": "", "did": 1, "key": "", "msgId": "20170310130900|en_IN", "requesterId": "", "ts": 1513579888683, "ver": ".01", "authToken": "1f93a9b5-ddd8-4a63-a5c9-fe19511777b4", "userInfo": { "id": 94, "uuid": "32d0c87b-3d59-40ff-a18f-2120eb874551", "userName": "amit", "name": "Amit Sahu", "mobileNumber": "7002470681", "emailId": "rahul.kumar@walkingtree.tech", "locale": null, "type": "EMPLOYEE", "roles": [ { "name": "HelpDesk", "code": "HELPDESK", "tenantId": "as.health" }, { "name": "Employee", "code": "EMPLOYEE", "tenantId": "as.health" }, { "name": "State Administrator", "code": "STADMIN", "tenantId": "as.health" } ], "active": true, "tenantId": "as.health", "permanentCity": null } } }
                 uriResponseMapping:
                   - inJsonPath: $.ProcessInstances
                     outJsonPath: $.Data.history
