@@ -2113,6 +2113,26 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: false
+      - name: rating
+        label: reports.pgr.rating
+        type: string
+        source: eg_pgr_service
+        total: false
+      - name: name
+        label: reports.pgr.name
+        type: string
+        source: eg_user
+        total: false
+      - name: mobilenumber
+        label: reports.pgr.mobilenumber
+        type: string
+        source: eg_user
+        total: false
+      - name: gender
+        label: reports.pgr.gender
+        type: string
+        source: eg_user
+        total: false
     searchParams:
       - name: fromDate
         label: reports.pgr.datefrom
@@ -2129,7 +2149,7 @@ ReportDefinitions:
       - name: status
         label: reports.pgr.status
         type: singlevaluelist
-        pattern: 'list://PENDINGATLEVEL1:PENDINGATLEVEL1,RESOLVEDBYL1:RESOLVEDBYL1,REJECTEDBYL1:REJECTEDBYL1,PENDINGATLEVEL2:PENDINGATLEVEL2,RESOLVEDBYL2:RESOLVEDBYL2,REJECTEDBYL2:REJECTEDBYL2,PENDINGATLEVEL3:PENDINGATLEVEL3,RESOLVEDBYL3:RESOLVEDBYL3,REJECTEDBYL3:REJECTEDBYL3,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION'
+        pattern: 'list://PENDINGATSUPERVISOR:PENDINGATSUPERVISOR,PENDINGATLEVEL1:PENDINGATLEVEL1,RESOLVEDBYL1:RESOLVEDBYL1,REJECTEDBYL1:REJECTEDBYL1,PENDINGATLEVEL2:PENDINGATLEVEL2,RESOLVEDBYL2:RESOLVEDBYL2,REJECTEDBYL2:REJECTEDBYL2,PENDINGATLEVEL3:PENDINGATLEVEL3,RESOLVEDBYL3:RESOLVEDBYL3,REJECTEDBYL3:REJECTEDBYL3,CLOSEDAFTERRESOLUTION:CLOSEDAFTERRESOLUTION,CLOSEDAFTERREJECTION:CLOSEDAFTERREJECTION'
         source: seva
         isMandatory: false
         searchClause: AND pgr_data.applicationstatus = $status
@@ -2189,14 +2209,26 @@ ReportDefinitions:
         ad.district as district,
         description,
         PI.COMMENT,
+        PI.rating,
+        ue.name as name,
+        ue.mobilenumber as mobnumber,
+        CASE
+        WHEN ue.gender = 0 THEN ''
+        WHEN ue.gender = 1 THEN 'Female'
+        WHEN ue.gender = 2 THEN 'Male'
+        WHEN ue.gender = 3 THEN 'Others'
+        WHEN ue.gender = 4 THEN 'Transgender'
+        END as gender,
         (select max(createdtime) from eg_wf_processinstance_v2 where action LIKE 'RESOLVE%' and businessid = servicerequestid) as resolvedtime,
         (select min(createdtime) from eg_wf_processinstance_v2 where action LIKE 'APPLY%' and businessid = servicerequestid) as opentime
         from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
+        INNER JOIN eg_user ue on ps.accountid = ue.uuid
+        INNER JOIN eg_user usr on PI.CREATEDBY = usr.uuid
         where
         ps.tenantid = $tenantid AND PI.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = ps.servicerequestid GROUP BY wf.businessid))
         select
         initcap(split_part(tenantid, '.', 2)) as tenantid,          
-        SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1') THEN 1 ELSE 0 END) as assigned,
+        SUM (CASE WHEN applicationstatus in ('PENDINGATLEVEL3', 'PENDINGATLEVEL2', 'PENDINGATLEVEL1', 'PENDINGATSUPERVISOR') THEN 1 ELSE 0 END) as assigned,
         count(applicationstatus) as received,
         SUM (CASE WHEN applicationstatus in ('CLOSEDAFTERRESOLUTION', 'CLOSEDAFTERREJECTION') THEN 1 ELSE 0 END) as closed,
         SUM (CASE WHEN applicationstatus in ('RESOLVEDBYL1', 'RESOLVEDBYL2', 'RESOLVEDBYL3') THEN 1 ELSE 0 END) as resolved,   
@@ -2210,6 +2242,10 @@ ReportDefinitions:
         pgr_data.servicecode as servicecode,
         pgr_data.servicerequestid as grievanceid,
         pgr_data.comment as comment,
+        pgr_data.rating as rating,
+        pgr_data.name as name,
+        pgr_data.mobnumber as mobilenumber,
+        pgr_data.gender as gender,
         pgr_data.applicationstatus as validationstatus,
         pgr_data.description as description
         from pgr_data
@@ -2217,11 +2253,12 @@ ReportDefinitions:
       
       WHERE 1=1
 
-    groupby: GROUP BY tenantid,pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.description,pgr_data.state,pgr_data.region,pgr_data.district,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
+    groupby: GROUP BY tenantid,pgr_data.servicerequestid,pgr_data.tenantid,pgr_data.applicationstatus,pgr_data.comment,pgr_data.rating,pgr_data.name,pgr_data.mobnumber,pgr_data.gender,pgr_data.description,pgr_data.state,pgr_data.region,pgr_data.district,pgr_data.complainanttype,pgr_data.institutiontype,deptmap.menuPath,pgr_data.servicecode
     orderby: ORDER BY tenantid
 
 
   - reportName: SupervisorReport
+    decryptionPathId: SupervisorReport
     summary: Fetches complaint for Supervisor
     version: 1.0.0
     moduleName: pgr
@@ -2251,6 +2288,21 @@ ReportDefinitions:
         type: string
         source: eg_pgr_service
         total: false
+      - name: supervisorid
+        label: reports.pgr.supervisorid
+        type: string
+        source: eg_user
+        total: false
+      - name: name
+        label: reports.pgr.name
+        type: string
+        source: eg_user
+        total: false
+      - name: mobilenumber
+        label: reports.pgr.mobilenumber
+        type: string
+        source: eg_user
+        total: false
       - name: validationdate
         label: reports.pgr.validationdate
         type: string
@@ -2275,14 +2327,19 @@ ReportDefinitions:
         PI.CREATEDBY,
         PI.CREATEDTIME as WF_CREATEDTIME,
         ps.createdtime as gr_createdtime,
+        usr.username as username,
+        ue.name as name,
+        ue.mobilenumber as mobnumber,
         ps.tenantid,
         ad.state as state,
         ad.region as district,
         ad.district as taluka
         from eg_pgr_service_v2 ps inner join eg_pgr_address_v2 ad ON ad.parentid = ps.id 
         INNER JOIN EG_WF_PROCESSINSTANCE_V2 PI ON PS.SERVICEREQUESTID = PI.BUSINESSID
+        INNER JOIN eg_user ue on ps.accountid = ue.uuid
+        INNER JOIN eg_user usr on PI.CREATEDBY = usr.uuid
         where
-        ps.tenantid = $tenantid and ACTION IN ('EDIT','APPLY_BY_HELPDESK'))
+        ps.tenantid = $tenantid and ACTION IN ('EDIT','ACCEPT'))
         select  pgr_data.servicerequestid as grievanceid,
         (select to_char(to_timestamp(pgr_data.gr_createdtime/1000), 'DD/MM/YYYY')) as createdtime,
         (SELECT TO_CHAR(TO_TIMESTAMP(PGR_DATA.WF_CREATEDTIME / 1000), 'DD/MM/YYYY')  ) AS VALIDATIONDATE,
@@ -2290,12 +2347,15 @@ ReportDefinitions:
         pgr_data.taluka as taluka,
         pgr_data.action as validationstatus,
         deptmap.menuPath as menupath 
+        pgr_data.username as supervisorid,
+        pgr_data.name as name,
+        pgr_data.mobnumber as mobilenumber
         from pgr_data
       INNER JOIN (VALUES tbl_dept) AS deptmap(serviceCode, menuPath, slaHours) ON deptmap.serviceCode = pgr_data.servicecode
       
       WHERE 1=1 and RN = 1
 
-    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.wf_createdtime,pgr_data.action,pgr_data.district,pgr_data.taluka,deptmap.menuPath
+    groupby: GROUP BY pgr_data.servicerequestid,pgr_data.gr_createdtime,tenantid,pgr_data.state,pgr_data.wf_createdtime,pgr_data.action,pgr_data.district,pgr_data.taluka,deptmap.menuPath,pgr_data.username,pgr_data.name,pgr_data.mobnumber
     orderby: ORDER BY tenantid
 
 
