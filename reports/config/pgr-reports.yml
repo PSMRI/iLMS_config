@@ -2346,7 +2346,7 @@ ReportDefinitions:
         pgr_data.district as district,
         pgr_data.taluka as taluka,
         pgr_data.action as validationstatus,
-        deptmap.menuPath as menupath 
+        deptmap.menuPath as menupath, 
         pgr_data.username as supervisorid,
         pgr_data.name as name,
         pgr_data.mobnumber as mobilenumber
