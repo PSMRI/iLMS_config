@@ -20,6 +20,10 @@
 		{
 			"tenantCode":"pg.citye",
 			"tenantValue":"City E"
+		},
+		{
+			"tenantCode":"bh.health",
+			"tenantValue":"Assam"
 		}
 	]
 }
