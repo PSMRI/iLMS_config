@@ -1,1 +1,1 @@
-
+legal=file:///work-dir/iLMS_config.git/reports/config/legal-reports.yml
